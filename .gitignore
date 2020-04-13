@@ -1,0 +1,12 @@
+Big_Integer/bin/
+Big_Integer/obj/
+Big_Integer/*.depend
+Big_Integer/*.layout
+Big_Integer/*.cbp
+
+"Big_Integer template"/bin/
+"Big_Integer template"/obj/
+"Big_Integer template"/*.depend
+"Big_Integer template"/*.layout
+"Big_Integer template"/*.cbp
+
