@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1586791827 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm_my_variant\big_integer\main.cpp
+	<iostream>
+	"Big_Integer.hpp"
+
+1586791716 c:\users\galina\desktop\programming\c++\0-educational_projects\dm_my_variant\big_integer\big_integer.hpp
+	<string>
+
+1586695075 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm_my_variant\big_integer\big_integer.cpp
+	<iostream>
+	"Big_Integer.hpp"
+
+1586791737 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm_my_variant\big_integer\assigment_arithmetics.cpp
+	<iostream>
+	<exception>
+	"Big_Integer.hpp"
+
+1586714080 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm_my_variant\big_integer\base_methods.cpp
+	<iostream>
+	<exception>
+	"Big_Integer.hpp"
+
+1586791671 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm_my_variant\big_integer\binary_arithmetic.cpp
+	<iostream>
+	"Big_Integer.hpp"
+
+1586791671 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm_my_variant\big_integer\increment_decrement.cpp
+	"Big_Integer.hpp"
+
+1586791820 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm_my_variant\big_integer\logical_operators.cpp
+	"Big_Integer.hpp"
+
+1586791671 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm_my_variant\big_integer\iostream.cpp
+	"Big_Integer.hpp"
+
