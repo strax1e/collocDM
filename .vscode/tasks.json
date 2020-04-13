@@ -2,25 +2,17 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "g++ build",
+            "label": "make",
             "type": "shell",
-            "command": "g++",
-            "args": [
-                "*.cpp",
-                "-g",
-                "-o",
-                "test"
-            ],
-            "problemMatcher": [],
+            "command": "make",
         },
         {
             "label": "g++ run",
             "type": "shell",
-            "command": "./test",
+            "command": "./program.out",
             "dependsOn": [
-                "g++ build"
+                "make"
             ],
-            "problemMatcher": []
         },        
     ]
 }
