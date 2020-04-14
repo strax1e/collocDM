@@ -1,8 +1,10 @@
 #include <iostream>
-#include "Big_Integer.hpp"
+#include "Big_Integer.h"
 
 int main()
 {
+
+    std::cout << (-9) / 2 << " " << (-9) % 2 << "\n";
     Big_Integer<unsigned short> a(1);
     Big_Integer<unsigned short> b(2);
     Big_Integer<unsigned short> c(a-b);

@@ -1,5 +1,5 @@
-#ifndef INCREMENT_DECREMENT_IMPL_HPP_INCLUDED
-#define INCREMENT_DECREMENT_IMPL_HPP_INCLUDED
+#ifndef INCREMENT_DECREMENT_IMPL_H_INCLUDED
+#define INCREMENT_DECREMENT_IMPL_H_INCLUDED
 
 template < typename T >
 Big_Integer<T>& Big_Integer<T>::operator ++()
@@ -60,4 +60,4 @@ Big_Integer<T> Big_Integer<T>::operator --(int)
 }
 
 
-#endif // INCREMENT_DECREMENT_IMPL_HPP_INCLUDED
+#endif // INCREMENT_DECREMENT_IMPL_H_INCLUDED

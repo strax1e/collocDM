@@ -1,5 +1,5 @@
-#ifndef LOGICAL_OPERATORS_IMPL_HPP_INCLUDED
-#define LOGICAL_OPERATORS_IMPL_HPP_INCLUDED
+#ifndef LOGICAL_OPERATORS_IMPL_H_INCLUDED
+#define LOGICAL_OPERATORS_IMPL_H_INCLUDED
 
 template < typename T >
 bool Big_Integer<T>::operator ==(const Big_Integer<T>& other) const
@@ -38,4 +38,4 @@ bool Big_Integer<T>::operator <=(const Big_Integer<T>& other) const
 }
 
 
-#endif // LOGICAL_OPERATORS_IMPL_HPP_INCLUDED
+#endif // LOGICAL_OPERATORS_IMPL_H_INCLUDED

@@ -1,5 +1,5 @@
-#ifndef IOSTREAM_IMPL_HPP_INCLUDED
-#define IOSTREAM_IMPL_HPP_INCLUDED
+#ifndef IOSTREAM_IMPL_H_INCLUDED
+#define IOSTREAM_IMPL_H_INCLUDED
 
 #include <iostream>
 
@@ -12,4 +12,4 @@ inline std::ostream& operator <<(std::ostream& os, const Big_Integer<T>& x)
 }
 
 
-#endif // IOSTREAM_IMPL_HPP_INCLUDED
+#endif // IOSTREAM_IMPL_H_INCLUDED

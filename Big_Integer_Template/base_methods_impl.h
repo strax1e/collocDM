@@ -1,5 +1,5 @@
-#ifndef BASE_METHODS_IMPL_HPP_INCLUDED
-#define BASE_METHODS_IMPL_HPP_INCLUDED
+#ifndef BASE_METHODS_IMPL_H_INCLUDED
+#define BASE_METHODS_IMPL_H_INCLUDED
 
 #include <exception>
 
@@ -47,4 +47,4 @@ Big_Integer<T>::~Big_Integer(){}
 
 
 
-#endif // BASE_METHODS_IMPL_HPP_INCLUDED
+#endif // BASE_METHODS_IMPL_H_INCLUDED

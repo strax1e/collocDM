@@ -4,9 +4,9 @@ Big_Integer/*.depend
 Big_Integer/*.layout
 Big_Integer/*.cbp
 
-"Big_Integer template"/bin/
-"Big_Integer template"/obj/
-"Big_Integer template"/*.depend
-"Big_Integer template"/*.layout
-"Big_Integer template"/*.cbp
+Big_Integer_Template/bin/
+Big_Integer_Template/obj/
+Big_Integer_Template/*.depend
+Big_Integer_Template/*.layout
+Big_Integer_Template/*.cbp
 

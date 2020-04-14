@@ -1,5 +1,5 @@
-#ifndef BINARY_ARITHMETIC_IMPL_HPP_INCLUDED
-#define BINARY_ARITHMETIC_IMPL_HPP_INCLUDED
+#ifndef BINARY_ARITHMETIC_IMPL_H_INCLUDED
+#define BINARY_ARITHMETIC_IMPL_H_INCLUDED
 
 template < typename T >
 const Big_Integer<T> operator +(Big_Integer<T> left, const Big_Integer<T>& right)
@@ -37,4 +37,4 @@ const Big_Integer<T> operator %(Big_Integer<T> left, const Big_Integer<T>& right
 }
 
 
-#endif // BINARY_ARITHMETIC_IMPL_HPP_INCLUDED
+#endif // BINARY_ARITHMETIC_IMPL_H_INCLUDED

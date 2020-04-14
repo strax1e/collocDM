@@ -1,5 +1,5 @@
-#ifndef BIG_INTEGER_HPP_INCLUDED
-#define BIG_INTEGER_HPP_INCLUDED
+#ifndef BIG_INTEGER_H_INCLUDED
+#define BIG_INTEGER_H_INCLUDED
 
 #include <string>
 
@@ -67,11 +67,11 @@ private:
     T _number;
 };
 
-#include "assigment_arithmetics_impl.hpp"
-#include "base_methods_impl.hpp"
-#include "binary_arithmetic_impl.hpp"
-#include "increment_decrement_impl.hpp"
-#include "iostream_impl.hpp"
-#include "logical_operators_impl.hpp"
+#include "assigment_arithmetics_impl.h"
+#include "base_methods_impl.h"
+#include "binary_arithmetic_impl.h"
+#include "increment_decrement_impl.h"
+#include "iostream_impl.h"
+#include "logical_operators_impl.h"
 
-#endif // BIG_INTEGER_HPP_INCLUDED
+#endif // BIG_INTEGER_H_INCLUDED
