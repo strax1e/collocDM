@@ -16,6 +16,6 @@
 #include <cmath>
 #include <vector>
 
-#include "polynom.h"
+#include "Polynom.h"
 
 #endif // __TYPEDEF_H

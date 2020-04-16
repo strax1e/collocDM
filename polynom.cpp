@@ -8,64 +8,165 @@
 
 using namespace poly;
 
-/* Default polynom contructor */
-polynom::polynom( void )
+/* Default Polynom contructor */
+Polynom::Polynom( void )
 {
-} /* End of 'polynom' function */
+  degree = 0;
+  coefs = {0};
+} /* End of 'Polynom' function */
 
 /* Polynom destructor */
-polynom::~polynom( void )
+Polynom::~Polynom( void )
 {
-} /* End of '~polynom' function */
+} /* End of '~Polynom' function */
 
 /* Polynom constructor from coefficients
  * ARGUMENTS:
  *   - coefficients vector:
  *       const std::vector<float> &coefs;
  */
-polynom::polynom( const std::vector<float> &coefs )
+Polynom::Polynom( const std::vector<float> &coefs )
 {
   degree = coefs.size();
   this->coefs = coefs;
-} /* End of 'polynom' function */
+  Optimize();
+} /* End of 'Polynom' function */
 
-/* Polynomial summing funtion
- * ARGUMENTS:
- *   - coefficients vector:
- *       const std::vector<float> &coefs;
- * RETURNS:
- *   (polynom) Summing result
+/* Polynomial simplifying function
+ * ARGUMENTS: None
+ * RETURNS: None
  */
-const polynom polynom::ADD_PP_P( const polynom &p1, const polynom &p2 )
+void Polynom::Optimize( void )
 {
-  polynom res = p1.degree > p2.degree ? p1 : p2;
+  int cur = degree - 1, size;
 
-  for (int i = 0; i < fmin(p1.degree, p2.degree); i++)
-    res.coefs[i] = p1.coefs[i] + p2.coefs[i];
+  if (coefs[cur] == 0)
+  {
+    while (coefs[cur] == 0 && cur > 0)
+      cur--;
+    coefs.resize(cur + 1);
+  }
+} /* End of 'Optimize' function */
 
-  return res;
-} /* End of 'ADD_PP_P' function */
+
+/* Polynom print function
+ * ARGUMENTS: None
+ * RETURNS: None
+ */
+void Polynom::Print( void )
+{
+  for (int i = coefs.size() - 1; i >= 0; i--)
+  {
+    if (coefs[i] > 0 && i != 0)
+      printf("%fx^%i + ", coefs[i], i);
+    if (i == 0)
+    {
+      if (coefs[i] == 0)
+      {
+        if (coefs.size() == 1)
+          printf("0");
+      }
+      else
+        printf("%f", coefs[0]);
+    }
+  }
+} /* End of 'Print' function */
+
+/* Polynomial coefficient getting function
+ * ARGUMENTS:
+ *   - Position:
+ *       int pos;
+ * RETURNS:
+ *   (Rational) Coefficient
+ */
+const float Polynom::GetCoef( int pos )
+{
+  return coefs[pos - 1];
+} /* End of 'GetCoef' function */
+
+/* Polynomial degree getting function
+ * ARGUMENTS: None
+ * RETURNS: Degree
+ */
+const float Polynom::GetDegree( void )
+{
+  return degree;
+} /* End of 'GetCoef' function */
 
 /* Polynom addition with assignment operator
  * ARGUMENTS:
- *   - second polynomial:
- *       const polynom &p;
+ *   - Polynomials:
+ *       Polynom &left, const Polynom &right;
  * RETURNS:
- *   (polynom) Summing result
+ *   (Polynom) Summing result
  */
-const polynom &poly::polynom::operator+=( const polynom &p )
+Polynom &poly::operator+=( Polynom &left, const Polynom &right )
 {
-  return *this = polynom::ADD_PP_P(*this, p);
+  if (right.degree > left.degree)
+    left.coefs.resize(right.degree);
+  for (int i = 0; i < fmin(left.degree, right.degree); i++)
+    left.coefs[i] += right.coefs[i];
+  left.Optimize();
+  
+  return left;
 } /* End of 'operator+=' function */
 
 /* Polynom sum operator
  * ARGUMENTS:
- *   - second polynomial:
- *       const polynom &p;
+ *   - Polynomials:
+ *       const Polynom &left, const Polynom &right
  * RETURNS:
- *   (polynom) Summing result
+ *   (Polynom) Summing result
  */
-const polynom poly::polynom::operator+( const polynom &p )
+const Polynom poly::operator+( const Polynom &left, const Polynom &right )
 {
-  return *this += p;
+  Polynom res = left;
+
+  return res += right;
+} /* End of 'operator+' function */
+
+/* Polynom unary '+' operator
+ * ARGUMENTS:
+ *   - second Polynomial:
+ *       const Polynom &p;
+ * RETURNS:
+ *   (Polynom) Summing result
+ */
+const Polynom poly::operator+( const Polynom &p )
+{
+  return p;
+} /* End of 'operator+' function */
+
+/* Polynom multiplying by number operator
+ * ARGUMENTS:
+ *   - Polynomial:
+ *       Polynom &p;
+ *   - Number:
+ *       float num;
+ * RETURNS:
+ *   (Polynom) Multiplying result
+ */
+Polynom &poly::operator*=( Polynom &p, float num )
+{
+  for (int i = 0; i < p.degree; i++)
+    p.coefs[i] *= num;
+  p.Optimize();
+  
+  return p;
+} /* End of 'operator*=' function */
+
+/* Polynom multiplying by number and assignment operator
+ * ARGUMENTS:
+ *   - Polynomial:
+ *       const Polynom &p;
+ *   - Number:
+ *       float num;
+ * RETURNS:
+ *   (Polynom) Multiplying result
+ */
+const Polynom poly::operator*( const Polynom &p, float num )
+{
+  Polynom res = p;
+
+  return res *= num;
 } /* End of 'operator+' function */

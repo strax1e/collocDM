@@ -12,7 +12,15 @@
 
 #include "typedef.h"
 
+using namespace poly;
+
 int main( void )
 {
+  Polynom a(std::vector<float>{1, 2, 3}), b(std::vector<float>{3, 2, 1}), c = a + b;
+  c = c + a + b;
+  a += b += c;
+  a = c;
+  c.Print();
+  
   return 30;
 }
