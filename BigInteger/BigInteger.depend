@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1587151962 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm\biginteger\assigment_arithmetics_impl.cpp
+	<exception>
+	<stdexcept>
+	"BigInteger.h"
+
+1587152245 c:\users\galina\desktop\programming\c++\0-educational_projects\dm\biginteger\biginteger.h
+	<string>
+
+1587152179 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm\biginteger\biginteger_test.cpp
+	<iostream>
+	<vector>
+	<utility>
+	<string>
+	<sstream>
+	"BigInteger.h"
+
+1587149775 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm\biginteger\increment_decrement_impl.cpp
+	"BigInteger.h"
+
+1587149982 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm\biginteger\binary_arithmetic_impl.cpp
+	"BigInteger.h"
+
+1587151772 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm\biginteger\iostream_impl.cpp
+	<iostream>
+	"BigInteger.h"
+
+1587149994 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm\biginteger\logical_operators_impl.cpp
+	"BigInteger.h"
+
+1587152046 source:c:\users\galina\desktop\programming\c++\0-educational_projects\dm\biginteger\base_methods_impl.cpp
+	<exception>
+	<algorithm>
+	"BigInteger.h"
+
