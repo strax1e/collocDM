@@ -4,75 +4,75 @@
 #include <exception>
 
 template < typename T >
-Big_Integer<T>& Big_Integer<T>::Big_Integer::operator +=(const Big_Integer<T>& other)
+BigInteger<T>& BigInteger<T>::operator +=(const BigInteger<T>& other)
 {
-    if (_sign == other._sign)
-        _number += other._number;
+    if (sign == other.sign)
+        number += other.number;
     else
     {
-        if (_number >= other._number)
-            _number -= other._number;
+        if (number >= other.number)
+            number -= other.number;
         else
         {
-            _sign = !_sign;
-            Big_Natural n(std::move(_number));
-            _number = other._number;
-            _number -= n;
+            sign = !sign;
+            T n(std::move(number));
+            number = other.number;
+            number -= n;
         }
     }
     return *this;
 }
 
 template < typename T >
-Big_Integer<T>& Big_Integer<T>::Big_Integer::operator -=(const Big_Integer<T>& other)
+BigInteger<T>& BigInteger<T>::operator -=(const BigInteger<T>& other)
 {
-    if (_sign != other._sign)
-        _number += other._number;
+    if (sign != other.sign)
+        number += other.number;
     else
     {
-        if (_number >= other._number)
-            _number -= other._number;
+        if (number >= other.number)
+            number -= other.number;
         else
         {
-            _sign = !_sign;
-            T n(std::move(_number));
-            _number = other._number;
-            _number -= n;
+            sign = !sign;
+            T n(std::move(number));
+            number = other.number;
+            number -= n;
         }
     }
     return *this;
 }
 
 template < typename T >
-Big_Integer<T>& Big_Integer<T>::Big_Integer::operator *=(const Big_Integer<T>& other)
+BigInteger<T>& BigInteger<T>::operator *=(const BigInteger<T>& other)
 {
-    _sign = _sign == other._sign ? true : false;
-    _number *= other._number;
+    sign = sign == other.sign ? true : false;
+    number *= other.number;
     return *this;
 }
 
 template < typename T >
-Big_Integer<T>& Big_Integer<T>::operator *=(int num) // -9 <= num <= 9
+BigInteger<T>& BigInteger<T>::operator *=(int num) // -9 <= num <= 9
 {
     if (std::abs(num) % 10 != 0)
         throw std::runtime_error("ERROR: multiplying by num(abs(num) % 10 != 0)");
 
-    _sign = _sign == num > 0 ? true : false;
-    _number *= std::abs(num);
+    sign = sign == num > 0 ? true : false;
+    number *= std::abs(num);
     return *this;
 }
 
 template < typename T >
-Big_Integer<T>& Big_Integer<T>::Big_Integer::operator /=(const Big_Integer<T>& other)
+BigInteger<T>& BigInteger<T>::operator /=(const BigInteger<T>& other)
 {
-    throw std::runtime_error("featch not realised: Big_Integer()");
+    throw std::runtime_error("feature not realised: operator /=(const BigInteger<T>&)");
     //return *this;
 }
 
 template < typename T >
-Big_Integer<T>& Big_Integer<T>::Big_Integer::operator %=(const Big_Integer<T>& other)
+BigInteger<T>& BigInteger<T>::BigInteger::operator %=(const BigInteger<T>& other)
 {
-    throw std::runtime_error("featch not realised: Big_Integer()");
+    throw std::runtime_error("feature not realised: operator %=(const BigInteger<T>&)");
     //return *this;
 }
 

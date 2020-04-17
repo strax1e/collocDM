@@ -2,39 +2,39 @@
 #define LOGICAL_OPERATORS_IMPL_H_INCLUDED
 
 template < typename T >
-bool Big_Integer<T>::operator ==(const Big_Integer<T>& other) const
+bool BigInteger<T>::operator ==(const BigInteger<T>& other) const
 {
-    return _number == other._number;
+    return number == other.number;
 }
 
 template < typename T >
-bool Big_Integer<T>::operator !=(const Big_Integer<T>& other) const
+bool BigInteger<T>::operator !=(const BigInteger<T>& other) const
 {
-    return _number != other._number;
+    return number != other.number;
 }
 
 template < typename T >
-bool Big_Integer<T>::operator > (const Big_Integer<T>& other) const
+bool BigInteger<T>::operator > (const BigInteger<T>& other) const
 {
-    return _number > other._number;
+    return number > other.number;
 }
 
 template < typename T >
-bool Big_Integer<T>::operator < (const Big_Integer<T>& other) const
+bool BigInteger<T>::operator < (const BigInteger<T>& other) const
 {
-    return _number < other._number;
+    return number < other.number;
 }
 
 template < typename T >
-bool Big_Integer<T>::operator >=(const Big_Integer<T>& other) const
+bool BigInteger<T>::operator >=(const BigInteger<T>& other) const
 {
-    return _number >= other._number;
+    return number >= other.number;
 }
 
 template < typename T >
-bool Big_Integer<T>::operator <=(const Big_Integer<T>& other) const
+bool BigInteger<T>::operator <=(const BigInteger<T>& other) const
 {
-    return _number <= other._number;
+    return number <= other.number;
 }
 
 

@@ -2,59 +2,59 @@
 #define INCREMENT_DECREMENT_IMPL_H_INCLUDED
 
 template < typename T >
-Big_Integer<T>& Big_Integer<T>::operator ++()
+BigInteger<T>& BigInteger<T>::operator ++()
 {
-    if (_sign)
-        _number++;
+    if (sign)
+        number++;
     else
-        _number--;
+        number--;
 
-    if (_number == 0)
-        _sign = true;
+    if (number == 0)
+        sign = true;
 
     return *this;
 }
 
 template < typename T >
-Big_Integer<T> Big_Integer<T>::operator ++(int)
+BigInteger<T> BigInteger<T>::operator ++(int)
 {
-    Big_Integer<T> copy(*this);
-    if (_sign)
-        _number++;
+    BigInteger<T> copy(*this);
+    if (sign)
+        number++;
     else
-        _number--;
+        number--;
 
-    if (_number == 0)
-        _sign = true;
+    if (number == 0)
+        sign = true;
 
     return copy;
 }
 
 template < typename T >
-Big_Integer<T>& Big_Integer<T>::operator --()
+BigInteger<T>& BigInteger<T>::operator --()
 {
-    if (_sign)
-        _number--;
+    if (sign)
+        number--;
     else
-        _number++;
+        number++;
 
-    if (_number < 0)
-        _sign = false;
+    if (number < 0)
+        sign = false;
 
     return *this;
 }
 
 template < typename T >
-Big_Integer<T> Big_Integer<T>::operator --(int)
+BigInteger<T> BigInteger<T>::operator --(int)
 {
-    Big_Integer<T> copy(*this);
-    if (_sign)
-        _number--;
+    BigInteger<T> copy(*this);
+    if (sign)
+        number--;
     else
-        _number++;
+        number++;
 
-    if (_number < 0)
-        _sign = false;
+    if (number < 0)
+        sign = false;
 
     return copy;
 }

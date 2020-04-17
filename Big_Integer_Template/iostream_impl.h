@@ -4,10 +4,10 @@
 #include <iostream>
 
 template < typename T >
-inline std::ostream& operator <<(std::ostream& os, const Big_Integer<T>& x)
+inline std::ostream& operator <<(std::ostream& os, const BigInteger<T>& x)
 {
-    x._sign ? os << "" : os << "-";
-    os << x._number;
+    x.sign ? os << "" : os << "-";
+    os << x.number;
     return os;
 }
 

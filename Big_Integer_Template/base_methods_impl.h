@@ -2,46 +2,74 @@
 #define BASE_METHODS_IMPL_H_INCLUDED
 
 #include <exception>
+#include <algorithm>
 
 template < typename T >
-Big_Integer<T>::Big_Integer()
+BigInteger<T>::BigInteger()
 {
-    throw std::runtime_error("featch not realised: Big_Integer()");
+    throw std::runtime_error("feature not realised: BigInteger()");
 }
 template < typename T >
-Big_Integer<T>::Big_Integer(const Big_Integer<T>& x): _sign(x._sign), _number(x._number){}
+BigInteger<T>::BigInteger(const BigInteger<T>& x): sign(x.sign), number(x.number){}
 
 template < typename T >
-Big_Integer<T>::Big_Integer(Big_Integer<T>&& x): _sign(x._sign), _number(std::move(x._number)){}
+BigInteger<T>::BigInteger(BigInteger<T>&& x): sign(x.sign), number(std::move(x.number)){}
 
 template < typename T >
-Big_Integer<T>::Big_Integer(const std::string& x)
+BigInteger<T>::BigInteger(const std::string& x)
 {
-    throw std::runtime_error("featch not realised: Big_Integer(const std::string&)");
-}
-
-template < typename T >
-Big_Integer<T>::Big_Integer(const T& n): _sign(true), _number(n){}
-
-template < typename T >
-Big_Integer<T>::Big_Integer(T&& n): _sign(true), _number(std::move(n)){}
-
-template < typename T >
-Big_Integer<T>& Big_Integer<T>::operator =(const Big_Integer& x)
-{
-    _sign = x._sign;
-    _number = x._number;
+    size_t it = 0;
+    if (x.front() == '-')
+    {
+        sign = false;
+        it++;
+    }
+    std::string s(x.substr(it, x.size()));
+    number(std::move(s));
 }
 
 template < typename T >
-Big_Integer<T>& Big_Integer<T>::operator =(Big_Integer<T>&& x)
+BigInteger<T>::BigInteger(const T& n): sign(true), number(n){}
+
+template < typename T >
+BigInteger<T>::BigInteger(T&& n): sign(true), number(std::move(n)){}
+
+template < typename T >
+BigInteger<T>::BigInteger(long long n): number(std::abs(n)), sign(n >= 0){}
+
+
+template < typename T >
+BigInteger<T>& BigInteger<T>::operator =(const BigInteger<T>& x)
 {
-    _sign = x._sign;
-    _number = std::move(x._number);
+    sign = x.sign;
+    number = x.number;
+    return *this;
 }
 
 template < typename T >
-Big_Integer<T>::~Big_Integer(){}
+BigInteger<T>& BigInteger<T>::operator =(BigInteger<T>&& x)
+{
+    sign = x.sign;
+    number = std::move(x.number);
+    return *this;
+}
+
+template < typename T >
+BigInteger<T>& BigInteger<T>::operator =(const T& x)
+{
+    number = x;
+    return *this;
+}
+
+template < typename T >
+BigInteger<T>& BigInteger<T>::operator =(T&& x)
+{
+    number = std::move(x);
+    return *this;
+}
+
+template < typename T >
+BigInteger<T>::~BigInteger(){}
 
 
 

@@ -1,70 +1,64 @@
-#ifndef BIG_INTEGER_H_INCLUDED
-#define BIG_INTEGER_H_INCLUDED
+#ifndef BigInteger_H_INCLUDED
+#define BigInteger_H_INCLUDED
 
 #include <string>
 
-//class Big_Natural{};
-typedef unsigned short Big_Natural;
-
-//inline std::ostream& operator <<(std::ostream& os, const Big_Natural& x)
-//{
-//    //os << "big natural value\n";
-//    return os;
-//}
-
 template < typename T >
-class Big_Integer
+class BigInteger
 {
 public:
-    Big_Integer();
-    Big_Integer(const Big_Integer&);
-    Big_Integer(Big_Integer&&);
+    BigInteger();
+    BigInteger(const BigInteger<T>&);
+    BigInteger(BigInteger<T>&&);
 
-    Big_Integer(const std::string&);
-    Big_Integer(const T&);
-    Big_Integer(T&&);
+    BigInteger(const std::string&);
+    explicit BigInteger(const T&);
+    explicit BigInteger(T&&);
+    explicit BigInteger(long long);
 
-    ~Big_Integer();
+    BigInteger<T>& operator =(const BigInteger<T>&);
+    BigInteger<T>& operator =(BigInteger<T>&&);
+    BigInteger<T>& operator =(const T&);
+    BigInteger<T>& operator =(T&&);
 
-    Big_Integer& operator =(const Big_Integer&);
-    Big_Integer& operator =(Big_Integer&&);
+    ~BigInteger();
 
-    bool operator ==(const Big_Integer&) const;
-	bool operator !=(const Big_Integer&) const;
-	bool operator > (const Big_Integer&) const;
-	bool operator < (const Big_Integer&) const;
-	bool operator >=(const Big_Integer&) const;
-	bool operator <=(const Big_Integer&) const;
+    bool operator ==(const BigInteger<T>&) const;
+	bool operator !=(const BigInteger<T>&) const;
+	bool operator > (const BigInteger<T>&) const;
+	bool operator < (const BigInteger<T>&) const;
+	bool operator >=(const BigInteger<T>&) const;
+	bool operator <=(const BigInteger<T>&) const;
 
-    Big_Integer& operator +=(const Big_Integer&);
-    Big_Integer& operator -=(const Big_Integer&);
-    Big_Integer& operator *=(const Big_Integer&);
-    Big_Integer& operator *=(int);
-    Big_Integer& operator /=(const Big_Integer&);
-    Big_Integer& operator %=(const Big_Integer&);
+    BigInteger<T>& operator +=(const BigInteger<T>&);
+    BigInteger<T>& operator -=(const BigInteger<T>&);
+    BigInteger<T>& operator *=(const BigInteger<T>&);
+    BigInteger<T>& operator *=(int);
+    BigInteger<T>& operator /=(const BigInteger<T>&);
+    BigInteger<T>& operator %=(const BigInteger<T>&);
 
-    Big_Integer& operator ++();
-    Big_Integer  operator ++(int);
-    Big_Integer& operator --();
-    Big_Integer  operator --(int);
-
-    template < typename U >
-    friend const Big_Integer<U> operator +(Big_Integer<U>, const Big_Integer<U>&);
-    template < typename U >
-    friend const Big_Integer<U> operator -(Big_Integer<U>, const Big_Integer<U>&);
-    template < typename U >
-    friend const Big_Integer<U> operator *(Big_Integer<U>, const Big_Integer<U>&);
-    template < typename U >
-    friend const Big_Integer<U> operator /(Big_Integer<U>, const Big_Integer<U>&);
-    template < typename U >
-    friend const Big_Integer<U> operator %(Big_Integer<U>, const Big_Integer<U>&);
+    BigInteger<T>& operator ++();
+    BigInteger<T>  operator ++(int);
+    BigInteger<T>& operator --();
+    BigInteger<T>  operator --(int);
 
     template < typename U >
-    friend inline std::ostream& operator <<(std::ostream& os, const Big_Integer<U>& x);
+    friend const BigInteger<U> operator +(BigInteger<U>, const BigInteger<U>&);
+    template < typename U >
+    friend const BigInteger<U> operator -(BigInteger<U>, const BigInteger<U>&);
+    template < typename U >
+    friend const BigInteger<U> operator *(BigInteger<U>, const BigInteger<U>&);
+    template < typename U >
+    friend const BigInteger<U> operator /(BigInteger<U>, const BigInteger<U>&);
+    template < typename U >
+    friend const BigInteger<U> operator %(BigInteger<U>, const BigInteger<U>&);
+
+    template < typename U >
+    friend inline std::ostream& operator <<(std::ostream& os, const BigInteger<U>& x);
 
 private:
-    bool _sign; // true -> number >= 0
-    T _number;
+    bool sign; // true -> number >= 0
+    T number;
 };
 
 #include "assigment_arithmetics_impl.h"
@@ -74,4 +68,4 @@ private:
 #include "iostream_impl.h"
 #include "logical_operators_impl.h"
 
-#endif // BIG_INTEGER_H_INCLUDED
+#endif // BigInteger_H_INCLUDED
