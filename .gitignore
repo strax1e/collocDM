@@ -1,8 +1,8 @@
-Big_Integer/bin/
-Big_Integer/obj/
-Big_Integer/*.depend
-Big_Integer/*.layout
-Big_Integer/*.cbp
+BigInteger/bin/
+BigInteger/obj/
+BigInteger/*.depend
+BigInteger/*.layout
+BigInteger/*.cbp
 
 Big_Integer_Template/bin/
 Big_Integer_Template/obj/
