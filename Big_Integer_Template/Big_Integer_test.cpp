@@ -95,24 +95,33 @@ typedef BigInteger<unsigned long long> num;
 
 int main()
 {
-    num a(1LL);
-    num b(0LL);
-    num c(2LL);
-    c = a + b + c + c;
-    std::cout << c << "\n";
+//    num a(1LL);
+//    num b(0LL);
+//    num c(2LL);
+//    c = a + b + c + c;
+//    std::cout << c << "\n";
 
     logBook logBook;
-    test(logBook, a, b, c, "+=", "23");
-    test(logBook, a, b, c, "+=", "1");
-    test(logBook, a, b, c, "/=", "2");
-    test(logBook, a, b, c, "-=");
-    test(logBook, num(2LL), num(4LL), num(13LL), "*=", "3");
-    test(logBook, num(12858LL), num(4LL), num(7LL), "+", "4");
+//    test(logBook, a, b, c, "+=", "23");
+//    test(logBook, a, b, c, "+=", "1");
+//    test(logBook, a, b, c, "/=", "2");
+//    test(logBook, a, b, c, "-=");
+//    test(logBook, num(2LL), num(4LL), num(13LL), "*=", "3");
+//    test(logBook, num(12858LL), num(4LL), num(7LL), "+", "4");
+    test(logBook, num(17LL),  num(5LL),  num(3LL),  "/", "1/");
+    test(logBook, num(-17LL), num(5LL),  num(-4LL), "/", "2/");
+    test(logBook, num(17LL),  num(-5LL), num(-3LL), "/", "3/");
+    test(logBook, num(-17LL), num(-5LL), num(4LL),  "/", "4/");
+
+    test(logBook, num(17LL),  num(5LL),  num(2LL), "%", "1%");
+    test(logBook, num(-17LL), num(5LL),  num(3LL), "%", "2%");
+    test(logBook, num(17LL),  num(-5LL), num(2LL), "%", "3%");
+    test(logBook, num(-17LL), num(-5LL), num(3LL), "%", "4%");
 
     for (auto&& i : logBook)
     {
         std::cout << "test: ";
-        std::cout.width(3);
+        std::cout.width(4);
         std::cout.setf(std::ios::left);
         std::cout << i.test;
         std::cout << ": " << i.left << " " << i.operation << " " << i.right;

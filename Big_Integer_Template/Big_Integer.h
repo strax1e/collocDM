@@ -30,10 +30,17 @@ public:
 	bool operator >=(const BigInteger<T>&) const;
 	bool operator <=(const BigInteger<T>&) const;
 
+	bool operator ==(int) const; // == 0
+	bool operator !=(int) const; // != 0
+	bool operator > (int) const; //  > 0
+	bool operator < (int) const; //  < 0
+	bool operator >=(int) const; // >= 0
+	bool operator <=(int) const; // <= 0
+
     BigInteger<T>& operator +=(const BigInteger<T>&);
     BigInteger<T>& operator -=(const BigInteger<T>&);
     BigInteger<T>& operator *=(const BigInteger<T>&);
-    BigInteger<T>& operator *=(int);
+    BigInteger<T>& operator *=(int); // *= n, -9 <= n <= 9
     BigInteger<T>& operator /=(const BigInteger<T>&);
     BigInteger<T>& operator %=(const BigInteger<T>&);
 

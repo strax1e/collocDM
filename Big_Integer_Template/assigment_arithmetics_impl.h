@@ -55,9 +55,9 @@ template < typename T >
 BigInteger<T>& BigInteger<T>::operator *=(int num) // -9 <= num <= 9
 {
     if (std::abs(num) % 10 != 0)
-        throw std::runtime_error("ERROR: multiplying by num(abs(num) % 10 != 0)");
+        throw std::runtime_error("ERROR: multiplying by num(abs(num) > 10)");
 
-    sign = sign == num > 0 ? true : false;
+    sign = sign == num >= 0 ? true : false;
     number *= std::abs(num);
     return *this;
 }
@@ -65,15 +65,32 @@ BigInteger<T>& BigInteger<T>::operator *=(int num) // -9 <= num <= 9
 template < typename T >
 BigInteger<T>& BigInteger<T>::operator /=(const BigInteger<T>& other)
 {
-    throw std::runtime_error("feature not realised: operator /=(const BigInteger<T>&)");
-    //return *this;
+    if (other.number == 0)
+        throw std::runtime_error("Error: div by null");
+
+    number /= other.number;
+    if (!sign)
+        number++;
+
+    if (!other.sign)
+        sign = !sign;
+
+    return *this;
 }
 
 template < typename T >
 BigInteger<T>& BigInteger<T>::BigInteger::operator %=(const BigInteger<T>& other)
 {
-    throw std::runtime_error("feature not realised: operator %=(const BigInteger<T>&)");
-    //return *this;
+    if (other.number == 0)
+        throw std::runtime_error("Error: div by null");
+
+    number %= other.number;
+    if (!sign)
+    {
+        number = other.number - number;
+        sign = true;
+    }
+    return *this;
 }
 
 

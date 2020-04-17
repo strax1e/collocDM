@@ -5,10 +5,7 @@
 #include <algorithm>
 
 template < typename T >
-BigInteger<T>::BigInteger()
-{
-    throw std::runtime_error("feature not realised: BigInteger()");
-}
+BigInteger<T>::BigInteger(): sign(true), number("0"){}
 template < typename T >
 BigInteger<T>::BigInteger(const BigInteger<T>& x): sign(x.sign), number(x.number){}
 
@@ -70,9 +67,5 @@ BigInteger<T>& BigInteger<T>::operator =(T&& x)
 
 template < typename T >
 BigInteger<T>::~BigInteger(){}
-
-
-
-
 
 #endif // BASE_METHODS_IMPL_H_INCLUDED
