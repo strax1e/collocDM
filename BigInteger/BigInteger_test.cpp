@@ -93,9 +93,6 @@ void test(logBook& logBook, T&& left, T&& right, T&& must,
         resultSS << left;
         resultSS >> resultS;
 
-        if (resultS == mustS)
-            return;
-
         logBook.push_back( LogCell(std::move(leftS), std::move(rightS), std::string(operation),
                             std::move(resultS), std::move(mustS), std::string(testNumber)) );
     }
@@ -105,6 +102,55 @@ void test(logBook& logBook, T&& left, T&& right, T&& must,
                             std::string(ex.what()), std::move(mustS), std::string(testNumber)) );
     }
 }
+
+template < typename T >
+void test(logBook& logBook, T&& left, T&& must,
+          const std::string& operation, const std::string& testNumber = "-")
+{
+    std::stringstream leftSS;
+    std::stringstream resultSS;
+    std::stringstream mustSS;
+
+    std::string leftS;
+    std::string resultS;
+    std::string mustS;
+
+    leftSS << left;
+    leftSS >> leftS;
+    mustSS << must;
+    mustSS >> mustS;
+
+    try
+    {
+        if (operation == "()++")
+            left++;
+        else if (operation == "()--")
+            left--;
+        else if (operation == "++()")
+            ++left;
+        else if (operation == "--()")
+            --left;
+
+        else
+        {
+            logBook.push_back( LogCell(std::move(leftS), "-", std::string(operation),
+                                "undefined operation", std::move(mustS), std::string(testNumber)) );
+            return;
+        }
+
+        resultSS << left;
+        resultSS >> resultS;
+
+        logBook.push_back( LogCell(std::move(leftS), "-", std::string(operation),
+                            std::move(resultS), std::move(mustS), std::string(testNumber)) );
+    }
+    catch(std::exception& ex)
+    {
+        logBook.push_back( LogCell(std::move(leftS), "-", std::string(operation),
+                            std::string(ex.what()), std::move(mustS), std::string(testNumber)) );
+    }
+}
+
 
 typedef BigInteger num;
 
@@ -128,13 +174,29 @@ int main()
     test(logBook, num(-1), num(5), num(0), ">=", "13");
     test(logBook, num(-1), num(5), num(1), "<=", "14");
 
+    test(logBook, num(2), num(3), "()++", "15");
+    test(logBook, num(-1), num(0), "++()", "16");
+
+    test(logBook, num(5), num(5), num(1), "==", "17");
+    test(logBook, num(5), num(5), num(0), "!=", "18");
+    test(logBook, num(5), num(5), num(0), ">",  "19");
+    test(logBook, num(5), num(5), num(0), "<",  "20");
+    test(logBook, num(5), num(5), num(1), ">=", "21");
+    test(logBook, num(5), num(5), num(1), "<=", "22");
+
     for (auto&& i : logBook)
     {
         std::cout << "test: ";
         std::cout.width(4);
         std::cout.setf(std::ios::left);
         std::cout << i.test;
-        std::cout << ": " << i.left << " " << i.operation << " " << i.right;
-        std::cout  << ";  result: " << i.result << ";   must be: " << i.must << "\n";
+        if (i.result == i.must)
+            std::cout << " -  ok\n";
+        else
+        {
+            std::cout << ": " << i.left << " " << i.operation << " ";
+            i.right != "-" ? std::cout << i.right : std::cout << "";
+            std::cout  << ";  result: " << i.result << ";   must be: " << i.must << "\n";
+        }
     }
 }

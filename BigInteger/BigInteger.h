@@ -30,12 +30,15 @@ public:
 	bool operator >=(const BigInteger&) const;
 	bool operator <=(const BigInteger&) const;
 
-	bool operator ==(int) const; // == 0
-	bool operator !=(int) const; // != 0
-	bool operator > (int) const; //  > 0
-	bool operator < (int) const; //  < 0
-	bool operator >=(int) const; // >= 0
-	bool operator <=(int) const; // <= 0
+	bool isNegative() { return !isPositive; }
+	bool isZero() { return number == BigNatural(0); }
+
+//	bool operator ==(int) const; // == 0
+//	bool operator !=(int) const; // != 0
+//	bool operator > (int) const; //  > 0
+//	bool operator < (int) const; //  < 0
+//	bool operator >=(int) const; // >= 0
+//	bool operator <=(int) const; // <= 0
 
     BigInteger& operator +=(const BigInteger&);
     BigInteger& operator -=(const BigInteger&);
