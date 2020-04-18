@@ -2,8 +2,7 @@
 #define BigInteger_H_INCLUDED
 
 #include <string>
-
-typedef unsigned long long BigNatural;
+#include "__BigNatural.h"
 
 class BigInteger
 {
@@ -13,9 +12,9 @@ public:
     BigInteger(BigInteger&&);
 
     BigInteger(const std::string&);
-    explicit BigInteger(const BigNatural&);
-    explicit BigInteger(BigNatural&&);
-    explicit BigInteger(long long);
+    BigInteger(const BigNatural&);
+    BigInteger(BigNatural&&);
+    BigInteger(long long);
 
     BigInteger& operator =(const BigInteger&);
     BigInteger& operator =(BigInteger&&);

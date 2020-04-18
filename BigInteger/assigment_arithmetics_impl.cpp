@@ -59,7 +59,8 @@ BigInteger& BigInteger::operator *=(int num) // -9 <= num <= 9
 
 BigInteger& BigInteger::operator /=(const BigInteger& other)
 {
-    if (other.number == 0)
+    // maybe need to realise comparison with int(0)
+    if (other.number == BigNatural(0))
         throw std::runtime_error("Error: div by null");
 
     number /= other.number;
@@ -74,7 +75,8 @@ BigInteger& BigInteger::operator /=(const BigInteger& other)
 
 BigInteger& BigInteger::BigInteger::operator %=(const BigInteger& other)
 {
-    if (other.number == 0)
+    // maybe need to realise comparison with int(0)
+    if (other.number == BigNatural(0))
         throw std::runtime_error("Error: div by null");
 
     number %= other.number;

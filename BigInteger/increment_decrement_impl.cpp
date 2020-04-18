@@ -7,7 +7,8 @@ BigInteger& BigInteger::operator ++()
     else
         number--;
 
-    if (number == 0)
+    // maybe need to realise comparison with int(0)
+    if (number == BigNatural(0))
         isPositive = true;
 
     return *this;
@@ -21,7 +22,8 @@ BigInteger BigInteger::operator ++(int)
     else
         number--;
 
-    if (number == 0)
+    // maybe need to realise comparison with int(0)
+    if (number == BigNatural(0))
         isPositive = true;
 
     return copy;
@@ -29,13 +31,14 @@ BigInteger BigInteger::operator ++(int)
 
 BigInteger& BigInteger::operator --()
 {
-    if (isPositive)
-        number--;
-    else
+    // maybe need to realise comparison with int(0)
+    if (!isPositive || number == BigNatural(0))
+    {
         number++;
-
-    if (number < 0)
         isPositive = false;
+    }
+    else
+        number--;
 
     return *this;
 }
@@ -43,13 +46,15 @@ BigInteger& BigInteger::operator --()
 BigInteger BigInteger::operator --(int)
 {
     BigInteger copy(*this);
-    if (isPositive)
-        number--;
-    else
-        number++;
 
-    if (number < 0)
+    // maybe need to realise comparison with int(0)
+    if (!isPositive || number == BigNatural(0))
+    {
+        number++;
         isPositive = false;
+    }
+    else
+        number--;
 
     return copy;
 }

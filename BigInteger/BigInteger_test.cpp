@@ -58,6 +58,7 @@ void test(logBook& logBook, T&& left, T&& right, T&& must,
             left *= right;
         else if (operation == "/=")
             left /= right;
+
         else if (operation == "+")
             left = left + right;
         else if (operation == "-")
@@ -68,6 +69,20 @@ void test(logBook& logBook, T&& left, T&& right, T&& must,
             left = left / right;
         else if (operation == "%")
             left = left % right;
+
+        else if (operation == "==")
+            left = BigInteger(left == right);
+        else if (operation == "!=")
+            left = BigInteger(left != right);
+        else if (operation == ">")
+            left = BigInteger(left > right);
+        else if (operation == "<")
+            left = BigInteger(left < right);
+        else if (operation == ">=")
+            left = BigInteger(left >= right);
+        else if (operation == "<=")
+            left = BigInteger(left <= right);
+
         else
         {
             logBook.push_back( LogCell(std::move(leftS), std::move(rightS), std::string(operation),
@@ -95,28 +110,23 @@ typedef BigInteger num;
 
 int main()
 {
-//    num a(1LL);
-//    num b(0LL);
-//    num c(2LL);
-//    c = a + b + c + c;
-//    std::cout << c << "\n";
-
     logBook logBook;
-//    test(logBook, a, b, c, "+=", "23");
-//    test(logBook, a, b, c, "+=", "1");
-//    test(logBook, a, b, c, "/=", "2");
-//    test(logBook, a, b, c, "-=");
-//    test(logBook, num(2LL), num(4LL), num(13LL), "*=", "3");
-//    test(logBook, num(12858LL), num(4LL), num(7LL), "+", "4");
-    test(logBook, num(17LL),  num(5LL),  num(3LL),  "/", "1/");
-    test(logBook, num(-17LL), num(5LL),  num(-4LL), "/", "2/");
-    test(logBook, num(17LL),  num(-5LL), num(-3LL), "/", "3/");
-    test(logBook, num(-17LL), num(-5LL), num(4LL),  "/", "4/");
+    test(logBook, num(17),  num(5),  num(3),  "/", "1");
+    test(logBook, num(-17), num(5),  num(-4), "/", "2");
+    test(logBook, num(17),  num(-5), num(-3), "/", "3");
+    test(logBook, num(-17), num(-5), num(4),  "/", "4");
 
-    test(logBook, num(17LL),  num(5LL),  num(2LL), "%", "1%");
-    test(logBook, num(-17LL), num(5LL),  num(3LL), "%", "2%");
-    test(logBook, num(17LL),  num(-5LL), num(2LL), "%", "3%");
-    test(logBook, num(-17LL), num(-5LL), num(3LL), "%", "4%");
+    test(logBook, num(17),  num(5),  num(2), "%", "5");
+    test(logBook, num(-17), num(5),  num(3), "%", "6");
+    test(logBook, num(17),  num(-5), num(2), "%", "7");
+    test(logBook, num(-17), num(-5), num(3), "%", "8");
+
+    test(logBook, num(-1), num(5), num(0), "==", "9");
+    test(logBook, num(-1), num(5), num(1), "!=", "10");
+    test(logBook, num(-1), num(5), num(0), ">",  "11");
+    test(logBook, num(-1), num(5), num(1), "<",  "12");
+    test(logBook, num(-1), num(5), num(0), ">=", "13");
+    test(logBook, num(-1), num(5), num(1), "<=", "14");
 
     for (auto&& i : logBook)
     {
