@@ -42,6 +42,18 @@ bign::BigNatural::~BigNatural(void)
 {
 }
 
+const bign::BigNatural bign::operator++ ( BigNatural& left, int ){
+    BigNatural oldleft = left;
+    left += 1;
+    return oldleft; 
+}
+
+bign::BigNatural& bign::operator++ ( BigNatural& left )
+{
+    left += 1;
+    return left;
+}
+
 bign::BigNatural &bign::operator+=(BigNatural &left, const long long &right)
 {
     bign::BigNatural bigright = right;

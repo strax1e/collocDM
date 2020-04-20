@@ -14,12 +14,16 @@ namespace bign
     {
         private:
             std::vector<int> nums;
+            //compares
             friend const bool operator!= ( const BigNatural& left, const BigNatural& right );
             friend const bool operator== ( const BigNatural& left, const BigNatural& right );
             friend const bool operator<= ( const BigNatural& left, const BigNatural& right );
             friend const bool operator< ( const BigNatural& left, const BigNatural& right );
             friend const bool operator>= ( const BigNatural& left, const BigNatural& right );
             friend const bool operator> ( const BigNatural& left, const BigNatural& right );
+            //
+            friend const BigNatural operator++ ( BigNatural& left, int );
+            friend BigNatural &operator++ ( BigNatural& left );
             friend BigNatural &operator+= ( BigNatural& left, const BigNatural& right );
             friend BigNatural &operator+= ( BigNatural& left, const long long &right );
             friend BigNatural &operator*= ( BigNatural& left, const BigNatural& right );
@@ -30,7 +34,10 @@ namespace bign
             friend const BigNatural operator* ( const BigNatural& left, const BigNatural& right );
             friend const BigNatural operator* ( const BigNatural& left, const long long& right );
             friend const BigNatural operator* ( const long long& left, const BigNatural& right );
+
+            //output
             friend std::ostream& operator<< ( std::ostream& out, const BigNatural &obj );
+            //
         public:
             BigNatural( const std::string& inum );
             BigNatural( long long inum );
