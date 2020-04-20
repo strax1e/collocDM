@@ -3,13 +3,14 @@
 
 #include <string>
 #include <sstream>
+#include <iostream>
 
 class BigNatural
 {
 public:
     BigNatural(): num(0){}
-    BigNatural(const BigNatural& other): num(other.num){}
-    BigNatural(BigNatural&& other): num(other.num){}
+    BigNatural(const BigNatural& other): num(other.num){/*std::cout << "copy\n";*/}
+    BigNatural(BigNatural&& other): num(other.num){/*std::cout << "move\n";*/}
 
     BigNatural(const std::string& s): num(std::stoll(s)){}
     BigNatural(unsigned long long n): num(n){}

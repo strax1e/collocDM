@@ -30,8 +30,8 @@ public:
 	bool operator >=(const BigInteger&) const;
 	bool operator <=(const BigInteger&) const;
 
-	bool isNegative() { return !isPositive; }
-	bool isZero() { return number == BigNatural(0); }
+	bool isNegative() const { return !isPositive; }
+	bool isZero() const { return number == BigNatural(0); }
 
 //	bool operator ==(int) const; // == 0
 //	bool operator !=(int) const; // != 0
@@ -58,6 +58,9 @@ public:
     friend const BigInteger operator /(BigInteger, const BigInteger&);
     friend const BigInteger operator %(BigInteger, const BigInteger&);
     friend std::ostream& operator <<(std::ostream&, const BigInteger&);
+
+    BigNatural getNatural() const & {BigNatural copy(number); return copy;}
+    BigNatural&& getNatural() && {return std::move(number);}
 
 private:
     bool isPositive; // true -> number >= 0

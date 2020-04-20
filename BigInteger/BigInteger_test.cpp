@@ -214,4 +214,14 @@ int main()
             std::cout  << ";  result: " << i.result << ";   must be: " << i.must << "\n";
         }
     }
+
+//    std::cout << "\n----------------\n";
+//
+//    BigInteger a(14);
+//    BigNatural b = a.getNatural();
+//    BigNatural c = std::move(a).getNatural();
+//    std::cout << "----\n";
+//    ++b;
+//    ++c;
+//    std::cout << a << " " << b << " " << c << "\n";
 }
