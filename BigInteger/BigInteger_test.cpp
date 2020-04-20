@@ -161,28 +161,43 @@ int main()
     test(logBook, num(-17), num(5),  num(-4), "/", "2");
     test(logBook, num(17),  num(-5), num(-3), "/", "3");
     test(logBook, num(-17), num(-5), num(4),  "/", "4");
-
     test(logBook, num(17),  num(5),  num(2), "%", "5");
     test(logBook, num(-17), num(5),  num(3), "%", "6");
     test(logBook, num(17),  num(-5), num(2), "%", "7");
     test(logBook, num(-17), num(-5), num(3), "%", "8");
-
     test(logBook, num(-1), num(5), num(0), "==", "9");
     test(logBook, num(-1), num(5), num(1), "!=", "10");
     test(logBook, num(-1), num(5), num(0), ">",  "11");
     test(logBook, num(-1), num(5), num(1), "<",  "12");
     test(logBook, num(-1), num(5), num(0), ">=", "13");
     test(logBook, num(-1), num(5), num(1), "<=", "14");
-
     test(logBook, num(2), num(3), "()++", "15");
     test(logBook, num(-1), num(0), "++()", "16");
-
     test(logBook, num(5), num(5), num(1), "==", "17");
     test(logBook, num(5), num(5), num(0), "!=", "18");
     test(logBook, num(5), num(5), num(0), ">",  "19");
     test(logBook, num(5), num(5), num(0), "<",  "20");
     test(logBook, num(5), num(5), num(1), ">=", "21");
     test(logBook, num(5), num(5), num(1), "<=", "22");
+    test(logBook, num(-1), num(1), num(-1), "/", "23");
+    test(logBook, num(-1), num(1), num(0), "%", "24");
+    test(logBook, num(-15), num(5), num(-3), "/", "25");
+    test(logBook, num(-15), num(5), num(0),  "%", "26");
+    test(logBook, num(-1), num(3), num(-1), "/", "27");
+    test(logBook, num(-1), num(3), num(2), "%", "28");
+    test(logBook, num(-1), num(1), num(0), "+", "29");
+    test(logBook, num(1), num(-1), num(0), "+", "30");
+    test(logBook, num(1), num(1), num(0), "-", "31");
+    test(logBook, num(0), num(-1), num(-1), "+", "32");
+    test(logBook, num(0), num(1), num(-1), "-", "33");
+    test(logBook, num(5), num(5), num(0), "-", "34");
+    test(logBook, num(0), num(-5), num(0), "*", "35");
+    test(logBook, num(-5), num(0), num(0), "*", "36");
+    test(logBook, num(1), num(3), num(0), "/", "37");
+    test(logBook, num(1), num(3), num(1), "%", "38");
+    test(logBook, num(-1), num(-3), num(3), "*", "39");
+    test(logBook, num(-1), num(0), "()++", "40");
+    test(logBook, num(0), num(-1), "()--", "41");
 
     for (auto&& i : logBook)
     {

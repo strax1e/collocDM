@@ -18,6 +18,10 @@ BigInteger& BigInteger::operator +=(const BigInteger& other)
             number -= n;
         }
     }
+
+    if (number == BigNatural(0))
+        isPositive = true;
+
     return *this;
 }
 
@@ -37,6 +41,10 @@ BigInteger& BigInteger::operator -=(const BigInteger& other)
             number -= n;
         }
     }
+
+    if (number == BigNatural(0))
+        isPositive = true;
+
     return *this;
 }
 
@@ -44,6 +52,10 @@ BigInteger& BigInteger::operator *=(const BigInteger& other)
 {
     isPositive = isPositive == other.isPositive ? true : false;
     number *= other.number;
+
+    if (number == BigNatural(0))
+        isPositive = true;
+
     return *this;
 }
 
@@ -54,6 +66,10 @@ BigInteger& BigInteger::operator *=(int num) // -9 <= num <= 9
 
     isPositive = num >= 0;
     number *= std::abs(num);
+
+    if (number == BigNatural(0))
+        isPositive = true;
+
     return *this;
 }
 
@@ -63,12 +79,17 @@ BigInteger& BigInteger::operator /=(const BigInteger& other)
     if (other.number == BigNatural(0))
         throw std::runtime_error("Error: div by null");
 
+    bool isIntegerMod = number % other.number == BigNatural(0);
     number /= other.number;
-    if (!isPositive)
-        number++;
+    if (!isIntegerMod)
+        if (!isPositive)
+            number++;
 
     if (!other.isPositive)
         isPositive = !isPositive;
+
+    if (number == BigNatural(0))
+        isPositive = true;
 
     return *this;
 }
@@ -82,8 +103,14 @@ BigInteger& BigInteger::BigInteger::operator %=(const BigInteger& other)
     number %= other.number;
     if (!isPositive)
     {
-        number = other.number - number;
+        if (number != BigNatural(0))
+            number = other.number - number;
+
         isPositive = true;
     }
+
+    if (number == BigNatural(0))
+        isPositive = true;
+
     return *this;
 }
