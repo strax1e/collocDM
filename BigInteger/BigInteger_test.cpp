@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include "BigInteger.h"
+#include "standart_functions.h"
 
 struct LogCell
 {
@@ -164,6 +165,9 @@ int main()
     std::cout << a << " " << b << " " << c << "\n";
     bool d = a == c;
     std::cout << a << " " << b << " " << c << d << "\n";
+
+    MUL_ZM_Z(a);
+    std::cout << a << "\n";
 
     logBook logBook;
     test(logBook, num("17"),  num("5"),  num("3"),  "/", "1");

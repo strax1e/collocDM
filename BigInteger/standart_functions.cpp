@@ -1,18 +1,39 @@
 #include "standart_functions.h"
 #include "BigInteger.h"
 
+/* ABS function
+ * ARGUMENTS:
+ *   - BigInteger:
+ *       BigInteger& x or BigInteger&& x (xvalue)
+ * RETURNS:
+ *   - BigNatural(result of abs)
+ */
 template < typename T >
 BigNatural ABS_Z_N(T&& x)
 {
     return ((std::forward<T>(x)).getNatural());
 }
 
+/* Transformation function(BigNatural to BigInteger)
+ * ARGUMENTS:
+ *   - BigNatural:
+ *       BigNatural& x or BigNatural&& x (xvalue)
+ * RETURNS:
+ *   - BigInteger(result of transformation)
+ */
 template < typename T >
 BigInteger TRANS_N_Z(T&& x)
 {
     return BigInteger(std::forward<T>(x));
 }
 
+/* Transformation function(BigInteger to BigNatural)
+ * ARGUMENTS:
+ *   - BigInteger:
+ *       BigInteger& x or BigInteger&& x (xvalue)
+ * RETURNS:
+ *   - BigNatural(result of transformation)
+ */
 template < typename T >
 BigNatural TRANS_Z_N(T&& x)
 {
@@ -22,6 +43,13 @@ BigNatural TRANS_Z_N(T&& x)
     return ((std::forward<T>(x)).getNatural());
 }
 
+/* Getting position of number function
+ * ARGUMENTS:
+ *   - BigInteger:
+ *       const BigInteger& x
+ * RETURNS:
+ *   - int(0 if x == 0, 1 if x < 0, 2 if x > 0)
+ */
 int POZ_Z_D(const BigInteger& x)
 {
     if (x == BigInteger(0))
@@ -33,11 +61,25 @@ int POZ_Z_D(const BigInteger& x)
     return 2;
 }
 
+/* Reversing sign of BigInteger function
+ * ARGUMENTS:
+ *   - BigInteger:
+ *       BigInteger& x
+ * RETURNS:
+ *   - none
+ */
 void MUL_ZM_Z(BigInteger& x)
 {
     x *= -1;
 }
 
+/* Simple arithmetic operatoins functions
+ * ARGUMENTS:
+ *   - BigInteger:
+        const BigInteger& left, const BigInteger& right
+ * RETURNS:
+ *   - BigInteger(result of operation)
+ */
 BigInteger ADD_ZZ_Z(const BigInteger& left, const BigInteger& right)
 {
     return left + right;

@@ -61,7 +61,7 @@ BigInteger& BigInteger::operator *=(const BigInteger& other)
 
 BigInteger& BigInteger::operator *=(int num) // -9 <= num <= 9
 {
-    if (std::abs(num) % 10 != 0)
+    if (std::abs(num) / 10 != 0)
         throw std::runtime_error("ERROR: multiplying by num(abs(num) > 10)");
 
     isPositive = num >= 0;
