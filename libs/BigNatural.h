@@ -12,18 +12,33 @@ namespace bign
 {
     class BigNatural
     {
-    private:
-        std::vector<int> nums;
-        friend BigNatural &operator+= ( BigNatural& left, const BigNatural& right );
-        friend BigNatural &operator+= ( BigNatural& left, const long long &right );
-        friend BigNatural &operator*= ( BigNatural& left, const BigNatural& right );
-        friend const BigNatural operator+ ( const BigNatural& left, const BigNatural& right ); //2 перегрузки надо
-        friend std::ostream& operator<< ( std::ostream& out, const BigNatural &obj );
-    public:
-        BigNatural( const std::string& inum );
-        BigNatural( long long inum );
-        BigNatural( const BigNatural& inum );
-        ~BigNatural( void );
+        private:
+            std::vector<int> nums;
+            friend const bool operator!= ( const BigNatural& left, const BigNatural& right );
+            friend const bool operator== ( const BigNatural& left, const BigNatural& right );
+            friend const bool operator<= ( const BigNatural& left, const BigNatural& right );
+            friend const bool operator< ( const BigNatural& left, const BigNatural& right );
+            friend const bool operator>= ( const BigNatural& left, const BigNatural& right );
+            friend const bool operator> ( const BigNatural& left, const BigNatural& right );
+            friend BigNatural &operator+= ( BigNatural& left, const BigNatural& right );
+            friend BigNatural &operator+= ( BigNatural& left, const long long &right );
+            friend BigNatural &operator*= ( BigNatural& left, const BigNatural& right );
+            friend BigNatural &operator*= ( BigNatural& left, const long long &right );
+            friend const BigNatural operator+ ( const BigNatural& left, const BigNatural& right );
+            friend const BigNatural operator+ ( const BigNatural& left, const long long& right );
+            friend const BigNatural operator+ ( const long long& left, const BigNatural& right ); 
+            friend const BigNatural operator* ( const BigNatural& left, const BigNatural& right );
+            friend const BigNatural operator* ( const BigNatural& left, const long long& right );
+            friend const BigNatural operator* ( const long long& left, const BigNatural& right );
+            friend std::ostream& operator<< ( std::ostream& out, const BigNatural &obj );
+        public:
+            BigNatural( const std::string& inum );
+            BigNatural( long long inum );
+            BigNatural( const BigNatural& inum );
+            BigNatural( void )
+            {
+                nums.push_back(0);
+            }
+            ~BigNatural( void );
     };
-    //std::ostream &operator<<(std::ostream &out, const BigNatural &obj)
 } // namespace bign
