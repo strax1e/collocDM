@@ -47,10 +47,10 @@ public:
     BigInteger& operator /=(const BigInteger&);
     BigInteger& operator %=(const BigInteger&);
 
-    BigInteger& operator ++();
-    BigInteger  operator ++(int);
-    BigInteger& operator --();
-    BigInteger  operator --(int);
+    BigInteger& operator ++(); // prefix
+    BigInteger  operator ++(int); // postfix
+    BigInteger& operator --(); // prefix
+    BigInteger  operator --(int); // postfix
 
     friend const BigInteger operator +(BigInteger, const BigInteger&);
     friend const BigInteger operator -(BigInteger, const BigInteger&);

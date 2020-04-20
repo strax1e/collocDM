@@ -12,14 +12,24 @@ BigInteger::BigInteger(BigInteger&& x): isPositive(x.isPositive), number(std::mo
 
 BigInteger::BigInteger(const std::string& x)
 {
+    if (x.size() == 0)
+    {
+        number = BigNatural(0);
+        isPositive = true;
+        return;
+    }
+
     size_t it = 0;
-    if (x.front() == '-')
+    if (x[0] == '-')
     {
         isPositive = false;
         it++;
     }
+    else
+        isPositive = true;
+
     std::string s(x.substr(it, x.size()));
-    number = s;
+    number = BigNatural(s);
 }
 
 BigInteger::BigInteger(const BigNatural& n): isPositive(true), number(n){}
