@@ -42,22 +42,60 @@ bign::BigNatural::~BigNatural(void)
 {
 }
 
-const bign::BigNatural bign::operator++ ( BigNatural& left, int ){
-    BigNatural oldleft = left;
-    left += 1;
-    return oldleft; 
+const bign::BigNatural bign::operator--(BigNatural &left, int)
+{
+    bign::BigNatural old = left;
+    left -= 1;
+    return old;
 }
 
-bign::BigNatural& bign::operator++ ( BigNatural& left )
+bign::BigNatural& bign::operator--(BigNatural &left)
 {
+    return left -= 1;
+}
+
+const bign::BigNatural bign::operator++(BigNatural &left, int)
+{
+    BigNatural old = left;
     left += 1;
-    return left;
+    return old;
+}
+
+bign::BigNatural &bign::operator++(BigNatural &left)
+{
+    return left += 1;
+}
+
+bign::BigNatural &bign::operator-=(BigNatural &left, const long long &right)
+{
+    bign::BigNatural newright = right;
+    return left -= newright;
+}
+
+bign::BigNatural &bign::operator-=(BigNatural &left, const BigNatural &right)
+{
+    if (left >= right)
+    {
+        int overflow = 0;
+        for (int i = 0; i < left.nums.size() || overflow; ++i)
+        {
+            left.nums[i] -= overflow + (i < right.nums.size() ? right.nums[i] : 0);
+            overflow = left.nums[i] < 0;
+            if (overflow)
+                left.nums[i] += 10;
+        }
+        while (left.nums.size() > 1 && left.nums.back() == 0)
+            left.nums.pop_back();
+        return left;
+    }
+    else
+        return left = 0;
 }
 
 bign::BigNatural &bign::operator+=(BigNatural &left, const long long &right)
 {
-    bign::BigNatural bigright = right;
-    return left += bigright;
+    bign::BigNatural newright = right;
+    return left += newright;
 }
 
 bign::BigNatural &bign::operator+=(BigNatural &left, const BigNatural &right)
@@ -75,6 +113,7 @@ bign::BigNatural &bign::operator+=(BigNatural &left, const BigNatural &right)
     return left;
 }
 
+// *=
 bign::BigNatural &bign::operator*=(BigNatural &left, const BigNatural &right)
 {
     int overflow = 0;
@@ -101,6 +140,7 @@ bign::BigNatural &bign::operator*=(BigNatural &left, const long long &right)
     return left *= bigright;
 }
 
+// *
 const bign::BigNatural bign::operator*(const BigNatural &left, const BigNatural &right)
 {
     bign::BigNatural newleft = left;
@@ -119,6 +159,26 @@ const bign::BigNatural bign::operator*(const BigNatural &left, const long long &
     return newright *= left;
 }
 
+// -
+const bign::BigNatural bign::operator-(const BigNatural &left, const BigNatural &right)
+{
+    bign::BigNatural newleft = left;
+    return newleft -= right;
+}
+
+const bign::BigNatural bign::operator-(const BigNatural &left, const long long &right)
+{
+    bign::BigNatural newright = right, newleft = left;
+    return newleft -= newright;
+}
+
+const bign::BigNatural bign::operator-(const long long &left, const BigNatural &right)
+{
+    bign::BigNatural newleft = left;
+    return newleft -= right;
+}
+
+// +
 const bign::BigNatural bign::operator+(const BigNatural &left, const BigNatural &right)
 {
     bign::BigNatural newleft = left;
@@ -137,6 +197,8 @@ const bign::BigNatural bign::operator+(const BigNatural &left, const long long &
     return newright += left;
 }
 
+
+// output
 std::ostream &bign::operator<<(std::ostream &out, const BigNatural &obj)
 {
     for (auto g = obj.nums.end() - 1; g != obj.nums.begin() - 1; --g)
@@ -144,17 +206,26 @@ std::ostream &bign::operator<<(std::ostream &out, const BigNatural &obj)
     return out;
 }
 
+
+// compares
 const bool bign::operator!=(const BigNatural &left, const BigNatural &right)
 {
-    if (left.nums.size() != right.nums.size())
-        return true;
-    else
-    {
-        for (int i = left.nums.size() - 1; i >= 0; --i)
-            if (left.nums[i] != right.nums[i])
-                return true;
-    }
-    return false;
+    return !(left == right);
+}
+
+const bool bign::operator<=(const BigNatural &left, const BigNatural &right)
+{
+    return !(left > right);
+}
+
+const bool bign::operator>=(const BigNatural &left, const BigNatural &right)
+{
+    return !(left < right);
+}
+
+const bool bign::operator>(const BigNatural &left, const BigNatural &right)
+{
+    return right < left;
 }
 
 const bool bign::operator==(const BigNatural &left, const BigNatural &right)
@@ -166,25 +237,6 @@ const bool bign::operator==(const BigNatural &left, const BigNatural &right)
         for (int i = left.nums.size() - 1; i >= 0; --i)
             if (left.nums[i] != right.nums[i])
                 return false;
-    }
-    return true;
-}
-
-const bool bign::operator<=(const BigNatural &left, const BigNatural &right)
-{
-    if (left.nums.size() > right.nums.size())
-        return false;
-    else if (left.nums.size() < right.nums.size())
-        return true;
-    else
-    {
-        for (int i = left.nums.size() - 1; i >= 0; --i)
-        {
-            if (left.nums[i] > right.nums[i])
-                return false;
-            else if (left.nums[i] < right.nums[i])
-                return true;
-        }
     }
     return true;
 }
@@ -203,44 +255,6 @@ const bool bign::operator<(const BigNatural &left, const BigNatural &right)
                 return false;
             else if (left.nums[i] < right.nums[i])
                 return true;
-        }
-    }
-    return false;
-}
-
-const bool bign::operator>=(const BigNatural &left, const BigNatural &right)
-{
-    if (left.nums.size() > right.nums.size())
-        return true;
-    else if (left.nums.size() < right.nums.size())
-        return false;
-    else
-    {
-        for (int i = left.nums.size() - 1; i >= 0; --i)
-        {
-            if (left.nums[i] > right.nums[i])
-                return true;
-            else if (left.nums[i] < right.nums[i])
-                return false;
-        }
-    }
-    return true;
-}
-
-const bool bign::operator>(const BigNatural &left, const BigNatural &right)
-{
-    if (left.nums.size() > right.nums.size())
-        return true;
-    else if (left.nums.size() < right.nums.size())
-        return false;
-    else
-    {
-        for (int i = left.nums.size() - 1; i >= 0; --i)
-        {
-            if (left.nums[i] > right.nums[i])
-                return true;
-            else if (right.nums[i] < right.nums[i])
-                return false;
         }
     }
     return false;
