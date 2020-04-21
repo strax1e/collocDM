@@ -62,6 +62,7 @@ namespace bign
             friend std::ostream& operator<< ( std::ostream& out, const BigNatural &obj );
 
         public:
+            BigNatural &pow10 (const long long)
             BigNatural( const std::string& inum );
             BigNatural( long long inum );
             BigNatural( const BigNatural& inum );
