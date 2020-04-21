@@ -364,3 +364,52 @@ bign::BigNatural::BigNatural(const BigNatural &inum)
 bign::BigNatural::~BigNatural(void)
 {
 }
+
+const bign::BigNatural bign::GCD(const bign::BigNatural &left, bign::BigNatural &right)
+{
+    if (left == 0)
+        return right;
+    else if (right == 0)
+        return left;
+    bign::BigNatural newLeft, newRight, tmp;
+    if (right < left) {
+        newLeft = left;
+        newRight = right;
+    } else {
+        newLeft = right;
+        newRight = left;
+    }
+    while (newLeft % newRight) {
+        tmp = newLeft;
+        newLeft = newRight;
+        newRight = tmp % newRight;
+    }
+    return newRight;
+}
+
+const bign::BigNatural bign::GCD(const bign::BigNatural &left, long long &right)
+{
+    bign::BigNatural castRight = right;
+    return bign::GCD(left, castRight);
+}
+
+const bign::BigNatural bign::GCD(const long long &left, bign::BigNatural &right)
+{
+    bign::BigNatural castLeft = left;
+    return bign::GCD(castLeft, right);
+}
+
+const bign::BigNatural bign::LCM(const BigNatural &left, BigNatural &right)
+{
+    return (left * right) / bign::GCD(left, right);
+}
+
+const bign::BigNatural bign::LCM(const BigNatural &left, long long &right)
+{
+    return (left * right) / bign::GCD(left, right);
+}
+
+const bign::BigNatural bign::LCM(const long long &left, BigNatural &right)
+{
+    return (left * right) / bign::GCD(left, right);
+}

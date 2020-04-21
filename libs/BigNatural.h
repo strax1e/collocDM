@@ -17,7 +17,6 @@ private:
     std::vector<int> nums;
 
     // compares
-    // compares
     // !=
     friend const bool operator!=(const BigNatural &left, const BigNatural &right);
     friend const bool operator!=(const BigNatural &left, const long long &right);
@@ -98,4 +97,11 @@ public:
     ~BigNatural(void);
     BigNatural &pow10(const long long &k);
 };
+
+const BigNatural GCD(const BigNatural &left, BigNatural &right);
+const BigNatural GCD(const BigNatural &left, long long &right);
+const BigNatural GCD(const long long &left, BigNatural &right);
+const BigNatural LCM(const BigNatural &left, BigNatural &right);
+const BigNatural LCM(const BigNatural &left, long long &right);
+const BigNatural LCM(const long long &left, BigNatural &right);
 } // namespace bign
