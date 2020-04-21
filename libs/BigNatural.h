@@ -6,70 +6,96 @@
 #include <vector>
 #include <string>
 #include <assert.h>
-#include <iostream>
+#include <fstream>
+#include <algorithm>
 
 namespace bign
 {
-    class BigNatural
+class BigNatural
+{
+private:
+    std::vector<int> nums;
+
+    // compares
+    // compares
+    // !=
+    friend const bool operator!=(const BigNatural &left, const BigNatural &right);
+    friend const bool operator!=(const BigNatural &left, const long long &right);
+    friend const bool operator!=(const long long &left, const BigNatural &right);
+
+    // ==
+    friend const bool operator==(const BigNatural &left, const BigNatural &right);
+    friend const bool operator==(const BigNatural &left, const long long &right);
+    friend const bool operator==(const long long &left, const BigNatural &right);
+
+    // >=
+    friend const bool operator>=(const BigNatural &left, const BigNatural &right);
+    friend const bool operator>=(const BigNatural &left, const long long &right);
+    friend const bool operator>=(const long long &left, const BigNatural &right);
+
+    // >
+    friend const bool operator>(const BigNatural &left, const BigNatural &right);
+    friend const bool operator>(const BigNatural &left, const long long &right);
+    friend const bool operator>(const long long &left, const BigNatural &right);
+
+    // <=
+    friend const bool operator<=(const BigNatural &left, const BigNatural &right);
+    friend const bool operator<=(const BigNatural &left, const long long &right);
+    friend const bool operator<=(const long long &left, const BigNatural &right);
+
+    // <
+    friend const bool operator<(const BigNatural &left, const BigNatural &right);
+    friend const bool operator<(const BigNatural &left, const long long &right);
+    friend const bool operator<(const long long &left, const BigNatural &right);
+
+    // --
+    friend const BigNatural operator--(BigNatural &left, int);
+    friend BigNatural &operator--(BigNatural &left);
+
+    // ++
+    friend const BigNatural operator++(BigNatural &left, int);
+    friend BigNatural &operator++(BigNatural &left);
+
+    // -=
+    friend BigNatural &operator-=(BigNatural &left, const BigNatural &right);
+    friend BigNatural &bign::operator-=(BigNatural &left, const long long &right);
+
+    // +=
+    friend BigNatural &operator+=(BigNatural &left, const BigNatural &right);
+    friend BigNatural &operator+=(BigNatural &left, const long long &right);
+
+    // *=
+    friend BigNatural &operator*=(BigNatural &left, const BigNatural &right);
+    friend BigNatural &operator*=(BigNatural &left, const long long &right);
+
+    // -
+    friend const BigNatural operator-(const BigNatural &left, const BigNatural &right);
+    friend const BigNatural operator-(const BigNatural &left, const long long &right);
+    friend const BigNatural operator-(const long long &left, const BigNatural &right);
+
+    // +
+    friend const BigNatural operator+(const BigNatural &left, const BigNatural &right);
+    friend const BigNatural operator+(const BigNatural &left, const long long &right);
+    friend const BigNatural operator+(const long long &left, const BigNatural &right);
+
+    // *
+    friend const BigNatural operator*(const BigNatural &left, const BigNatural &right);
+    friend const BigNatural operator*(const BigNatural &left, const long long &right);
+    friend const BigNatural operator*(const long long &left, const BigNatural &right);
+
+    // output
+    friend std::ostream &operator<<(std::ostream &out, const BigNatural &obj);
+
+public:
+    operator bool();
+    BigNatural(const std::string &inum);
+    BigNatural(long long inum);
+    BigNatural(const BigNatural &inum);
+    BigNatural(void)
     {
-        private: 
-            std::vector<int> nums;
-
-            // compares
-            friend const bool operator!= ( const BigNatural& left, const BigNatural& right );
-            friend const bool operator== ( const BigNatural& left, const BigNatural& right );
-            friend const bool operator<= ( const BigNatural& left, const BigNatural& right );
-            friend const bool operator< ( const BigNatural& left, const BigNatural& right );
-            friend const bool operator>= ( const BigNatural& left, const BigNatural& right );
-            friend const bool operator> ( const BigNatural& left, const BigNatural& right );
-
-            // --
-            friend const BigNatural operator--(BigNatural &left, int);
-            friend BigNatural &operator--(BigNatural &left);
-
-            // ++
-            friend const BigNatural operator++ ( BigNatural& left, int );
-            friend BigNatural &operator++ ( BigNatural& left );
-
-            // -=
-            friend BigNatural &operator-= ( BigNatural& left, const BigNatural& right );
-            friend BigNatural &bign::operator-=(BigNatural &left, const long long &right);
-            
-            // +=
-            friend BigNatural &operator+= ( BigNatural& left, const BigNatural& right );
-            friend BigNatural &operator+= ( BigNatural& left, const long long &right );
-            
-            // *=
-            friend BigNatural &operator*= ( BigNatural& left, const BigNatural& right );
-            friend BigNatural &operator*= ( BigNatural& left, const long long &right );
-            
-            // -
-            friend const BigNatural operator-(const BigNatural &left, const BigNatural &right);
-            friend const BigNatural operator-(const BigNatural &left, const long long &right);
-            friend const BigNatural operator-(const long long &left, const BigNatural &right);
-
-            // +
-            friend const BigNatural operator+ ( const BigNatural& left, const BigNatural& right );
-            friend const BigNatural operator+ ( const BigNatural& left, const long long& right );
-            friend const BigNatural operator+ ( const long long& left, const BigNatural& right ); 
-
-            // *
-            friend const BigNatural operator* ( const BigNatural& left, const BigNatural& right );
-            friend const BigNatural operator* ( const BigNatural& left, const long long& right );
-            friend const BigNatural operator* ( const long long& left, const BigNatural& right );
-            
-            // output
-            friend std::ostream& operator<< ( std::ostream& out, const BigNatural &obj );
-
-        public:
-            BigNatural &pow10 (const long long)
-            BigNatural( const std::string& inum );
-            BigNatural( long long inum );
-            BigNatural( const BigNatural& inum );
-            BigNatural( void )
-            {
-                nums.push_back(0);
-            }
-            ~BigNatural( void );
-    };
+        nums.push_back(0);
+    }
+    ~BigNatural(void);
+    BigNatural &pow10(const long long &k);
+};
 } // namespace bign
