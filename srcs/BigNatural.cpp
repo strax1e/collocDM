@@ -176,7 +176,7 @@ bign::BigNatural &bign::operator-=(BigNatural &left, const BigNatural &right)
         }
         return left;
     } else {
-        return left = 0;
+        throw(std::runtime_error("[Exception] negative result. Right > Left"));
     }
 }
 
@@ -229,6 +229,127 @@ bign::BigNatural &bign::operator*=(BigNatural &left, const long long &right)
     return left *= bigright;
 }
 
+// /=
+bign::BigNatural &bign::operator/=(BigNatural &left, const BigNatural &right)
+{
+    if (right == 0)
+        throw(std::runtime_error("division by zero"));
+    else if (left < right)
+        return left = 0;
+    BigNatural vLeft = left, result, partLeft;
+    std::string part;
+    long long sizeOst = 9223372036854775807;
+    while (vLeft >= right) {
+        part.reserve(right.nums.size() + 3);
+        long long len = right.nums.size();
+        do {
+            part.clear();
+            for (int g = vLeft.nums.size() - 1, end = vLeft.nums.size() - 1 - len; g > end && g >= 0; --g) {
+                part.push_back(vLeft.nums[g] + '0');
+            }
+            partLeft = part;
+            ++len;
+        } while (partLeft < right);
+        if (len > sizeOst) {
+            long long oldSizeRes = result.nums.size();
+            long long sizeZero = len - sizeOst - 2;
+            long long cou = oldSizeRes + sizeZero;
+            result.nums.resize(cou);
+            for (int g = result.nums.size() - 1; g != result.nums.size() - 1 - oldSizeRes; --g)
+                result.nums[g] = result.nums[g - sizeZero];
+            for (int i = 0; i < sizeZero; ++i)
+                result.nums[i] = 0;
+        }
+        int partRes = 0;
+        while (partRes * right <= partLeft)
+            ++partRes;
+        --partRes;
+        if (vLeft != 0)
+            for (int i = 0; i < partLeft.nums.size(); ++i)
+                vLeft.nums.pop_back();
+        partLeft -= partRes * right;
+        sizeOst = partLeft.nums.size() - (long long)(partLeft == 0);
+        if (partLeft != 0) {
+            for (int i = 0; i < partLeft.nums.size(); ++i)
+                vLeft.nums.push_back(partLeft.nums[i]);
+        }
+        result.nums.insert(result.nums.begin(), partRes);
+        if (result.nums[(int)result.nums.size() - 1] == 0)
+            result.nums.pop_back();
+
+        while (vLeft.nums.size() && *(vLeft.nums.rbegin()) == 0) {
+            vLeft.nums.pop_back();
+            result.nums.insert(result.nums.begin(), 0);
+        }
+    }
+    if (vLeft != 0 && (long long)vLeft.nums.size() > sizeOst) {
+        long long oldSizeRes = result.nums.size();
+        long long sizeZero = vLeft.nums.size() - sizeOst;
+        long long cou = oldSizeRes + sizeZero;
+        result.nums.resize(cou);
+        for (int g = result.nums.size() - 1; g != result.nums.size() - 1 - oldSizeRes; --g)
+            result.nums[g] = result.nums[g - sizeZero];
+        for (int i = 0; i < vLeft.nums.size() - sizeOst; ++i)
+            result.nums[i] = 0;
+    }
+    return left = result;
+}
+
+bign::BigNatural &bign::operator/=(BigNatural &left, const long long &right)
+{
+    bign::BigNatural newright = right;
+    return left /= newright;
+}
+
+// %=
+bign::BigNatural &bign::operator%=(BigNatural &left, const BigNatural &right)
+{
+    if (right == 0)
+        throw(std::runtime_error("division by zero"));
+    else if (left < right)
+        return left = 0;
+    BigNatural vLeft = left, partLeft;
+    std::string part;
+    long long sizeOst = 9223372036854775807;
+    while (vLeft >= right) {
+        part.reserve(right.nums.size() + 3);
+        long long len = right.nums.size();
+        do {
+            part.clear();
+            for (int g = vLeft.nums.size() - 1, end = vLeft.nums.size() - 1 - len; g > end && g >= 0; --g) {
+                part.push_back(vLeft.nums[g] + '0');
+            }
+            partLeft = part;
+            ++len;
+        } while (partLeft < right);
+        int partRes = 0;
+        while (partRes * right <= partLeft)
+            ++partRes;
+        --partRes;
+        if (vLeft != 0) {
+            for (int i = 0; i < partLeft.nums.size(); ++i)
+                vLeft.nums.pop_back();
+        }
+        partLeft -= partRes * right;
+        sizeOst = partLeft.nums.size() - (long long)(partLeft == 0);
+        if (partLeft != 0) {
+            for (int i = 0; i < partLeft.nums.size(); ++i)
+                vLeft.nums.push_back(partLeft.nums[i]);
+        }
+        while (vLeft.nums.size() && *(vLeft.nums.rbegin()) == 0)
+            vLeft.nums.pop_back();
+    }
+    if (!vLeft.nums.size())
+        vLeft.nums.push_back(0);
+    return vLeft;
+}
+
+bign::BigNatural &bign::operator%=(BigNatural &left, const long long &right)
+{
+    BigNatural newRight = right;
+    return left %= newRight;
+}
+
 // -
 const bign::BigNatural bign::operator-(const BigNatural &left, const BigNatural &right)
 {
@@ -238,8 +359,8 @@ const bign::BigNatural bign::operator-(const BigNatural &left, const BigNatural 
 
 const bign::BigNatural bign::operator-(const BigNatural &left, const long long &right)
 {
-    bign::BigNatural newright = right, newleft = left;
-    return newleft -= newright;
+    bign::BigNatural newleft = left;
+    return newleft -= right;
 }
 
 const bign::BigNatural bign::operator-(const long long &left, const BigNatural &right)
@@ -286,6 +407,44 @@ const bign::BigNatural bign::operator*(const long long &left, const BigNatural &
     return newleft *= right;
 }
 
+// /
+const bign::BigNatural bign::operator/(const BigNatural &left, const BigNatural &right)
+{
+    BigNatural newLeft = left;
+    return newLeft /= right;
+}
+
+const bign::BigNatural bign::operator/(const BigNatural &left, const long long &right)
+{
+    bign::BigNatural newLeft = right;
+    return newLeft /= right;
+}
+
+const bign::BigNatural bign::operator/(const long long &left, const BigNatural &right)
+{
+    bign::BigNatural newLeft = right;
+    return newLeft /= right;
+}
+
+// %
+const bign::BigNatural bign::operator%(const BigNatural &left, const BigNatural &right)
+{
+    BigNatural newLeft = left;
+    return newLeft %= right;
+}
+
+const bign::BigNatural bign::operator%(const BigNatural &left, const long long &right)
+{
+    bign::BigNatural newLeft = right;
+    return newLeft %= right;
+}
+
+const bign::BigNatural bign::operator%(const long long &left, const BigNatural &right)
+{
+    bign::BigNatural newLeft = right;
+    return newLeft %= right;
+}
+
 // output
 std::ostream &bign::operator<<(std::ostream &out, const BigNatural &obj)
 {
@@ -295,7 +454,23 @@ std::ostream &bign::operator<<(std::ostream &out, const BigNatural &obj)
     return out;
 }
 
+// input
+std::istream &bign::operator>>(std::istream &in, bign::BigNatural &obj)
+{
+    std::string t;
+    in >> t;
+    obj = t;
+    return in;
+}
+
 // pow10
+bign::BigNatural &bign::BigNatural::pow10(const BigNatural &k)
+{
+    for (BigNatural i = 0; i < k; ++i)
+        nums.insert(nums.begin(), 0);
+    return *this;
+}
+
 bign::BigNatural &bign::BigNatural::pow10(const long long &k)
 {
     if (k < 0) {
@@ -310,14 +485,25 @@ bign::BigNatural &bign::BigNatural::pow10(const long long &k)
         while (nums.size() > 1 && nums.back() == 0)
             nums.pop_back();
     } else {
-        nums.reserve(nums.size() + k);
-        for (int i = 0; i < k; ++i)
-            nums.insert(nums.begin(), 0);
+        unsigned long long szvec = nums.size();
+        nums.resize(nums.size() + k);
+        for (unsigned long long i = szvec - 1; i >= 0; --i) {
+            nums[i + k] ^= nums[i];
+            nums[i] ^= nums[i + k];
+            nums[i + k] ^= nums[i];
+            if (!i)
+                break;
+        }
     }
     return *this;
 }
 
-bign::BigNatural::operator bool()
+const bign::BigNatural bign::BigNatural::getSize() const
+{
+    return nums.size();
+}
+
+bign::BigNatural::operator bool() const
 {
     return *this != 0;
 }
@@ -331,13 +517,13 @@ bign::BigNatural::BigNatural(const std::string &inum)
             if (inum[i] >= '0' && inum[i] <= '9') {
                 nums.push_back(inum[i] - '0');
             } else {
-                assert(0);
+                throw(std::runtime_error("[Exception] invalid input"));
             }
         while (nums.size() > 1 && nums.back() == 0) {
             nums.pop_back();
         }
     } else {
-        assert(0);
+        throw(std::runtime_error("[Exception] invalid input"));
     }
 }
 
@@ -351,7 +537,7 @@ bign::BigNatural::BigNatural(long long inum)
     } else if (inum == 0) {
         nums.push_back(0);
     } else {
-        assert(0);
+        throw(std::runtime_error("[Exception] negative number"));
     }
 }
 
@@ -363,6 +549,7 @@ bign::BigNatural::BigNatural(const BigNatural &inum)
 // destructor
 bign::BigNatural::~BigNatural(void)
 {
+    ; // hello
 }
 
 const bign::BigNatural bign::GCD(const bign::BigNatural &left, bign::BigNatural &right)
