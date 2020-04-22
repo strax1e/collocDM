@@ -307,7 +307,7 @@ bign::BigNatural &bign::operator%=(BigNatural &left, const BigNatural &right)
     if (right == 0)
         throw(std::runtime_error("division by zero"));
     else if (left < right)
-        return left = 0;
+        return left;
     BigNatural vLeft = left, partLeft;
     std::string part;
     long long sizeOst = 9223372036854775807;
@@ -341,26 +341,23 @@ bign::BigNatural &bign::operator%=(BigNatural &left, const BigNatural &right)
     }
     if (!vLeft.nums.size())
         vLeft.nums.push_back(0);
-    return vLeft;
+    return left = vLeft;
 }
 
 bign::BigNatural &bign::operator%=(BigNatural &left, const long long &right)
 {
-    BigNatural newRight = right;
-    return left %= newRight;
+    return left %= (BigNatural)right;
 }
 
 // -
-const bign::BigNatural bign::operator-(const BigNatural &left, const BigNatural &right)
+const bign::BigNatural bign::operator-(BigNatural left, const BigNatural &right)
 {
-    bign::BigNatural newleft = left;
-    return newleft -= right;
+    return left -= right;
 }
 
-const bign::BigNatural bign::operator-(const BigNatural &left, const long long &right)
+const bign::BigNatural bign::operator-(BigNatural left, const long long &right)
 {
-    bign::BigNatural newleft = left;
-    return newleft -= right;
+    return left -= right;
 }
 
 const bign::BigNatural bign::operator-(const long long &left, const BigNatural &right)
@@ -370,16 +367,14 @@ const bign::BigNatural bign::operator-(const long long &left, const BigNatural &
 }
 
 // +
-const bign::BigNatural bign::operator+(const BigNatural &left, const BigNatural &right)
+const bign::BigNatural bign::operator+(BigNatural left, const BigNatural &right)
 {
-    bign::BigNatural newleft = left;
-    return newleft += right;
+    return left += right;
 }
 
-const bign::BigNatural bign::operator+(const BigNatural &left, const long long &right)
+const bign::BigNatural bign::operator+(BigNatural left, const long long &right)
 {
-    bign::BigNatural newright = right;
-    return newright += left;
+    return left += right;
 }
 
 const bign::BigNatural bign::operator+(const long long &left, const BigNatural &right)
@@ -389,16 +384,14 @@ const bign::BigNatural bign::operator+(const long long &left, const BigNatural &
 }
 
 // *
-const bign::BigNatural bign::operator*(const BigNatural &left, const BigNatural &right)
+const bign::BigNatural bign::operator*(BigNatural left, const BigNatural &right)
 {
-    bign::BigNatural newleft = left;
-    return newleft *= right;
+    return left *= right;
 }
 
-const bign::BigNatural bign::operator*(const BigNatural &left, const long long &right)
+const bign::BigNatural bign::operator*(BigNatural left, const long long &right)
 {
-    bign::BigNatural newright = right;
-    return newright *= left;
+    return left *= right;
 }
 
 const bign::BigNatural bign::operator*(const long long &left, const BigNatural &right)
@@ -408,40 +401,36 @@ const bign::BigNatural bign::operator*(const long long &left, const BigNatural &
 }
 
 // /
-const bign::BigNatural bign::operator/(const BigNatural &left, const BigNatural &right)
+const bign::BigNatural bign::operator/(BigNatural left, const BigNatural &right)
 {
-    BigNatural newLeft = left;
-    return newLeft /= right;
+    return left /= right;
 }
 
-const bign::BigNatural bign::operator/(const BigNatural &left, const long long &right)
+const bign::BigNatural bign::operator/(BigNatural left, const long long &right)
 {
-    bign::BigNatural newLeft = right;
-    return newLeft /= right;
+    return left /= right;
 }
 
 const bign::BigNatural bign::operator/(const long long &left, const BigNatural &right)
 {
-    bign::BigNatural newLeft = right;
+    bign::BigNatural newLeft = left;
     return newLeft /= right;
 }
 
 // %
-const bign::BigNatural bign::operator%(const BigNatural &left, const BigNatural &right)
+const bign::BigNatural bign::operator%(BigNatural left, const BigNatural &right)
 {
-    BigNatural newLeft = left;
-    return newLeft %= right;
+    return left %= right;
 }
 
-const bign::BigNatural bign::operator%(const BigNatural &left, const long long &right)
+const bign::BigNatural bign::operator%(BigNatural left, const long long &right)
 {
-    bign::BigNatural newLeft = right;
-    return newLeft %= right;
+    return left %= right;
 }
 
 const bign::BigNatural bign::operator%(const long long &left, const BigNatural &right)
 {
-    bign::BigNatural newLeft = right;
+    bign::BigNatural newLeft = left;
     return newLeft %= right;
 }
 
@@ -470,7 +459,7 @@ bign::BigNatural &bign::BigNatural::pow10(const BigNatural &k)
         nums.insert(nums.begin(), 0);
     return *this;
 }
-
+//std::rotate();
 bign::BigNatural &bign::BigNatural::pow10(const long long &k)
 {
     if (k < 0) {

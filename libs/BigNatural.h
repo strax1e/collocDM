@@ -75,28 +75,28 @@ class BigNatural
         friend BigNatural &operator%=(BigNatural &left, const long long &right);
 
         // -
-        friend const BigNatural operator-(const BigNatural &left, const BigNatural &right);
-        friend const BigNatural operator-(const BigNatural &left, const long long &right);
+        friend const BigNatural operator-(BigNatural left, const BigNatural &right);
+        friend const BigNatural operator-(BigNatural left, const long long &right);
         friend const BigNatural operator-(const long long &left, const BigNatural &right);
 
         // +
-        friend const BigNatural operator+(const BigNatural &left, const BigNatural &right);
-        friend const BigNatural operator+(const BigNatural &left, const long long &right);
+        friend const BigNatural operator+(BigNatural left, const BigNatural &right);
+        friend const BigNatural operator+(BigNatural left, const long long &right);
         friend const BigNatural operator+(const long long &left, const BigNatural &right);
 
         // *
-        friend const BigNatural operator*(const BigNatural &left, const BigNatural &right);
-        friend const BigNatural operator*(const BigNatural &left, const long long &right);
+        friend const BigNatural operator*(BigNatural left, const BigNatural &right);
+        friend const BigNatural operator*(BigNatural left, const long long &right);
         friend const BigNatural operator*(const long long &left, const BigNatural &right);
 
         // /
-        friend const BigNatural operator/(const BigNatural &left, const BigNatural &right);
-        friend const BigNatural operator/(const BigNatural &left, const long long &right);
+        friend const BigNatural operator/(BigNatural left, const BigNatural &right);
+        friend const BigNatural operator/(BigNatural left, const long long &right);
         friend const BigNatural operator/(const long long &left, const BigNatural &right);
 
         // %
-        friend const BigNatural operator%(const BigNatural &left, const BigNatural &right);
-        friend const BigNatural operator%(const BigNatural &left, const long long &right);
+        friend const BigNatural operator%(BigNatural left, const BigNatural &right);
+        friend const BigNatural operator%(BigNatural left, const long long &right);
         friend const BigNatural operator%(const long long &left, const BigNatural &right);
 
         // output
