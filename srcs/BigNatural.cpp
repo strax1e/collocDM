@@ -561,6 +561,18 @@ const BigNatural GCD(const long long &left, const BigNatural &right)
     return GCD(castLeft, right);
 }
 
+const BigNatural GCD( const std::vector<BigNatural> &vec )
+{
+  if (vec.size() < 2)
+    throw(std::runtime_error( "[Exception] vector is empty" ));
+  BigNatural ans = GCD(vec[0], vec[1]);
+  for (size_t g = 2; g < vec.size(); ++g)
+  {
+    ans = GCD(ans, vec[g]);
+  }
+  return ans;
+}
+
 const BigNatural LCM(const BigNatural &left, const BigNatural &right)
 {
     return (left * right) / GCD(left, right);
@@ -574,4 +586,16 @@ const BigNatural LCM(const BigNatural &left, const long long &right)
 const BigNatural LCM(const long long &left, const BigNatural &right)
 {
     return (left * right) / GCD(left, right);
+}
+
+const BigNatural LCM( const std::vector<BigNatural> &vec )
+{
+  if (vec.size() < 2)
+    throw(std::runtime_error( "[Exception] vector is empty" ));
+  BigNatural ans = LCM(vec[0], vec[1]);
+  for (size_t g = 2; g < vec.size(); ++g)
+  {
+    ans = LCM(ans, vec[g]);
+  }
+  return ans;
 }
