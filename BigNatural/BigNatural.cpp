@@ -234,28 +234,28 @@ BigNatural &operator/=(BigNatural &left, const BigNatural &right)
     std::vector<int> result;                       // stores the result
     BigNatural partLeft;                           //
     partLeft.nums.pop_back();                      // reset the size
-    size_t sizeRemainder = 0; // max long long
+    size_t sizeRemainder = 0;
     while (left >= right)
     {
         partLeft.nums.reserve(right.getSize() + 3);
-        for (size_t g = left.getSize() - right.getSize(); g < left.getSize(); ++g)                     // getting part of the left number to divide by the right
+        for (size_t g = left.getSize() - right.getSize(); g < left.getSize(); ++g)                        // getting part of the left number to divide by the right
             partLeft.nums.push_back(left.nums[g]);                                                        //
         if (partLeft < right)                                                                             // adding the extra digit if the number is too small to divide
             partLeft.nums.insert(partLeft.nums.begin(), left.nums[left.getSize() - right.getSize() - 1]); //
-        if (result.size() && partLeft.getSize() > sizeRemainder + 1)                                                       // adding zeros to the result
-            for (size_t g = 0, end = partLeft.getSize() - sizeRemainder - 1; g < end; ++g)             //
+        if (result.size() && partLeft.getSize() > sizeRemainder + 1)                                      // adding zeros to the result
+            for (size_t g = 0, end = partLeft.getSize() - sizeRemainder - 1; g < end; ++g)                //
                 result.push_back(0);                                                                      //
-        long long partRes = 1;                                                                                  // finding part of the result
+        long long partRes = 1;                                                                            // finding part of the result
         while (partRes * right <= partLeft)
             ++partRes;
         --partRes;
-        for (size_t i = 0; i < partLeft.getSize(); ++i)    // deleting used digits
+        for (size_t i = 0; i < partLeft.getSize(); ++i) // deleting used digits
             left.nums.pop_back();                       //
         partLeft -= partRes * right;                    // calculating the remainder of the number
         if (partLeft == 0)                              // delete zero
             partLeft.nums.pop_back();                   //
         sizeRemainder = partLeft.getSize();             // calculating the remainder size
-        for (size_t i = 0; i < sizeRemainder; ++i)         // adding digits to the original number for a new iteration
+        for (size_t i = 0; i < sizeRemainder; ++i)      // adding digits to the original number for a new iteration
             left.nums.push_back(partLeft.nums[i]);      //
         partLeft.nums.clear();                          // deleting all elements
         result.push_back(partRes);                      // adding part of the result
@@ -268,7 +268,7 @@ BigNatural &operator/=(BigNatural &left, const BigNatural &right)
     size_t currSizeLeft = left.getSize();
     left.nums.clear();
     if (left != 0 && currSizeLeft > sizeRemainder)                              // adding zeros to the result (left)
-        for (size_t g = 0, end = currSizeLeft - sizeRemainder; g < end; ++g) //
+        for (size_t g = 0, end = currSizeLeft - sizeRemainder; g < end; ++g) 
             left.nums.push_back(0);                                             //
     for (auto it = result.rbegin(); it != result.rend(); ++it)                  // coping from the result to the left
         left.nums.push_back(*it);
@@ -290,11 +290,11 @@ BigNatural &operator%=(BigNatural &left, const BigNatural &right)
         return left;
     BigNatural partLeft;
     partLeft.nums.pop_back();                      // reset the size
-    size_t sizeRemainder = 0; // max long long
+    size_t sizeRemainder = 0;
     while (left >= right)
     {
         partLeft.nums.reserve(right.getSize() + 3);
-        for (size_t g = left.getSize() - right.getSize(); g < left.getSize(); ++g)                     // getting part of the left number to divide by the right
+        for (size_t g = left.getSize() - right.getSize(); g < left.getSize(); ++g)                        // getting part of the left number to divide by the right
             partLeft.nums.push_back(left.nums[g]);                                                        //
         if (partLeft < right)                                                                             // adding the extra digit if the number is too small to divide
             partLeft.nums.insert(partLeft.nums.begin(), left.nums[left.getSize() - right.getSize() - 1]); // finding part of the result
@@ -302,13 +302,13 @@ BigNatural &operator%=(BigNatural &left, const BigNatural &right)
         while (partRes * right <= partLeft)
             ++partRes;
         --partRes;
-        for (size_t i = 0; i < partLeft.getSize(); ++i)    // deleting used digits
+        for (size_t i = 0; i < partLeft.getSize(); ++i) // deleting used digits
             left.nums.pop_back();                       //
         partLeft -= partRes * right;                    // calculating the remainder of the number
         if (partLeft == 0)                              // delete zero
             partLeft.nums.pop_back();                   //
         sizeRemainder = partLeft.getSize();             // calculating the remainder size
-        for (size_t i = 0; i < sizeRemainder; ++i)         // adding digits to the original number for a new iteration
+        for (size_t i = 0; i < sizeRemainder; ++i)      // adding digits to the original number for a new iteration
             left.nums.push_back(partLeft.nums[i]);      //
         partLeft.nums.clear();                          // deleting all elements
         while (left.getSize() && left.nums.back() == 0) // deleting leading zeros
@@ -567,9 +567,7 @@ const BigNatural GCD( const std::vector<BigNatural> &vec )
     throw(std::runtime_error( "[Exception] vector is empty" ));
   BigNatural ans = GCD(vec[0], vec[1]);
   for (size_t g = 2; g < vec.size(); ++g)
-  {
     ans = GCD(ans, vec[g]);
-  }
   return ans;
 }
 
@@ -594,8 +592,6 @@ const BigNatural LCM( const std::vector<BigNatural> &vec )
     throw(std::runtime_error( "[Exception] vector is empty" ));
   BigNatural ans = LCM(vec[0], vec[1]);
   for (size_t g = 2; g < vec.size(); ++g)
-  {
     ans = LCM(ans, vec[g]);
-  }
   return ans;
 }
