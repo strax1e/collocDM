@@ -24,8 +24,8 @@ const bool bign::operator==(const BigNatural &left, const BigNatural &right)
     if (left.nums.size() != right.nums.size())
         return false;
     else
-        for (int i = left.nums.size() - 1; i >= 0; --i)
-            if (left.nums[i] != right.nums[i])
+        for (size_t i = left.nums.size(); i > 0; --i)
+            if (left.nums[i - 1] != right.nums[i - 1])
                 return false;
     return true;
 }
@@ -104,10 +104,10 @@ const bool bign::operator<(const BigNatural &left, const BigNatural &right)
     else if (left.nums.size() < right.nums.size())
         return true;
     else
-        for (int i = left.nums.size() - 1; i >= 0; --i)
-            if (left.nums[i] > right.nums[i])
+        for (size_t i = left.nums.size(); i > 0; --i)
+            if (left.nums[i- 1] > right.nums[i-1])
                 return false;
-            else if (left.nums[i] < right.nums[i])
+            else if (left.nums[i-1] < right.nums[i-1])
                 return true;
     return false;
 }
@@ -162,7 +162,7 @@ bign::BigNatural &bign::operator-=(BigNatural &left, const BigNatural &right)
     if (left >= right)
     {
         int overflow = 0;
-        for (int i = 0; i < left.nums.size() || overflow; ++i)
+        for (size_t i = 0; i < left.nums.size() || overflow; ++i)
         {
             left.nums[i] -= overflow + (i < right.nums.size() ? right.nums[i] : 0);
             overflow = left.nums[i] < 0;
@@ -205,8 +205,8 @@ bign::BigNatural &bign::operator*=(BigNatural &left, const BigNatural &right)
     int overflow = 0;
     bign::BigNatural result = 0;
     result.nums.resize(left.nums.size() + right.nums.size() + 1);
-    for (int i = 0; i < (int)left.nums.size(); ++i)
-        for (int j = 0; j < (int)right.nums.size() || overflow; ++j)
+    for (size_t i = 0; i < left.nums.size(); ++i)
+        for (size_t j = 0; j < right.nums.size() || overflow; ++j)
         {
             int tmp = result.nums[i + j] + left.nums[i] * ((j < (int)right.nums.size()) ? right.nums[j] : 0) + overflow;
             result.nums[i + j] = tmp % 10;
@@ -234,28 +234,28 @@ bign::BigNatural &bign::operator/=(BigNatural &left, const BigNatural &right)
     std::vector<int> result;                       // stores the result
     BigNatural partLeft;                           //
     partLeft.nums.pop_back();                      // reset the size
-    long long sizeRemainder = 9223372036854775807; // max long long
+    size_t sizeRemainder = 0; // max long long
     while (left >= right)
     {
         partLeft.nums.reserve(right.getSize() + 3);
-        for (long long g = left.getSize() - right.getSize(); g < left.getSize(); ++g)                     // getting part of the left number to divide by the right
+        for (size_t g = left.getSize() - right.getSize(); g < left.getSize(); ++g)                     // getting part of the left number to divide by the right
             partLeft.nums.push_back(left.nums[g]);                                                        //
         if (partLeft < right)                                                                             // adding the extra digit if the number is too small to divide
             partLeft.nums.insert(partLeft.nums.begin(), left.nums[left.getSize() - right.getSize() - 1]); //
-        if (partLeft.getSize() > sizeRemainder + 1)                                                       // adding zeros to the result
-            for (long long g = 0, end = partLeft.getSize() - sizeRemainder - 1; g < end; ++g)             //
+        if (result.size() && partLeft.getSize() > sizeRemainder + 1)                                                       // adding zeros to the result
+            for (size_t g = 0, end = partLeft.getSize() - sizeRemainder - 1; g < end; ++g)             //
                 result.push_back(0);                                                                      //
-        int partRes = 1;                                                                                  // finding part of the result
+        long long partRes = 1;                                                                                  // finding part of the result
         while (partRes * right <= partLeft)
             ++partRes;
         --partRes;
-        for (int i = 0; i < partLeft.getSize(); ++i)    // deleting used digits
+        for (size_t i = 0; i < partLeft.getSize(); ++i)    // deleting used digits
             left.nums.pop_back();                       //
         partLeft -= partRes * right;                    // calculating the remainder of the number
         if (partLeft == 0)                              // delete zero
             partLeft.nums.pop_back();                   //
         sizeRemainder = partLeft.getSize();             // calculating the remainder size
-        for (int i = 0; i < sizeRemainder; ++i)         // adding digits to the original number for a new iteration
+        for (size_t i = 0; i < sizeRemainder; ++i)         // adding digits to the original number for a new iteration
             left.nums.push_back(partLeft.nums[i]);      //
         partLeft.nums.clear();                          // deleting all elements
         result.push_back(partRes);                      // adding part of the result
@@ -265,10 +265,10 @@ bign::BigNatural &bign::operator/=(BigNatural &left, const BigNatural &right)
             result.push_back(0);
         }
     }
-    long long currSizeLeft = left.getSize();
+    size_t currSizeLeft = left.getSize();
     left.nums.clear();
     if (left != 0 && currSizeLeft > sizeRemainder)                              // adding zeros to the result (left)
-        for (long long g = 0, end = currSizeLeft - sizeRemainder; g < end; ++g) //
+        for (size_t g = 0, end = currSizeLeft - sizeRemainder; g < end; ++g) //
             left.nums.push_back(0);                                             //
     for (auto it = result.rbegin(); it != result.rend(); ++it)                  // coping from the result to the left
         left.nums.push_back(*it);
@@ -290,25 +290,25 @@ bign::BigNatural &bign::operator%=(BigNatural &left, const BigNatural &right)
         return left;
     BigNatural partLeft;
     partLeft.nums.pop_back();                      // reset the size
-    long long sizeRemainder = 9223372036854775807; // max long long
+    size_t sizeRemainder = 0; // max long long
     while (left >= right)
     {
         partLeft.nums.reserve(right.getSize() + 3);
-        for (long long g = left.getSize() - right.getSize(); g < left.getSize(); ++g)                     // getting part of the left number to divide by the right
+        for (size_t g = left.getSize() - right.getSize(); g < left.getSize(); ++g)                     // getting part of the left number to divide by the right
             partLeft.nums.push_back(left.nums[g]);                                                        //
         if (partLeft < right)                                                                             // adding the extra digit if the number is too small to divide
             partLeft.nums.insert(partLeft.nums.begin(), left.nums[left.getSize() - right.getSize() - 1]); // finding part of the result
-        int partRes = 1;
+        long long partRes = 1;
         while (partRes * right <= partLeft)
             ++partRes;
         --partRes;
-        for (int i = 0; i < partLeft.getSize(); ++i)    // deleting used digits
+        for (size_t i = 0; i < partLeft.getSize(); ++i)    // deleting used digits
             left.nums.pop_back();                       //
         partLeft -= partRes * right;                    // calculating the remainder of the number
         if (partLeft == 0)                              // delete zero
             partLeft.nums.pop_back();                   //
         sizeRemainder = partLeft.getSize();             // calculating the remainder size
-        for (int i = 0; i < sizeRemainder; ++i)         // adding digits to the original number for a new iteration
+        for (size_t i = 0; i < sizeRemainder; ++i)         // adding digits to the original number for a new iteration
             left.nums.push_back(partLeft.nums[i]);      //
         partLeft.nums.clear();                          // deleting all elements
         while (left.getSize() && left.nums.back() == 0) // deleting leading zeros
