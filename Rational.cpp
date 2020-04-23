@@ -10,7 +10,7 @@ using namespace std;
 void Rational::Make()
 {
     if (!den)
-        throw runtime_error("ERROR syka blyat: denominator should not be zero");
+        throw runtime_error("ERROR : denominator should not be zero");
     if (((num >> (sizeof(num) * 8 - 1)) ^ (den >> (sizeof(den) * 8 - 1))) & 1)
         num = -abs(num);
     else
@@ -46,7 +46,8 @@ Rational& operator +=( Rational& first, const  Rational  &second)
     r.den = first.den * second.den;
     first.num = r.num;
     first.den = r.den;
-    return r;
+    delete &r;
+    return first;
 }
 Rational& operator -=(Rational&  first, Rational  const &second)
 {
@@ -55,6 +56,7 @@ Rational& operator -=(Rational&  first, Rational  const &second)
     r.den = first.den * second.den;
     first.num = r.num;
     first.den = r.den;
+    delete& r;
     return first;
 }
 Rational& operator *=(Rational& first, Rational const &second)
@@ -64,6 +66,7 @@ Rational& operator *=(Rational& first, Rational const &second)
     r.den = first.den * second.den;
     first.num = r.num;
     first.den = r.den;
+    delete& r;
     return first;
 }
 
@@ -79,6 +82,7 @@ Rational& operator /=(Rational& first, Rational const &second)
     r.den = first.den * second.num;
     first.num = r.num;
     first.den = r.den;
+    delete& r;
     return first;
 }
 

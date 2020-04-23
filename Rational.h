@@ -47,7 +47,7 @@ public:
         }
         else
         {
-            throw invalid_argument("jopa");
+            throw invalid_argument("something");
         }
     }
 
