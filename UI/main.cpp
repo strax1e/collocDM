@@ -2,7 +2,7 @@
 #include <string>
 #include "../BigInteger/BigInteger.h"
 #include "../BigInteger/standart_functions.h"
-#include "../BigInteger/__BigNatural.h"
+#include "../BigNatural/BigNatural.h"
 
 #define FIRST_STATE 1
 

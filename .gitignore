@@ -3,6 +3,8 @@ BigInteger/obj/
 BigInteger/*.depend
 BigInteger/*.layout
 BigInteger/*.cbp
+BigInteger/__*
+
 
 Big_Integer_Template/bin/
 Big_Integer_Template/obj/

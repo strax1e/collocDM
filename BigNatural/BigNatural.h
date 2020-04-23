@@ -1,3 +1,6 @@
+#ifndef BigNatural_H_INCLUDED
+#define BigNatural_H_INCLUDED
+
 /* Natural numbers source code module
  * Authors:
  * - Afanasyev Andrey 9373
@@ -126,3 +129,5 @@ const BigNatural LCM(const BigNatural &left, const BigNatural &right);
 const BigNatural LCM(const BigNatural &left, const long long &right);
 const BigNatural LCM(const long long &left, const BigNatural &right);
 const BigNatural LCM(const std::vector<BigNatural> &vec);
+
+#endif // BigNatural_H_INCLUDED

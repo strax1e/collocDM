@@ -1,4 +1,4 @@
-#include "../libs/BigNatural.h"
+#include "BigNatural.h"
 
 // compares
 const bool operator!=(const BigNatural &left, const BigNatural &right)

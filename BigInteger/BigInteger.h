@@ -2,7 +2,7 @@
 #define BigInteger_H_INCLUDED
 
 #include <string>
-#include "__BigNatural.h"
+#include "../BigNatural/BigNatural.h"
 
 class BigInteger
 {

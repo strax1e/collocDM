@@ -2,7 +2,7 @@
 #define STANDART_FUNCTIONS_H_INCLUDED
 
 #include "BigInteger.h"
-#include "__BigNatural.h"
+#include "../BigNatural/BigNatural.h"
 
 /* ABS function
  * ARGUMENTS:
