@@ -8,8 +8,7 @@
 #include <fstream>
 #include <algorithm>
 
-namespace bign
-{
+
 class BigNatural
 {
 private:
@@ -125,4 +124,3 @@ const BigNatural GCD(const long long &left, const BigNatural &right);
 const BigNatural LCM(const BigNatural &left, const BigNatural &right);
 const BigNatural LCM(const BigNatural &left, const long long &right);
 const BigNatural LCM(const long long &left, const BigNatural &right);
-} // namespace bign

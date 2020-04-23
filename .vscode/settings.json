@@ -38,6 +38,12 @@
         "sstream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "typeinfo": "cpp"
-    }
+        "typeinfo": "cpp",
+        "ctime": "cpp"
+    },
+    "workbench.sideBar.location": "right",
+    "workbench.statusBar.visible": false,
+    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.default.cStandard": "c11",
+    "workbench.editor.tabSizing": "shrink"
 }
