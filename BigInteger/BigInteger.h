@@ -21,6 +21,9 @@ public:
     BigInteger& operator =(const BigNatural&);
     BigInteger& operator =(BigNatural&&);
 
+    operator BigNatural() &;
+    operator BigNatural() &&;
+
     ~BigInteger();
 
     bool operator ==(const BigInteger&) const;

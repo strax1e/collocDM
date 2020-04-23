@@ -10,4 +10,10 @@ Big_Integer_Template/*.depend
 Big_Integer_Template/*.layout
 Big_Integer_Template/*.cbp
 
+UI/bin/
+UI/obj/
+UI/*.depend
+UI/*.layout
+UI/*.cbp
+
 changes.txt

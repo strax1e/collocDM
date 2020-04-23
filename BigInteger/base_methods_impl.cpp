@@ -66,4 +66,15 @@ BigInteger& BigInteger::operator =(BigNatural&& x)
     return *this;
 }
 
+BigInteger::operator BigNatural() &
+{
+    BigNatural copy(number);
+    return BigNatural(copy);
+}
+
+BigInteger::operator BigNatural() &&
+{
+    return std::move(number);
+}
+
 BigInteger::~BigInteger(){}
