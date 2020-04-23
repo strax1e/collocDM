@@ -34,7 +34,7 @@ BigInteger TRANS_N_Z(T&& x) { return BigInteger(std::forward<T>(x)); }
 template < typename T >
 BigNatural TRANS_Z_N(T&& x)
 {
-    if (x < BigNatural(0))
+    if (x < BigInteger(0))
         throw std::runtime_error("ERROR: invalid transformation from integer to natural");
 
     return ((std::forward<T>(x)).getNatural());

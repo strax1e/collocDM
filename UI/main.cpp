@@ -234,256 +234,256 @@ int main()
                 }
                 break;
             }
-            case OPERATION_NATURAL:
-            {
-                BigNatural first, second;
-                try
-                {
-                    first = getFirst<BigNatural>();
-                }
-                catch(...)
-                {
-                    state = NATURAL;
-                    continue;
-                }
-
-                if (numberOfOperation == 1 || numberOfOperation == 4 || numberOfOperation == 5 ||
-                    numberOfOperation == 8 || numberOfOperation == 9 || numberOfOperation == 10 ||
-                    numberOfOperation == 11 || numberOfOperation == 12 ||
-                    numberOfOperation == 13 || numberOfOperation == 14)
-                    try
-                    {
-                        second = getSecond<BigNatural>();
-                    }
-                    catch(...)
-                    {
-                        state = NATURAL;
-                        continue;
-                    }
-
-
-                switch(numberOfOperation)
-                {
-                    case 1:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = COM_NN_D(first, second);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 2:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = NZER_N_B(first);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 3:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = ADD_1N_N(first);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 4:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = ADD_NN_N(first, second);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 5:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = SUB_NN_N(first, second);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 6:
-                    {
-                        state = NATURAL;
-                        int n;
-                        std::cout << "Enter number:\n-->";
-                        std::cin >> n;
-                        try
-                        {
-                            BigNatural result = MUL_ND_N(first, n);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 7:
-                    {
-                        state = NATURAL;
-                        int n;
-                        std::cout << "Enter number:\n-->";
-                        std::cin >> n;
-                        try
-                        {
-                            BigNatural result = MUL_Nk_N(first, n);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 8:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = MUL_NN_N(first, second);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 9:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = SUB_NDN_N(first, second);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 10:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = DIV_NN_Dk(first, second);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 11:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = DIV_NN_N(first, second);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 12:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = MOD_NN_N(first, second);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 13:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = GCF_NN_N(first, second);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 14:
-                    {
-                        state = NATURAL;
-                        try
-                        {
-                            BigNatural result = LCM_NN_N(first, second);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                }
-
-                break;
-            }
+//            case OPERATION_NATURAL:
+//            {
+//                BigNatural first, second;
+//                try
+//                {
+//                    first = getFirst<BigNatural>();
+//                }
+//                catch(...)
+//                {
+//                    state = NATURAL;
+//                    continue;
+//                }
+//
+//                if (numberOfOperation == 1 || numberOfOperation == 4 || numberOfOperation == 5 ||
+//                    numberOfOperation == 8 || numberOfOperation == 9 || numberOfOperation == 10 ||
+//                    numberOfOperation == 11 || numberOfOperation == 12 ||
+//                    numberOfOperation == 13 || numberOfOperation == 14)
+//                    try
+//                    {
+//                        second = getSecond<BigNatural>();
+//                    }
+//                    catch(...)
+//                    {
+//                        state = NATURAL;
+//                        continue;
+//                    }
+//
+//
+//                switch(numberOfOperation)
+//                {
+//                    case 1:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = COM_NN_D(first, second);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 2:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = NZER_N_B(first);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 3:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = ADD_1N_N(first);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 4:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = ADD_NN_N(first, second);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 5:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = SUB_NN_N(first, second);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 6:
+//                    {
+//                        state = NATURAL;
+//                        int n;
+//                        std::cout << "Enter number:\n-->";
+//                        std::cin >> n;
+//                        try
+//                        {
+//                            BigNatural result = MUL_ND_N(first, n);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 7:
+//                    {
+//                        state = NATURAL;
+//                        int n;
+//                        std::cout << "Enter number:\n-->";
+//                        std::cin >> n;
+//                        try
+//                        {
+//                            BigNatural result = MUL_Nk_N(first, n);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 8:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = MUL_NN_N(first, second);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 9:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = SUB_NDN_N(first, second);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 10:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = DIV_NN_Dk(first, second);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 11:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = DIV_NN_N(first, second);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 12:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = MOD_NN_N(first, second);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 13:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = GCF_NN_N(first, second);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 14:
+//                    {
+//                        state = NATURAL;
+//                        try
+//                        {
+//                            BigNatural result = LCM_NN_N(first, second);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                }
+//
+//                break;
+//            }
             case OPERATION_INTEGER:
             {
                 BigInteger first, second;
@@ -666,307 +666,307 @@ int main()
 
                 break;
             }
-            case OPERATION_RATIONAL:
-            {
-                BigRational first, second;
-                try
-                {
-                    first = getFirst<BigRational>();
-                }
-                catch(...)
-                {
-                    state = POLINOM;
-                    continue;
-                }
-
-                if (numberOfOperation == 5 || numberOfOperation == 6 || numberOfOperation == 7 ||
-                    numberOfOperation == 8)
-                    try
-                    {
-                        second = getSecond<BigRational>();
-                    }
-                    catch(...)
-                    {
-                        state = RATIONAL;
-                        continue;
-                    }
-
-                switch(numberOfOperation)
-                {
-                    case 1:
-                    {
-                        state = RATIONAL;
-                        try
-                        {
-                            BigRational result = RED_Q_Q(left);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 2:
-                    {
-                        state = RATIONAL;
-                        try
-                        {
-                            bool result = INT_Q_B(left);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 3:
-                    {
-                        state = RATIONAL;
-                        std::cout << "result: no visual result"
-                        break;
-                    }
-                    case 4:
-                    {
-                        state = RATIONAL;
-                        std::cout << "result: no visual result"
-                        break;
-                    }
-                    case 5:
-                    {
-                        state = RATIONAL;
-                        try
-                        {
-                            BigRational result = ADD_QQ_Q(left, right);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 6:
-                    {
-                        state = RATIONAL;
-                        try
-                        {
-                            BigRational result = SUB_QQ_Q(left, right);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 7:
-                    {
-                        state = RATIONAL;
-                        try
-                        {
-                            BigRational result = MUL_QQ_Q(left, right);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                    case 8:
-                    {
-                        state = RATIONAL;
-                        try
-                        {
-                            BigRational result = DIV_QQ_Q(left, right);
-                            std::cout << "result: " << result << "\n\n";
-                        }
-                        catch(std::exception& e)
-                        {
-                            std::cout << e.what() << "\n";
-                            continue;
-                        }
-                        break;
-                    }
-                break;
-            }
-            case OPERATION_POLINOM:
-            {
-                Polinom first, second;
-                try
-                {
-                    first = getFirst<Polinom>();
-                }
-                catch(...)
-                {
-                    state = POLINOM;
-                    continue;
-                }
-
-                if (numberOfOperation == 1 || numberOfOperation == 2 || numberOfOperation == 7 ||
-                    numberOfOperation == 8)
-                    try
-                    {
-                        second = getSecond<Polinom>();
-                    }
-                    catch(...)
-                    {
-                        state = POLINOM;
-                        continue;
-                    }
-
-                case 1:
-                {
-                    state = POLINOM;
-                    try
-                    {
-                        Polinom result = ADD_PP_P(left, right);
-                        std::cout << "result: " << result << "\n\n";
-                    }
-                    catch(std::exception& e)
-                    {
-                        std::cout << e.what() << "\n";
-                        continue;
-                    }
-                    break;
-                }
-                case 2:
-                {
-                    state = POLINOM;
-                    try
-                    {
-                        Polinom result = SUB_PP_P(left, right);
-                        std::cout << "result: " << result << "\n\n";
-                    }
-                    catch(std::exception& e)
-                    {
-                        std::cout << e.what() << "\n";
-                        continue;
-                    }
-                    break;
-                }
-                case 3:
-                {
-                    state = POLINOM;
-                    try
-                    {
-                        Polinom result = MUL_PQ_P(left);
-                        std::cout << "result: " << result << "\n\n";
-                    }
-                    catch(std::exception& e)
-                    {
-                        std::cout << e.what() << "\n";
-                        continue;
-                    }
-                    break;
-                }
-                case 4:
-                {
-                    state = POLINOM;
-                    try
-                    {
-                        Polinom result = MUL_Pxk_P(left);
-                        std::cout << "result: " << result << "\n\n";
-                    }
-                    catch(std::exception& e)
-                    {
-                        std::cout << e.what() << "\n";
-                        continue;
-                    }
-                    break;
-                }
-                case 5:
-                {
-                    throw std::runtime_error("feature not realized");
-                }
-                case 6:
-                {
-                    throw std::runtime_error("feature not realized");
-                }
-                case 8:
-                {
-                    state = POLINOM;
-                    try
-                    {
-                        Polinom result = MUL_PP_P(left,right);
-                        std::cout << "result: " << result << "\n\n";
-                    }
-                    catch(std::exception& e)
-                    {
-                        std::cout << e.what() << "\n";
-                        continue;
-                    }
-                    break;
-                }
-                case 9:
-                {
-                    state = POLINOM;
-                    try
-                    {
-                        Polinom result = DIV_PP_P(left,right);
-                        std::cout << "result: " << result << "\n\n";
-                    }
-                    catch(std::exception& e)
-                    {
-                        std::cout << e.what() << "\n";
-                        continue;
-                    }
-                    break;
-                }
-                case 11:
-                {
-                    state = POLINOM;
-                    try
-                    {
-                        Polinom result = GCF_PP_P(left,right);
-                        std::cout << "result: " << result << "\n\n";
-                    }
-                    catch(std::exception& e)
-                    {
-                        std::cout << e.what() << "\n";
-                        continue;
-                    }
-                    break;
-                }
-                case 12:
-                {
-                    state = POLINOM;
-                    try
-                    {
-                        Polinom result = DER_P_P(left,right);
-                        std::cout << "result: " << result << "\n\n";
-                    }
-                    catch(std::exception& e)
-                    {
-                        std::cout << e.what() << "\n";
-                        continue;
-                    }
-                    break;
-                }
-                case 13:
-                {
-                    state = POLINOM;
-                    try
-                    {
-                        Polinom result = NMR_P_P(left,right);
-                        std::cout << "result: " << result << "\n\n";
-                    }
-                    catch(std::exception& e)
-                    {
-                        std::cout << e.what() << "\n";
-                        continue;
-                    }
-                    break;
-                }
-                break;
-            }
+//            case OPERATION_RATIONAL:
+//            {
+//                BigRational first, second;
+//                try
+//                {
+//                    first = getFirst<BigRational>();
+//                }
+//                catch(...)
+//                {
+//                    state = POLINOM;
+//                    continue;
+//                }
+//
+//                if (numberOfOperation == 5 || numberOfOperation == 6 || numberOfOperation == 7 ||
+//                    numberOfOperation == 8)
+//                    try
+//                    {
+//                        second = getSecond<BigRational>();
+//                    }
+//                    catch(...)
+//                    {
+//                        state = RATIONAL;
+//                        continue;
+//                    }
+//
+//                switch(numberOfOperation)
+//                {
+//                    case 1:
+//                    {
+//                        state = RATIONAL;
+//                        try
+//                        {
+//                            BigRational result = RED_Q_Q(left);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 2:
+//                    {
+//                        state = RATIONAL;
+//                        try
+//                        {
+//                            bool result = INT_Q_B(left);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 3:
+//                    {
+//                        state = RATIONAL;
+//                        std::cout << "result: no visual result"
+//                        break;
+//                    }
+//                    case 4:
+//                    {
+//                        state = RATIONAL;
+//                        std::cout << "result: no visual result"
+//                        break;
+//                    }
+//                    case 5:
+//                    {
+//                        state = RATIONAL;
+//                        try
+//                        {
+//                            BigRational result = ADD_QQ_Q(left, right);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 6:
+//                    {
+//                        state = RATIONAL;
+//                        try
+//                        {
+//                            BigRational result = SUB_QQ_Q(left, right);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 7:
+//                    {
+//                        state = RATIONAL;
+//                        try
+//                        {
+//                            BigRational result = MUL_QQ_Q(left, right);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                    case 8:
+//                    {
+//                        state = RATIONAL;
+//                        try
+//                        {
+//                            BigRational result = DIV_QQ_Q(left, right);
+//                            std::cout << "result: " << result << "\n\n";
+//                        }
+//                        catch(std::exception& e)
+//                        {
+//                            std::cout << e.what() << "\n";
+//                            continue;
+//                        }
+//                        break;
+//                    }
+//                break;
+//            }
+//            case OPERATION_POLINOM:
+//            {
+//                Polinom first, second;
+//                try
+//                {
+//                    first = getFirst<Polinom>();
+//                }
+//                catch(...)
+//                {
+//                    state = POLINOM;
+//                    continue;
+//                }
+//
+//                if (numberOfOperation == 1 || numberOfOperation == 2 || numberOfOperation == 7 ||
+//                    numberOfOperation == 8)
+//                    try
+//                    {
+//                        second = getSecond<Polinom>();
+//                    }
+//                    catch(...)
+//                    {
+//                        state = POLINOM;
+//                        continue;
+//                    }
+//
+//                case 1:
+//                {
+//                    state = POLINOM;
+//                    try
+//                    {
+//                        Polinom result = ADD_PP_P(left, right);
+//                        std::cout << "result: " << result << "\n\n";
+//                    }
+//                    catch(std::exception& e)
+//                    {
+//                        std::cout << e.what() << "\n";
+//                        continue;
+//                    }
+//                    break;
+//                }
+//                case 2:
+//                {
+//                    state = POLINOM;
+//                    try
+//                    {
+//                        Polinom result = SUB_PP_P(left, right);
+//                        std::cout << "result: " << result << "\n\n";
+//                    }
+//                    catch(std::exception& e)
+//                    {
+//                        std::cout << e.what() << "\n";
+//                        continue;
+//                    }
+//                    break;
+//                }
+//                case 3:
+//                {
+//                    state = POLINOM;
+//                    try
+//                    {
+//                        Polinom result = MUL_PQ_P(left);
+//                        std::cout << "result: " << result << "\n\n";
+//                    }
+//                    catch(std::exception& e)
+//                    {
+//                        std::cout << e.what() << "\n";
+//                        continue;
+//                    }
+//                    break;
+//                }
+//                case 4:
+//                {
+//                    state = POLINOM;
+//                    try
+//                    {
+//                        Polinom result = MUL_Pxk_P(left);
+//                        std::cout << "result: " << result << "\n\n";
+//                    }
+//                    catch(std::exception& e)
+//                    {
+//                        std::cout << e.what() << "\n";
+//                        continue;
+//                    }
+//                    break;
+//                }
+//                case 5:
+//                {
+//                    throw std::runtime_error("feature not realized");
+//                }
+//                case 6:
+//                {
+//                    throw std::runtime_error("feature not realized");
+//                }
+//                case 8:
+//                {
+//                    state = POLINOM;
+//                    try
+//                    {
+//                        Polinom result = MUL_PP_P(left,right);
+//                        std::cout << "result: " << result << "\n\n";
+//                    }
+//                    catch(std::exception& e)
+//                    {
+//                        std::cout << e.what() << "\n";
+//                        continue;
+//                    }
+//                    break;
+//                }
+//                case 9:
+//                {
+//                    state = POLINOM;
+//                    try
+//                    {
+//                        Polinom result = DIV_PP_P(left,right);
+//                        std::cout << "result: " << result << "\n\n";
+//                    }
+//                    catch(std::exception& e)
+//                    {
+//                        std::cout << e.what() << "\n";
+//                        continue;
+//                    }
+//                    break;
+//                }
+//                case 11:
+//                {
+//                    state = POLINOM;
+//                    try
+//                    {
+//                        Polinom result = GCF_PP_P(left,right);
+//                        std::cout << "result: " << result << "\n\n";
+//                    }
+//                    catch(std::exception& e)
+//                    {
+//                        std::cout << e.what() << "\n";
+//                        continue;
+//                    }
+//                    break;
+//                }
+//                case 12:
+//                {
+//                    state = POLINOM;
+//                    try
+//                    {
+//                        Polinom result = DER_P_P(left,right);
+//                        std::cout << "result: " << result << "\n\n";
+//                    }
+//                    catch(std::exception& e)
+//                    {
+//                        std::cout << e.what() << "\n";
+//                        continue;
+//                    }
+//                    break;
+//                }
+//                case 13:
+//                {
+//                    state = POLINOM;
+//                    try
+//                    {
+//                        Polinom result = NMR_P_P(left,right);
+//                        std::cout << "result: " << result << "\n\n";
+//                    }
+//                    catch(std::exception& e)
+//                    {
+//                        std::cout << e.what() << "\n";
+//                        continue;
+//                    }
+//                    break;
+//                }
+//                break;
+//            }
 
         }
     }
