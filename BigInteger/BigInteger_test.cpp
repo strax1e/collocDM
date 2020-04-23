@@ -157,6 +157,11 @@ typedef BigInteger num;
 
 int main()
 {
+    BigInteger n(-123);
+    BigNatural m(32);
+    m = BigNatural(n);
+    std::cout << m << "\n";
+
     BigInteger a(123), b("321"), c(a);
     std::cout << a << " " << b << " " << c << "\n";
     a = a + b + c;
