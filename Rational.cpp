@@ -10,7 +10,7 @@ using namespace std;
 void Rational::Make()
 {
     if (!den)
-        throw invalid_argument("denominator should not be zero");
+        throw runtime_error("ERROR syka blyat: denominator should not be zero");
     if (((num >> (sizeof(num) * 8 - 1)) ^ (den >> (sizeof(den) * 8 - 1))) & 1)
         num = -abs(num);
     else
@@ -36,24 +36,71 @@ istream& operator>>(istream& ist, Rational& r)
     return ist;
 }
 
-Rational const operator+ (Rational const& first, Rational const& second)
+
+
+
+Rational& operator +=( Rational& first, const  Rational  &second)
 {
-    return Rational(first.num * second.den + second.num * first.den, first.den * second.den);
+    Rational &r = first;
+    r.num = first.num * second.den + first.den * second.num;
+    r.den = first.den * second.den;
+    first.num = r.num;
+    first.den = r.den;
+    return r;
+}
+Rational& operator -=(Rational&  first, Rational  const &second)
+{
+    Rational& r = first;
+    r.num = first.num * second.den - first.den * second.num;
+    r.den = first.den * second.den;
+    first.num = r.num;
+    first.den = r.den;
+    return first;
+}
+Rational& operator *=(Rational& first, Rational const &second)
+{
+    Rational& r = first;
+    r.num = first.num * second.num;
+    r.den = first.den * second.den;
+    first.num = r.num;
+    first.den = r.den;
+    return first;
 }
 
-Rational const operator- (Rational const& first, Rational const& second)
+Rational& operator /=(Rational& first, Rational const &second)
 {
-    return first + Rational(-first.num, second.den);
+    
+    if (second.num == 0)
+    {
+        throw runtime_error("ERROR: div by null");
+    }
+    Rational& r = first;
+    r.num = first.num * second.den;
+    r.den = first.den * second.num;
+    first.num = r.num;
+    first.den = r.den;
+    return first;
 }
 
-Rational const operator* (Rational const& first, Rational const& second)
+
+Rational& operator+(Rational& first, Rational& second)
 {
-    return Rational(first.num * second.num, first.den * second.den);
+    return first += second;
 }
 
-Rational const operator/ (Rational const& first, Rational const& second)
+ Rational&  operator- (Rational&  first, Rational&  second)
 {
-    return first * Rational(second.den, second.num);
+    return first -= second;
+}
+
+Rational& const operator* (Rational& first, Rational&  second)
+{
+    return first *= second;
+}
+
+Rational& const operator/ (Rational&  first, Rational&  second)
+{
+    return first /=second;
 }
 
 

@@ -1,4 +1,4 @@
-#pragma once
+
 #ifndef RATIONAL_H
 #define RATIONAL_H
 
@@ -12,6 +12,8 @@ public:
     {
         Make();
     }
+
+    
     void Make();
     
 public:
@@ -45,20 +47,27 @@ public:
         }
         else
         {
-            //return exception;
+            throw invalid_argument("jopa");
         }
     }
 
+    friend Rational& operator +=(Rational&,  Rational const&);
+    friend Rational& operator -=(Rational&, Rational const&);
+    friend Rational& operator *=(Rational&, Rational const&);
+    friend Rational& operator *=(Rational&, Rational const&);
+    friend Rational& operator /=(Rational&, Rational const&);
 
     friend ostream& operator << (ostream&, Rational const&);
     friend istream& operator>> (istream&, Rational&);
-    friend Rational const operator+ (Rational const&, Rational const&);
-    friend Rational const operator- (Rational const&, Rational const&);
-    friend Rational const operator* (Rational const&, Rational const&);
-    friend Rational const operator/ (Rational const&, Rational const&);
+
+    friend Rational& operator+ (Rational& ,  Rational& );
+    friend Rational&  operator- (Rational&, Rational&);
+    friend Rational&  operator* (Rational&, Rational&);
+    friend Rational&  operator/ (Rational&, Rational&);
 
     
-
+    
+    
     
     friend bool operator< (Rational const&, Rational const&);
     friend bool operator== (Rational const&, Rational const&);
