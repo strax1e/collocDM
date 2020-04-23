@@ -1,0 +1,13 @@
+BigInteger/bin/
+BigInteger/obj/
+BigInteger/*.depend
+BigInteger/*.layout
+BigInteger/*.cbp
+
+Big_Integer_Template/bin/
+Big_Integer_Template/obj/
+Big_Integer_Template/*.depend
+Big_Integer_Template/*.layout
+Big_Integer_Template/*.cbp
+
+changes.txt
