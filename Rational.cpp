@@ -41,32 +41,21 @@ istream& operator>>(istream& ist, Rational& r)
 
 Rational& operator +=( Rational& first, const  Rational  &second)
 {
-    Rational &r = first;
-    r.num = first.num * second.den + first.den * second.num;
-    r.den = first.den * second.den;
-    first.num = r.num;
-    first.den = r.den;
-    delete &r;
+    
+    first.num = first.num * second.den + first.den * second.num;
+    first.den = first.den * second.den;
     return first;
 }
 Rational& operator -=(Rational&  first, Rational  const &second)
 {
-    Rational& r = first;
-    r.num = first.num * second.den - first.den * second.num;
-    r.den = first.den * second.den;
-    first.num = r.num;
-    first.den = r.den;
-    delete& r;
+    first.num = first.num * second.den - first.den * second.num;
+    first.den = first.den * second.den;
     return first;
 }
 Rational& operator *=(Rational& first, Rational const &second)
 {
-    Rational& r = first;
-    r.num = first.num * second.num;
-    r.den = first.den * second.den;
-    first.num = r.num;
-    first.den = r.den;
-    delete& r;
+    first.num = first.num * second.num;
+    first.den = first.den * second.den;
     return first;
 }
 
@@ -77,12 +66,8 @@ Rational& operator /=(Rational& first, Rational const &second)
     {
         throw runtime_error("ERROR: div by null");
     }
-    Rational& r = first;
-    r.num = first.num * second.den;
-    r.den = first.den * second.num;
-    first.num = r.num;
-    first.den = r.den;
-    delete& r;
+    first.num = first.num * second.den;
+    first.den = first.den * second.num;
     return first;
 }
 
