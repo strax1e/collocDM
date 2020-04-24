@@ -10,7 +10,7 @@ using namespace std;
 class Rational
 {
 public:
-    explicit Rational(int num_ = 0, int den_ = 1) : num(num_), den(den_)
+    explicit Rational(BigInteger num_ = 0, BigNatural den_ = 1) : num(num_), den(den_)
     {
         Make();
     }
@@ -18,40 +18,7 @@ public:
     
     void Make();
     
-public:
-    Rational RED_Q_Q(Rational &r)
-    {
 
-    }
-
-    bool INT_Q_B(Rational &r)
-    {
-        if (RED_Q_Q(r).den == 1)
-        {
-            return true;
-        }
-        else return false;
-    }
-
-    Rational& TRANS_Z_Q(int i)
-    {
-        num = i; 
-        den = 1;
-
-        return *this;
-    }
-
-    BigInteger TRANS_Q_Z(Rational& r)
-    {
-        if (r.den == 1)
-        {
-            return r.num;
-        }
-        else
-        {
-            throw invalid_argument("something");
-        }
-    }
 
     friend Rational& operator +=(Rational&,  Rational const&);
     friend Rational& operator -=(Rational&, Rational const&);
@@ -86,7 +53,7 @@ public:
         return *this;
     }
         
-    Rational& operator= (Rational&& r)
+    Rational& operator= (Rational& r)
     {
         num = r.num;
         den = r.den;
@@ -96,7 +63,7 @@ public:
     
     
     
-private:
+public:
    
     BigInteger num;
     BigNatural den;
