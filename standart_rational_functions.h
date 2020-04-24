@@ -54,20 +54,20 @@
 
     const Rational ADD_QQ_Q(Rational first, Rational const& second)
     {
-        return first + second;
+        return RED_Q_Q(first + second);
     }
 
     const Rational SUB_QQ_Q(Rational first, Rational const& second)
     {
-        return first - second;
+        return RED_Q_Q(first - second);
     }
 
     const Rational MUL_QQ_Q(Rational first, Rational const& second)
     {
-        return first * second;
+        return RED_Q_Q(first * second);
     }
 
     const Rational DIV_QQ_Q(Rational first, Rational const& second)
     {
-        return first / second;
+        return RED_Q_Q(first / second);
     }

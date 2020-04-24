@@ -18,14 +18,39 @@ public:
     
     void Make();
     
-    Rational(BigInteger num, char ch , BigNatural den)
+    Rational(string s)
     { 
-        if (ch != '\\')
+        int k = 0;
+        den = 0;
+        for (int i = 0; i < s.size; i++)
         {
-            throw runtime_error("EROR: it should be like a\\b");
+            if (s[0] < 48 || s[0] > 57)
+            {
+                throw runtime_error("Invalid synatax");
+            }
+            else
+            {
+                while (s[i] != '\\')
+                {
+                    if ((s[i] < 48 || s[i] > 57) && s[i] != '\\')
+                    {
+                        throw runtime_error("Invalid synatax");
+                    }
+                    i++;
+                    k++;
+                }
+                num = (BigInteger)s.substr(0, i);
+
+                if (s[i] < 48 || s[i] > 57)
+                {
+                    throw runtime_error("Invalid synatax");
+                }
+            }
         }
-        this->num = num;
-        this->den = den;
+
+        den = (BigInteger)s.substr(k + 1, k);
+
+
 
     }
 
