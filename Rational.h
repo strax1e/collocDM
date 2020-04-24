@@ -3,6 +3,8 @@
 #define RATIONAL_H
 
 #include <iostream>
+#include "BigInteger.h"
+#include "BigNatural.h"
 using namespace std;
 
 class Rational
@@ -39,7 +41,7 @@ public:
         return *this;
     }
 
-    int TRANS_Q_Z(Rational& r)
+    BigInteger TRANS_Q_Z(Rational& r)
     {
         if (r.den == 1)
         {
@@ -95,7 +97,9 @@ public:
     
     
 private:
-    int num, den;
+   
+    BigInteger num;
+    BigNatural den;
 };
 
 
