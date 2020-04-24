@@ -5,7 +5,7 @@
 #include "standart_functions.h"
 
 
-    Rational& RED_Q_Q(const Rational &r)
+    inline Rational& RED_Q_Q(const Rational &r)
     {
         bool flag = false;
         Rational new_r = r;
@@ -24,7 +24,7 @@
         return new_r;
     }
 
-    bool INT_Q_B(Rational& r)
+    inline bool INT_Q_B(Rational& r)
     {
         if (RED_Q_Q(r).den == 1)
         {
@@ -33,7 +33,7 @@
         else return false;
     }
 
-    Rational TRANS_Z_Q(BigInteger i)
+    inline Rational TRANS_Z_Q(BigInteger i)
     {
         
         Rational r(i, 1);
@@ -41,7 +41,7 @@
         return r;
     }
 
-    BigInteger TRANS_Q_Z( Rational r)
+    inline BigInteger TRANS_Q_Z( Rational r)
     {
         if (r.den == 1)
         {
@@ -54,22 +54,22 @@
     }
 
 
-    const Rational ADD_QQ_Q(Rational first, Rational const& second)
+    inline const Rational ADD_QQ_Q(Rational first, Rational const& second)
     {
         return RED_Q_Q(first + second);
     }
 
-    const Rational SUB_QQ_Q(Rational first, Rational const& second)
+    inline const Rational SUB_QQ_Q(Rational first, Rational const& second)
     {
         return RED_Q_Q(first - second);
     }
 
-    const Rational MUL_QQ_Q(Rational first, Rational const& second)
+    inline const Rational MUL_QQ_Q(Rational first, Rational const& second)
     {
         return RED_Q_Q(first * second);
     }
 
-    const Rational DIV_QQ_Q(Rational first, Rational const& second)
+    inline const Rational DIV_QQ_Q(Rational first, Rational const& second)
     {
         return RED_Q_Q(first / second);
     }
