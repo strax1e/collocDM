@@ -1,3 +1,5 @@
+#ifndef STANDART_RATIONAL_FUNCTIONS_H
+#define STANDART_RATIONAL_FUNCTIONS_H
 
 #include "Rational.h"
 #include "standart_functions.h"
@@ -71,3 +73,6 @@
     {
         return RED_Q_Q(first / second);
     }
+
+
+#endif // STANDART_RATIONAL_FUNCTIONS_H

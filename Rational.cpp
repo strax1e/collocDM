@@ -91,7 +91,7 @@ bool operator< (Rational const& first, Rational const& second)
 
 bool operator== (Rational const& first, Rational const& second)
 {
-    return !(first < second || first < second);
+    return !(first < second || first > second);
 }
 
 bool operator> (Rational const& first, Rational const& second)
@@ -101,7 +101,7 @@ bool operator> (Rational const& first, Rational const& second)
 
 bool operator<= (Rational const& first, Rational const& second)
 {
-    return !(first < second);
+    return !(first > second);
 }
 
 bool operator>= (Rational const& first, Rational const& second)

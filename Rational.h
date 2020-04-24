@@ -22,7 +22,7 @@ public:
     { 
         int k = 0;
         den = 0;
-        for (int i = 0; i < s.size; i++)
+        for (int i = 0; i < s.size(); i++)
         {
             if (s[0] < 48 || s[0] > 57)
             {
@@ -53,6 +53,9 @@ public:
 
 
     }
+    friend  Rational& RED_Q_Q(const Rational&);
+    friend BigInteger TRANS_Q_Z(Rational);
+    friend  bool INT_Q_B(Rational&);
 
     friend Rational& operator +=(Rational&,  Rational const&);
     friend Rational& operator -=(Rational&, Rational const&);
@@ -97,7 +100,7 @@ public:
     
     
     
-public:
+private:
    
     BigInteger num;
     BigNatural den;
