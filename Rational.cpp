@@ -7,6 +7,7 @@
 #include "BigInteger.h"
 #include "BigNatural.h"
 #include "standart_functions.h"
+#include "standart_rational_functions.h"
 
 using namespace std;
 
@@ -32,19 +33,19 @@ Rational& operator +=( Rational& first,  const Rational  &second)
     
     first.num = first.num * (BigInteger)second.den + (BigInteger)first.den * second.num;
     first.den = first.den * second.den;
-    return first;
+    return RED_Q_Q(first);
 }
 Rational& operator -=(Rational&  first, Rational  const &second)
 {
     first.num = first.num * (BigInteger)second.den - (BigInteger)first.den * second.num;
     first.den = first.den * second.den;
-    return first;
+    return RED_Q_Q(first);
 }
 Rational& operator *=(Rational& first, Rational const &second)
 {
     first.num = first.num * second.num;
     first.den = first.den * second.den;
-    return first;
+    return RED_Q_Q(first);
 }
 
 Rational& operator /=(Rational& first, Rational const &second)
@@ -56,28 +57,28 @@ Rational& operator /=(Rational& first, Rational const &second)
     }
     first.num = first.num * (BigInteger)second.den;
     first.den = first.den * ABS_Z_N(second.num);
-    return first;
+    return RED_Q_Q(first);
 }
 
 
 const Rational operator+(Rational first, Rational const& second)
 {
-    return first += second;
+    return RED_Q_Q(first += second);
 }
 
  const Rational  operator- (Rational  first, Rational const& second)
 {
-    return first -= second;
+    return RED_Q_Q(first -= second);
 }
 
 const Rational  operator* (Rational first, Rational const& second)
 {
-    return first *= second;
+    return RED_Q_Q(first *= second);
 }
 
 const Rational operator/ (Rational  first, Rational const& second)
 {
-    return first /=second;
+    return RED_Q_Q(first /=second);
 }
 
 
