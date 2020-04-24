@@ -31,7 +31,7 @@
         else return false;
     }
 
-    Rational& TRANS_Z_Q(BigInteger i)
+    Rational TRANS_Z_Q(BigInteger i)
     {
         
         Rational r(i, 1);
@@ -52,22 +52,22 @@
     }
 
 
-    Rational& ADD_QQ_Q(Rational& first, Rational& second)
+    const Rational ADD_QQ_Q(Rational first, Rational const& second)
     {
         return first + second;
     }
 
-    Rational& SUB_QQ_Q(Rational& first, Rational& second)
+    const Rational SUB_QQ_Q(Rational first, Rational const& second)
     {
         return first - second;
     }
 
-    Rational& MUL_QQ_Q(Rational& first, Rational& second)
+    const Rational MUL_QQ_Q(Rational first, Rational const& second)
     {
-        return first + second;
+        return first * second;
     }
 
-    Rational& DIV_QQ_Q(Rational& first, Rational& second)
+    const Rational DIV_QQ_Q(Rational first, Rational const& second)
     {
-        return first + second;
+        return first / second;
     }

@@ -18,7 +18,16 @@ public:
     
     void Make();
     
+    Rational(BigInteger num, char ch , BigNatural den)
+    { 
+        if (ch != '\\')
+        {
+            throw runtime_error("EROR: it should be like a\\b");
+        }
+        this->num = num;
+        this->den = den;
 
+    }
 
     friend Rational& operator +=(Rational&,  Rational const&);
     friend Rational& operator -=(Rational&, Rational const&);
@@ -29,10 +38,10 @@ public:
     friend ostream& operator << (ostream&, Rational const&);
     friend istream& operator>> (istream&, Rational&);
 
-    friend Rational& operator+ (Rational& ,  Rational& );
-    friend Rational&  operator- (Rational&, Rational&);
-    friend Rational&  operator* (Rational&, Rational&);
-    friend Rational&  operator/ (Rational&, Rational&);
+    friend const Rational operator+ (Rational , Rational const& );
+    friend const Rational  operator- (Rational, Rational const&);
+    friend  const Rational  operator* (Rational, Rational const&);
+    friend  const Rational  operator/ (Rational, Rational const&);
 
     
     

@@ -75,22 +75,22 @@ Rational& operator /=(Rational& first, Rational const &second)
 }
 
 
-Rational& operator+(Rational& first, Rational& second)
+const Rational operator+(Rational first, Rational const& second)
 {
     return first += second;
 }
 
- Rational&  operator- (Rational&  first, Rational&  second)
+ const Rational  operator- (Rational  first, Rational const& second)
 {
     return first -= second;
 }
 
-Rational& const operator* (Rational& first, Rational&  second)
+const Rational  operator* (Rational first, Rational const& second)
 {
     return first *= second;
 }
 
-Rational& const operator/ (Rational&  first, Rational&  second)
+const Rational operator/ (Rational  first, Rational const& second)
 {
     return first /=second;
 }
