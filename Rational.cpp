@@ -4,6 +4,8 @@
 #include <string>
 #include <sstream>
 #include "Rational.h"
+#include "BigInteger.h"
+#include "BigNatural.h"
 #include "standart_functions.h"
 
 using namespace std;
@@ -12,11 +14,7 @@ void Rational::Make()
 {
     if (!den)
         throw runtime_error("ERROR : denominator should not be zero");
-    //if ((((long long)num >> (sizeof(num) * 8 - 1)) ^ (den >> (sizeof(den) * 8 - 1))) & 1)
-    //    num = ABS_Z_N(num) * -1;
-   // else
-   //     num = ABS_Z_N(num);
-   // den = ABS_Z_N(den);
+    
 }
 
 ostream& operator <<(ostream& ost, Rational const& r)
@@ -24,20 +22,7 @@ ostream& operator <<(ostream& ost, Rational const& r)
     return ost << r.num << '/' << r.den;
 }
 
-/*
-istream& operator>>(istream& ist, Rational& r) 
-{
-    string s;
-    getline(ist, s, ')');
-    string::size_type ind;
-    while ((ind = s.find_first_of("(,)")) != string::npos)
-        s.replace(ind, 1, 1, ' ');
-    istringstream iss(s);
-    iss >>  r.num >> r.den;
-    r.Make();
-    return ist;
-}
-*/
+
 
 
 
@@ -70,7 +55,7 @@ Rational& operator /=(Rational& first, Rational const &second)
         throw runtime_error("ERROR: div by null");
     }
     first.num = first.num * (BigInteger)second.den;
-    first.den = (BigInteger)first.den * second.num;
+    first.den = first.den * ABS_Z_N(second.num);
     return first;
 }
 
@@ -100,7 +85,7 @@ const Rational operator/ (Rational  first, Rational const& second)
 
 bool operator< (Rational const& first, Rational const& second)
 {
-    return double(first.num / (BigInteger)second.den )< double(first.num / (BigInteger)second.den);
+    return (first - second).num < 0 ? true : false;
 }
 
 bool operator== (Rational const& first, Rational const& second)
