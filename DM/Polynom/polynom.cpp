@@ -400,6 +400,14 @@ const Polynom operator/( Polynom left, const Polynom &right )
 
 Polynom &operator%=( Polynom &left, const Polynom &right )
 {
+  if (left.degree == 0 && right.degree == 0)
+  {
+    Rational r = RED_Q_Q(right[0]), l = RED_Q_Q(left[0]);
+    if (l.GetDen() == 1 && r.GetDen() == 1)
+      if (left.coefs[0] >= zero && right.coefs[0] > zero)
+        return left = Polynom({TRANS_Z_Q(TRANS_N_Z(TRANS_Z_N(TRANS_Q_Z(l)) % TRANS_Z_N(TRANS_Q_Z(r))))});
+    throw std::runtime_error("Impossible to divide with reminder");
+  }
   if (right.degree == 0 && right.coefs[0] == zero)
     throw std::runtime_error("Division by zero");
   else if (right.degree == 0)
