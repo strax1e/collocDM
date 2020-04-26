@@ -125,7 +125,7 @@ WPARAM Loop()
 	BOOL bRet = 0;
 	while ( bRet = GetMessage( &msg, nullptr, 0, 0 ) )
 	{
-		if ( -1 == bRet || -1 == bRet)
+		if ( -1 == bRet )
 			return 0;
 
 		if ( !HandleAccelArray( GetActiveWindow(), msg ) )
