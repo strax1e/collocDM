@@ -27,7 +27,11 @@ public:
       if (!((s[i] >= '0' && s[i] <= '9') || s[i] == '-'))
         throw runtime_error("Invalid syntax");
       if (s[i] == '-')
+      {
         i++;
+        if (s[i] == '0')
+          throw std::runtime_error("Invalid syntax");
+      }
       while (s[i] != '/' && i < s.size())
       {
         if (!((s[i] >= '0' && s[i] <= '9') || s[i] == '-'))
@@ -40,7 +44,7 @@ public:
       k = ++i;
       while (i < s.size())
       {
-        if (!((s[i] >= '0' && s[i] <= '9') || s[i] == '-'))
+        if (!((s[i] >= '0' && s[i] <= '9')))
           throw runtime_error("Invalid syntax");
         i++;
       }

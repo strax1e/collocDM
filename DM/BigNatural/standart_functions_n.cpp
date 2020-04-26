@@ -26,7 +26,10 @@ BigNatural SUB_NN_N(BigNatural left, const BigNatural &right)
 {
   return left -= right;
 }
-///BigNatural MUL_ND_N(BigNatural left, int digit);
+BigNatural MUL_ND_N(BigNatural left, int digit)
+{
+  return left *= digit;
+}
 BigNatural MUL_Nk_N(BigNatural left, long long k)
 {
   return left.pow10(k);
@@ -35,12 +38,25 @@ BigNatural MUL_NN_N(BigNatural left, const BigNatural &right)
 {
   return left *= right;
 }
-///BigNatural SUB_NDN_N(BigNatural left, int digit, BigNatural right)
-///{
-///  right = MUL_ND_N(right, digit);
-///  return left > right ? left - right : right - left;
-///}
-///DIV_NN_Dk
+BigNatural SUB_NDN_N(BigNatural left, int digit, BigNatural right)
+{
+  right = MUL_ND_N(right, digit);
+  return left > right ? left - right : right - left;
+}
+BigNatural DIV_NN_Dk(BigNatural left, const BigNatural &right)
+{
+  left /= right;
+  BigNatural k = 0;
+  int kInt = 0;
+  while (left != 0)
+  {
+    k = left % 10;
+    left /= 10;
+  }
+  while (k != kInt)
+    ++kInt;
+  return MUL_Nk_N(k, kInt);
+}
 BigNatural DIV_NN_N(BigNatural left, const BigNatural &right)
 {
   return left /= right;
