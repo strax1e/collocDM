@@ -6,6 +6,7 @@
  * - Afanasyev Andrey 9373
  * - Arutiunian Vladimir 9373
  */
+
 #include <vector>
 #include <string>
 #include <fstream>

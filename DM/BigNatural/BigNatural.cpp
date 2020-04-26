@@ -181,7 +181,7 @@ BigNatural &operator-=(BigNatural &left, const BigNatural &right)
 BigNatural &operator+=(BigNatural &left, const BigNatural &right)
 {
     int overflow = 0;
-    for (size_t i = 0; i < std::max(left.nums.size(), right.nums.size()) || overflow; ++i)
+    for (size_t i = 0; i < std::fmax(left.nums.size(), right.nums.size()) || overflow; ++i)
     {
         if (left.nums.size() == i)
             left.nums.push_back(0);
@@ -439,7 +439,7 @@ BigNatural &BigNatural::pow10(const long long &k)
     if (k < 0)
     {
         for (int i = 0; i < nums.size(); ++i)
-            if (k + i < nums.size())
+            if (k + i < (int)nums.size())
             {
                 nums[i] ^= nums[k + i];
                 nums[i + k] ^= nums[i];
@@ -482,7 +482,7 @@ BigNatural::BigNatural(const std::string &inum)
     if (inum.size())
     {
         nums.reserve(2 * inum.size());
-        for (int i = inum.size() - 1; i >= 0; --i)
+        for (int i = (int)inum.size() - 1; i >= 0; --i)
             if (inum[i] >= '0' && inum[i] <= '9')
                 nums.push_back(inum[i] - '0');
             else
