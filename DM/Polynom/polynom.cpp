@@ -134,29 +134,6 @@ void Polynom::Optimize( void )
   degree = (int)coefs.size() - 1;
 }
 
-/* Polynom print function
- * ARGUMENTS: None
- * RETURNS: None
- */
-void Polynom::Print( void )
-{
-  for (int i = (int)coefs.size() - 1; i >= 0; i--)
-  {
-    if (coefs[i] > Rational(0, 1) && i != 0)
-      printf("%fx^%i + ", coefs[i], i);
-    if (i == 0)
-    {
-      if (coefs[i] == zero)
-      {
-        if (coefs.size() == 1)
-          printf("0");
-      }
-      else
-        printf("%f", coefs[0]);
-    }
-  }
-}
-
 /* Polynomial coefficient getting function
  * ARGUMENTS:
  *   - Position:
@@ -185,6 +162,9 @@ const Polynom GCD( const Polynom &left, const Polynom &right )
     return right;
   else if (left.GetDegree() == 0 && left[0] == zero)
     return left;
+  Rational r = RED_Q_Q(right[0]), l = RED_Q_Q(left[0]);
+  if (l.GetDen() == 1 && r.GetDen() == 1)
+      return Polynom({TRANS_Z_Q(GCD(TRANS_Q_Z(l), TRANS_Q_Z(r)))});
   Polynom newLeft = left, newRight = right, tmp;
   if (right.GetDegree() > left.GetDegree())
   {
@@ -404,8 +384,7 @@ Polynom &operator%=( Polynom &left, const Polynom &right )
   {
     Rational r = RED_Q_Q(right[0]), l = RED_Q_Q(left[0]);
     if (l.GetDen() == 1 && r.GetDen() == 1)
-      if (left.coefs[0] >= zero && right.coefs[0] > zero)
-        return left = Polynom({TRANS_Z_Q(TRANS_N_Z(TRANS_Z_N(TRANS_Q_Z(l)) % TRANS_Z_N(TRANS_Q_Z(r))))});
+      return left = Polynom({TRANS_Z_Q(TRANS_Q_Z(l) % TRANS_Q_Z(r))});
     throw std::runtime_error("Impossible to divide with reminder");
   }
   if (right.degree == 0 && right.coefs[0] == zero)

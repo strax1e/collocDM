@@ -27,7 +27,6 @@ public:
   Polynom( const std::string &expr );
   ~Polynom( void );
 
-  void Print( void );
   size_t GetDegree( void ) const;
   Rational LeadCoef( void ) const;
 
