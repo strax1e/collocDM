@@ -573,16 +573,22 @@ const BigNatural GCD( const std::vector<BigNatural> &vec )
 
 const BigNatural LCM(const BigNatural &left, const BigNatural &right)
 {
+    if (!left && !right)
+      return BigNatural( 0 );
     return (left * right) / GCD(left, right);
 }
 
 const BigNatural LCM(const BigNatural &left, const long long &right)
 {
+    if (!left && !right)
+      return BigNatural( 0 );
     return (left * right) / GCD(left, right);
 }
 
 const BigNatural LCM(const long long &left, const BigNatural &right)
 {
+    if (!left && !right)
+      return BigNatural( 0 );
     return (left * right) / GCD(left, right);
 }
 
