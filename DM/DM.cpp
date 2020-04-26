@@ -209,7 +209,7 @@ HWND InitInstance(HINSTANCE hInstance, int nCmdShow)
 	hInst = hInstance; // Store instance handle in our global variable
 
 	HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, 370, 80, nullptr, nullptr, hInstance, nullptr);
+		CW_USEDEFAULT, 0, 370, 120, nullptr, nullptr, hInstance, nullptr);
 
 	if (!hWnd)
 	{
@@ -605,6 +605,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		CreateWindow(TEXT( "BUTTON" ), TEXT( "Integer" ), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 95, 10, 75, 20, hWnd, (HMENU)0x201, lpcs->hInstance, NULL);
 		CreateWindow(TEXT( "BUTTON" ), TEXT( "Rational" ), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 180, 10, 75, 20, hWnd, (HMENU)0x202, lpcs->hInstance, NULL);
 		CreateWindow(TEXT( "BUTTON" ), TEXT( "Polynomial" ), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 265, 10, 75, 20, hWnd, (HMENU)0x203, lpcs->hInstance, NULL);
+		CreateWindow(TEXT( "BUTTON" ), TEXT( "Help" ), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 132, 40, 75, 20, hWnd, (HMENU)0x204, lpcs->hInstance, NULL);
 		break;
 	}
 	case WM_SETFONT:
