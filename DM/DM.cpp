@@ -246,7 +246,7 @@ INT_PTR CALLBACK NaturalProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		CreateWindow(TEXT("BUTTON"), TEXT("A % B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x211, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("НОД(A, B)"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x212, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("НОК(A, B)"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x213, hInst, NULL);
-		FieldAns = CreateWindow(TEXT( "STATIC" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
+		FieldAns = CreateWindow(TEXT( "EDIT" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		break;
 	}
 	case WM_COMMAND:
@@ -334,7 +334,7 @@ INT_PTR CALLBACK IntegerProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		CreateWindow(TEXT("BUTTON"), TEXT("A * B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x209, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A / B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x210, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A % B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x211, hInst, NULL);
-		FieldAns = CreateWindow(TEXT( "STATIC" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
+		FieldAns = CreateWindow(TEXT( "EDIT" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		break;
 	}
 	case WM_COMMAND:
@@ -408,16 +408,19 @@ INT_PTR CALLBACK RationalProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		LPCREATESTRUCT lpcs = (LPCREATESTRUCT)lParam;
 		MoveWindow(hWnd, 0, 0, 700, 500, TRUE);
 		FieldA = CreateWindow(TEXT( "EDIT" ), TEXT(""), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x204, hInst, NULL);
-		CreateWindow(TEXT("STATIC"), TEXT("A:"), WS_CHILDWINDOW | WS_VISIBLE | SS_LEFT, 10, cury, 15, 20, hWnd, (HMENU)0x204, hInst, NULL);
+		CreateWindow(TEXT("STATIC"), TEXT("A:"), WS_CHILDWINDOW | WS_VISIBLE | SS_LEFT, 10, cury, 15, 20, hWnd, (HMENU)0x211, hInst, NULL);
 		FieldB = CreateWindow(TEXT( "EDIT" ), TEXT(""), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x205, hInst, NULL);
-		CreateWindow(TEXT("STATIC"), TEXT("B:"), WS_CHILDWINDOW | WS_VISIBLE | SS_LEFT, 10, cury, 15, 20, hWnd, (HMENU)0x204, hInst, NULL);
+		CreateWindow(TEXT("STATIC"), TEXT("B:"), WS_CHILDWINDOW | WS_VISIBLE | SS_LEFT, 10, cury, 15, 20, hWnd, (HMENU)0x211, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A + B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x207, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A - B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x208, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A * B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x209, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A / B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x210, hInst, NULL);
-		FieldAns = CreateWindow(TEXT( "STATIC" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
+		FieldAns = CreateWindow(TEXT( "EDIT" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		break;
 	}
+	case WM_SETFOCUS:
+		SetFocus(GetNextDlgTabItem(hWnd, (HWND)wParam, FALSE));
+		break;
 	case WM_COMMAND:
 	{
 		if (BN_CLICKED == HIWORD( wParam ) || 1 == HIWORD( wParam ))
@@ -503,7 +506,7 @@ INT_PTR CALLBACK PolynomProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		CreateWindow(TEXT("BUTTON"), TEXT("Кратные корни B в простые"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 218, cury += 40, 200, 20, hWnd, (HMENU)0x216, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("НОД числителей / НОК знаменателей A"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 168, cury += 40, 300, 20, hWnd, (HMENU)0x217, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("НОД числителей / НОК знаменателей B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 168, cury += 40, 300, 20, hWnd, (HMENU)0x218, hInst, NULL);
-		FieldAns = CreateWindow(TEXT( "STATIC" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
+		FieldAns = CreateWindow(TEXT( "EDIT" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		break;
 	}
 	case WM_COMMAND:
