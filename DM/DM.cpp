@@ -244,8 +244,8 @@ INT_PTR CALLBACK NaturalProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		CreateWindow(TEXT("BUTTON"), TEXT("A * B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x209, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A / B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x210, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A % B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x211, hInst, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("НОД(A, B)"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x212, hInst, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("НОК(A, B)"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x213, hInst, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("НОД(A, B)"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 270, cury += 40, 95, 20, hWnd, (HMENU)0x212, hInst, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("НОК(A, B)"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 270, cury += 40, 95, 20, hWnd, (HMENU)0x213, hInst, NULL);
 		FieldAns = CreateWindow(TEXT( "STATIC" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		break;
 	}
@@ -499,10 +499,10 @@ INT_PTR CALLBACK PolynomProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		CreateWindow(TEXT("BUTTON"), TEXT("НОД(A, B)"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 268, cury += 40, 100, 20, hWnd, (HMENU)0x212, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("Производная A"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 218, cury += 40, 200, 20, hWnd, (HMENU)0x213, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("Производная B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 218, cury += 40, 200, 20, hWnd, (HMENU)0x214, hInst, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("Кратные корни A в простые"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 218, cury += 40, 200, 20, hWnd, (HMENU)0x215, hInst, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("Кратные корни B в простые"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 218, cury += 40, 200, 20, hWnd, (HMENU)0x216, hInst, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("НОД числителей / НОК знаменателей A"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 168, cury += 40, 300, 20, hWnd, (HMENU)0x217, hInst, NULL);
-		CreateWindow(TEXT("BUTTON"), TEXT("НОД числителей / НОК знаменателей B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 168, cury += 40, 300, 20, hWnd, (HMENU)0x218, hInst, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("Кратные корни A в простые"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 178, cury += 40, 280, 20, hWnd, (HMENU)0x215, hInst, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("Кратные корни B в простые"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 178, cury += 40, 280, 20, hWnd, (HMENU)0x216, hInst, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("НОД числителей / НОК знаменателей A"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 138, cury += 40, 360, 20, hWnd, (HMENU)0x217, hInst, NULL);
+		CreateWindow(TEXT("BUTTON"), TEXT("НОД числителей / НОК знаменателей B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 138, cury += 40, 360, 20, hWnd, (HMENU)0x218, hInst, NULL);
 		FieldAns = CreateWindow(TEXT( "STATIC" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		break;
 	}
