@@ -16,7 +16,7 @@ bool NZER_N_B(const BigNatural &x)
 
 BigNatural ADD_1N_N(BigNatural x)
 {
-  return x++;
+  return ++x;
 }
 BigNatural ADD_NN_N(BigNatural left, const BigNatural &right)
 {
