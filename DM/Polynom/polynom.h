@@ -18,8 +18,8 @@ private:
   size_t degree;               // Polynomial degree
   std::vector<Rational> coefs; // vector of coefficients
 
-  Polynom( int lenght );
-  Polynom( int pos, Rational coef );
+  Polynom( size_t lenght );
+  Polynom( size_t pos, Rational coef );
   void Optimize( void );
 public: 
   Polynom( void );
@@ -30,7 +30,7 @@ public:
   size_t GetDegree( void ) const;
   Rational LeadCoef( void ) const;
 
-  Rational operator[]( int ind ) const;
+  Rational operator[]( size_t ind ) const;
   friend Polynom &operator+=( Polynom &left, const Polynom &right );
   friend const Polynom operator+( Polynom left, const Polynom &right );
   friend const Polynom operator+( const Polynom &p );
@@ -48,7 +48,7 @@ public:
   friend Polynom &operator*=( Polynom &left, const Polynom &right );
   friend const Polynom operator*( Polynom left, const Polynom &right );
 
-  friend Polynom MulByMono( const Polynom &p, int degree );
+  friend Polynom MulByMono( const Polynom &p, size_t degree );
 
   friend Polynom &operator/=( Polynom &left, const Polynom &right );
   friend const Polynom operator/( Polynom left, const Polynom &right );

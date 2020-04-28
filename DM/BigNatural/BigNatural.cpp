@@ -174,7 +174,7 @@ BigNatural &operator-=(BigNatural &left, const BigNatural &right)
         return left;
     }
     else
-        throw(std::runtime_error("[Exception] negative result. Right > Left"));
+        throw(std::runtime_error("Negative result. Right > Left"));
 }
 
 // +=
@@ -228,7 +228,7 @@ BigNatural &operator*=(BigNatural &left, const long long &right)
 BigNatural &operator/=(BigNatural &left, const BigNatural &right)
 {
     if (!right)
-        throw(std::runtime_error("division by zero"));
+        throw(std::runtime_error("Division by zero"));
     else if (left < right)
         return left = 0;
     std::vector<int> result;                       // stores the result
@@ -285,7 +285,7 @@ BigNatural &operator/=(BigNatural &left, const long long &right)
 BigNatural &operator%=(BigNatural &left, const BigNatural &right)
 {
     if (right == 0)
-        throw(std::runtime_error("division by zero"));
+        throw(std::runtime_error("Division by zero"));
     else if (left < right)
         return left;
     BigNatural partLeft;
@@ -486,12 +486,12 @@ BigNatural::BigNatural(const std::string &inum)
             if (inum[i] >= '0' && inum[i] <= '9')
                 nums.push_back(inum[i] - '0');
             else
-                throw(std::runtime_error("[Exception] invalid input"));
+                throw(std::runtime_error("Invalid input"));
         while (nums.size() > 1 && nums.back() == 0)
             nums.pop_back();
     }
     else
-        throw(std::runtime_error("[Exception] invalid input"));
+        throw(std::runtime_error("Invalid input"));
 }
 
 BigNatural::BigNatural(long long inum)
@@ -505,7 +505,7 @@ BigNatural::BigNatural(long long inum)
     else if (!inum)
         nums.push_back(0);
     else
-        throw(std::runtime_error("[Exception] negative number"));
+        throw(std::runtime_error("Negative number"));
 }
 
 BigNatural::BigNatural(const BigNatural &inum)
@@ -564,7 +564,7 @@ const BigNatural GCD(const long long &left, const BigNatural &right)
 const BigNatural GCD( const std::vector<BigNatural> &vec )
 {
   if (vec.size() < 2)
-    throw(std::runtime_error( "[Exception] vector is empty" ));
+    throw(std::runtime_error( "Vector is empty" ));
   BigNatural ans = GCD(vec[0], vec[1]);
   for (size_t g = 2; g < vec.size(); ++g)
     ans = GCD(ans, vec[g]);
@@ -595,7 +595,7 @@ const BigNatural LCM(const long long &left, const BigNatural &right)
 const BigNatural LCM( const std::vector<BigNatural> &vec )
 {
   if (vec.size() < 2)
-    throw(std::runtime_error( "[Exception] vector is empty" ));
+    throw(std::runtime_error( "Vector is empty" ));
   BigNatural ans = LCM(vec[0], vec[1]);
   for (size_t g = 2; g < vec.size(); ++g)
     ans = LCM(ans, vec[g]);

@@ -51,7 +51,7 @@ public:
     }
 
     if (k > 0)
-      den = (BigNatural)s.substr(k, s.size() - 1);
+      den = (BigNatural)s.substr(k, s.size() - k);
     if (den == 0)
       throw std::runtime_error("Denominator must not be zero");
   }

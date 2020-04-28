@@ -62,7 +62,7 @@ BigInteger& BigInteger::operator *=(const BigInteger& other)
 BigInteger& BigInteger::operator *=(int num) // -9 <= num <= 9
 {
     if (std::abs(num) / 10 != 0)
-        throw std::runtime_error("ERROR: multiplying by num(abs(num) > 10)");
+        throw std::runtime_error("Multiplying by digit(abs(num) > 10)");
 
     isPositive = num >= 0;
     number *= std::abs(num);
@@ -77,7 +77,7 @@ BigInteger& BigInteger::operator /=(const BigInteger& other)
 {
     // maybe need to realise comparison with int(0)
     if (other.number == BigNatural(0))
-        throw std::runtime_error("Error: div by null");
+        throw std::runtime_error("Division by zero");
 
     bool isIntegerMod = number % other.number == BigNatural(0);
     number /= other.number;
@@ -98,7 +98,7 @@ BigInteger& BigInteger::BigInteger::operator %=(const BigInteger& other)
 {
     // maybe need to realise comparison with int(0)
     if (other.number == BigNatural(0))
-        throw std::runtime_error("Error: div by null");
+        throw std::runtime_error("Div by zero");
 
     number %= other.number;
     if (!isPositive)

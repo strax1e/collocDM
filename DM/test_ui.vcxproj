@@ -150,7 +150,7 @@
   <ItemGroup>
     <ClInclude Include="BigInteger\BigInteger.h" />
     <ClInclude Include="BigNatural\BigNatural.h" />
-    <ClInclude Include="Polynom\polynom.h" />
+    <ClInclude Include="Polynom\Polynom.h" />
     <ClInclude Include="Rational\Rational.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="standart_functions.h" />
@@ -168,7 +168,7 @@
     <ClCompile Include="BigInteger\standart_functions_i.cpp" />
     <ClCompile Include="BigNatural\BigNatural.cpp" />
     <ClCompile Include="BigNatural\standart_functions_n.cpp" />
-    <ClCompile Include="Polynom\polynom.cpp" />
+    <ClCompile Include="Polynom\Polynom.cpp" />
     <ClCompile Include="Rational\Rational.cpp" />
     <ClCompile Include="Rational\standart_functions_r.cpp" />
     <ClCompile Include="DM.cpp" />

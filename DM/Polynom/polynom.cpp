@@ -31,7 +31,7 @@ Polynom::~Polynom( void )
  *   - Polynomial predicted degree:
  *       const std::vector<Rational> &coefs;
  */
-Polynom::Polynom( int length ) : degree(length - 1)
+Polynom::Polynom( size_t length ) : degree(length - 1)
 {
   coefs.resize(length, Rational(0, 1));
 }
@@ -41,13 +41,13 @@ Polynom::Polynom( int length ) : degree(length - 1)
  *   - coefficients vector:
  *       const std::vector<Rational> &coefs;
  */
-Polynom::Polynom( const std::vector<Rational> &coefs ) : degree((int)coefs.size() - 1), coefs(coefs)
+Polynom::Polynom( const std::vector<Rational> &coefs ) : degree(coefs.size() - 1), coefs(coefs)
 {
-  if (coefs.size() > 30)
+  if (coefs.size() > 9223372036854775806LL)
     throw std::runtime_error("Too big polynom");
   Optimize();
 }
-
+#if 0
 /* Polynom constructor from string
  * ARGUMENTS:
  *   - expression string:
@@ -116,6 +116,125 @@ Polynom::Polynom( const std::string &expr )
     coefs.push_back(Rational(std::string(num1 + num2)));
   Optimize();
 }
+#endif
+/* Polynom constructor from string
+ * ARGUMENTS:
+ *   - expression string:
+ *       const std::string &expr;
+ */
+Polynom::Polynom( const std::string &expr )
+{
+  int cur = 0;
+  char ch = expr[cur];
+  bool iscoef = false, isdeg = false;
+  int numsize = 0, numstart;
+  Rational coef = Rational(1);
+  size_t deg = 0;
+  std::string curnum;
+
+  while (cur < expr.size())
+  {
+    ch = expr[cur];
+    if (ch == ' ')
+    {
+      cur++;
+      continue;
+    }
+    else if (iscoef && !isdeg)
+    {
+      bool wasx = false;
+      while (1)
+      {
+        ch = expr[cur++];
+        if (ch == ' ')
+          continue;
+        else if (ch == 'x' && !wasx)
+          wasx = true;
+        else if (ch == '^' && wasx)
+        {
+          isdeg = true;
+          break;
+        }
+        else
+        {
+          if (coefs.size() < deg + 1)
+            coefs.resize(deg + 1, zero);
+          coefs[deg] += coef;
+          deg = 0;
+          iscoef = false;
+          break;
+        }
+      }
+    }
+    else if (ch >= '0' && ch <= '9' || ch == '-' || ch == '+')
+    {
+      if (!iscoef)
+      {
+        iscoef = true;
+        if (ch == '+')
+        {
+          cur++;
+          ch = expr[cur];
+        }
+        while (ch >= '0' && ch <= '9' || ch == '/' || ch == ' ' || ch == '-')
+        {
+          if (ch == ' ')
+          {
+            ch = expr[++cur];
+            continue;
+          }
+          curnum.push_back(ch);
+          ch = expr[++cur];
+        }
+        coef = Rational(curnum);
+        curnum.clear();
+      }
+      else if (isdeg)
+      {
+        int size = 0, firstdigit;
+        if (ch < '0' || ch > '9')
+          throw std::runtime_error("Invalid syntax");
+        deg = 0;
+        ch = expr[cur];
+        while (ch >= '0' && ch <= '9' || ch == ' ')
+        {
+          if (ch == ' ')
+          {
+            ch = expr[++cur];
+            continue;
+          }
+          if (isdeg)
+          {
+            firstdigit = ch - '0';
+            isdeg = false;
+          }
+          curnum.push_back(ch);
+          numsize++;
+          ch = expr[++cur];
+        }
+        deg = atoll(curnum.data());
+        if (deg == 0 && firstdigit != 0 || numsize > 4)
+          throw std::runtime_error("Invalid syntax");
+        curnum.clear();
+        numsize = 0;
+        if (coefs.size() < deg + 1)
+          coefs.resize(deg + 1, zero);
+        coefs[deg] += coef;
+        deg = 0;
+        coef = Rational(1);
+        iscoef = false;
+      }
+      else
+        throw std::runtime_error("Invalid syntax");
+    }
+    else
+      throw std::runtime_error("Invalid syntax");
+  }
+  if (iscoef)
+    coefs[deg] += coef;
+  
+  Optimize();
+}
 
 /* Polynomial simplifying function
  * ARGUMENTS: None
@@ -123,25 +242,25 @@ Polynom::Polynom( const std::string &expr )
  */
 void Polynom::Optimize( void )
 {
-  int cur = (int)coefs.size() - 1;
+  size_t cur = coefs.size() - 1;
 
   if (coefs[cur] == zero)
   {
     while (coefs[cur] == zero && cur > 0)
       cur--;
-    coefs.resize(size_t(cur) + 1);
+    coefs.resize(cur + 1);
   }
-  degree = (int)coefs.size() - 1;
+  degree = coefs.size() - 1;
 }
 
 /* Polynomial coefficient getting function
  * ARGUMENTS:
  *   - Position:
- *       int pos;
+ *       size_t pos;
  * RETURNS:
  *   (Rational) Coefficient
  */
-Rational Polynom::operator[]( int ind ) const
+Rational Polynom::operator[]( size_t ind ) const
 {
   return coefs[ind];
 }
@@ -149,22 +268,32 @@ Rational Polynom::operator[]( int ind ) const
 /* Polynomial degree getting function
  * ARGUMENTS: None
  * RETURNS:
- *   (int) Degree
+ *   (size_t) Degree
  */
 size_t Polynom::GetDegree( void ) const
 {
   return degree;
 }
 
+/* Greatest common divider of polynomials fiding function
+ * ARGUMENTS:
+ *  - Polynomilas:
+ *      const Polynom &left, const Polynom &right;
+ * RETURNS:
+ *   (Polynom) GCD
+ */
 const Polynom GCD( const Polynom &left, const Polynom &right )
 {
   if (left.GetDegree() == 0 && left[0] == zero)
     return right;
   else if (left.GetDegree() == 0 && left[0] == zero)
     return left;
-  Rational r = RED_Q_Q(right[0]), l = RED_Q_Q(left[0]);
-  if (l.GetDen() == 1 && r.GetDen() == 1)
-      return Polynom({TRANS_Z_Q(GCD(TRANS_Q_Z(l), TRANS_Q_Z(r)))});
+  if (left.GetDegree() == 0 && right.GetDegree() == 0)
+  {
+    Rational r = RED_Q_Q(right[0]), l = RED_Q_Q(left[0]);
+    if (l.GetDen() == 1 && r.GetDen() == 1)
+        return Polynom({TRANS_Z_Q(GCD(TRANS_Q_Z(l), TRANS_Q_Z(r)))});
+  }
   Polynom newLeft = left, newRight = right, tmp;
   if (right.GetDegree() > left.GetDegree())
   {
@@ -198,7 +327,7 @@ Rational Polynom::LeadCoef( void ) const
 Rational FAC( const Polynom &p )
 {
   BigNatural gcdnum = ABS_Z_N(p[0].GetNum()), gcdden = p[0].GetDen(), lcmden = 1;
-  for (int i = 0; i <= p.GetDegree(); i++)
+  for (size_t i = 0; i <= p.GetDegree(); i++)
   {
     gcdnum = GCD(gcdnum, ABS_Z_N(p[i].GetNum()));
     gcdden = GCD(gcdden, p[i].GetDen());
@@ -218,7 +347,7 @@ const Polynom DER( const Polynom &p )
   else
   {
     dep.reserve(p.GetDegree());
-    for (int i = 1; i <= p.GetDegree(); i++)
+    for (size_t i = 1; i <= p.GetDegree(); i++)
       dep.push_back(p[i] * Rational(i, 1));
     return Polynom(dep);
   }
@@ -227,6 +356,9 @@ const Polynom DER( const Polynom &p )
 const Polynom NMR( Polynom p )
 {
   if (p.GetDegree() == 0)
+    return p;
+  Polynom gcd = GCD(p, DER(p));
+  if (gcd.GetDegree() == 0 && gcd.LeadCoef() == zero)
     return p;
   return p /= GCD(p, DER(p));
 }
@@ -238,7 +370,7 @@ Polynom &operator+=( Polynom &left, const Polynom &right )
     left.coefs.resize(right.degree + 1);
     left.degree = right.degree;
   }
-  for (int i = 0; i <= fmin(left.degree, right.degree); i++)
+  for (size_t i = 0; i <= fmin(left.degree, right.degree); i++)
     left.coefs[i] += right.coefs[i];
   left.Optimize();
   
@@ -262,7 +394,7 @@ Polynom &operator-=( Polynom &left, const Polynom &right )
     left.coefs.resize(right.degree + 1, zero);
     left.degree = right.degree;
   }
-  for (int i = 0; i <= fmin(left.degree, right.degree); i++)
+  for (size_t i = 0; i <= fmin(left.degree, right.degree); i++)
     left.coefs[i] -= right.coefs[i];
   left.Optimize();
 
@@ -281,7 +413,7 @@ const Polynom operator-( const Polynom &p )
 
 Polynom &operator*=( Polynom &p, Rational num )
 {
-  for (int i = 0; i <= p.degree; i++)
+  for (size_t i = 0; i <= p.degree; i++)
     p.coefs[i] *= num;
   p.Optimize();
   
@@ -295,7 +427,7 @@ const Polynom operator*( Polynom p, Rational num )
 
 Polynom &operator/=( Polynom &p, Rational num )
 {
-  for (int i = 0; i <= p.degree; i++)
+  for (size_t i = 0; i <= p.degree; i++)
     p.coefs[i] /= num;
   p.Optimize();
 
@@ -310,11 +442,11 @@ const Polynom operator/( Polynom p, Rational num )
 /* Polynomial by x^k multiplying function
  * ARGUMENTS:
  *   - x degree:
- *       int degree;
+ *       size_t degree;
  * RETURNS:
  *   (Polynom) Multiplying result
  */
-Polynom MulByMono( const Polynom &p, int degree )
+Polynom MulByMono( const Polynom &p, size_t degree )
 {
   Polynom res(p);
 
@@ -322,7 +454,7 @@ Polynom MulByMono( const Polynom &p, int degree )
     return p;
   if (degree < 0)
     throw std::runtime_error("Negative degrees are not supported");
-  res.coefs.resize(size_t(res.degree) + degree + 1, zero);
+  res.coefs.resize(res.degree + degree + 1, zero);
   std::rotate(res.coefs.begin(), res.coefs.begin() + res.degree + 1, res.coefs.end());
 
   res.Optimize();
@@ -334,7 +466,7 @@ Polynom &operator*=( Polynom &left, const Polynom &right )
 {
   Polynom res(left.degree + 1);
 
-  for (int i = 0; i <= right.degree; i++)
+  for (size_t i = 0; i <= right.degree; i++)
     res += MulByMono(left * right.coefs[i], i);
   res.Optimize();
 
@@ -362,7 +494,7 @@ Polynom &operator/=( Polynom &left, const Polynom &right )
   res = Polynom(left.degree - right.degree + 1);
   while (left.degree >= right.degree && !(left.degree == 0 && left.coefs[0] == zero))
   {
-    int curdeg = left.degree - right.degree;
+    size_t curdeg = left.degree - right.degree;
     Rational curcoef = left.LeadCoef() / right.LeadCoef();
 
     res.coefs[curdeg] = curcoef;
@@ -385,7 +517,7 @@ Polynom &operator%=( Polynom &left, const Polynom &right )
     Rational r = RED_Q_Q(right[0]), l = RED_Q_Q(left[0]);
     if (l.GetDen() == 1 && r.GetDen() == 1)
       return left = Polynom({TRANS_Z_Q(TRANS_Q_Z(l) % TRANS_Q_Z(r))});
-    throw std::runtime_error("Impossible to divide with reminder");
+    throw std::runtime_error("Impossible to divide with remainder");
   }
   if (right.degree == 0 && right.coefs[0] == zero)
     throw std::runtime_error("Division by zero");
@@ -396,10 +528,10 @@ Polynom &operator%=( Polynom &left, const Polynom &right )
 
   while (left.degree >= right.degree)
   {
-    int curdeg = left.degree - right.degree;
+    size_t curdeg = left.degree - right.degree;
     Rational curcoef = left.LeadCoef() / right.LeadCoef();
 
-    left -= MulByMono(right * curcoef, curdeg); 
+    left -= MulByMono(right * curcoef, curdeg);
     left.Optimize();
   }
 
@@ -413,11 +545,12 @@ const Polynom operator%( Polynom left, const Polynom &right )
 
 std::ostream& operator <<(std::ostream& os, const Polynom& x)
 {
-  for (int i = (int)x.coefs.size() - 1; i >= 0; i--)
+  for (size_t i = x.coefs.size(); i > 0; i--)
   {
+    i--;
     if (!(x.coefs[i] == zero) && i != 0)
     { 
-      if (i >= 1 && i < (int)x.coefs.size() - 1 && x.coefs[i] > zero)
+      if (i >= 1 && i < x.coefs.size() - 1 && x.coefs[i] > zero)
         os << "+";
       if (!(x.coefs[i] == Rational(1)))
         os << x.coefs[i];
@@ -439,6 +572,7 @@ std::ostream& operator <<(std::ostream& os, const Polynom& x)
         os << x.coefs[0];
       } 
     }
+    i++;
   }
 
   return os;

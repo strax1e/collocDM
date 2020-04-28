@@ -11,7 +11,7 @@ using namespace std;
 void Rational::Make()
 {
   if (!den)
-    throw runtime_error("ERROR : denominator should not be zero");   
+    throw runtime_error("Denominator should not be zero");   
 }
 
 const BigInteger Rational::GetNum( void )
@@ -74,7 +74,7 @@ Rational& operator /=(Rational& first, Rational const &second)
   int sign = 1;
 
   if (second.num == 0)
-    throw runtime_error("ERROR: div by null");
+    throw runtime_error("Division by null");
   if (second.num.isNegative())
     sign = -1;
   first.num = first.num * (BigInteger)second.den * sign;

@@ -34,7 +34,7 @@ BigInteger TRANS_N_Z(const BigNatural &x)
 BigNatural TRANS_Z_N(const BigInteger &x)
 {
   if (x < BigNatural(0))
-    throw std::runtime_error("ERROR: invalid transformation from integer to natural");
+    throw std::runtime_error("Invalid transformation from integer to natural");
 
   return x.getNatural();
 }
@@ -90,15 +90,9 @@ BigInteger MUL_ZZ_Z(const BigInteger& left, const BigInteger& right)
 }
 BigInteger DIV_ZZ_Z(const BigInteger& left, const BigInteger& right)
 {
-  if (left <= BigInteger(0) || right <= BigInteger(0))
-    throw std::runtime_error("ERROR: div with not natural numbers");
-
   return left / right;
 }
 BigInteger MOD_ZZ_Z(const BigInteger& left, const BigInteger& right)
 {
-  if (left <= BigInteger(0) || right <= BigInteger(0))
-    throw std::runtime_error("ERROR: div with not natural numbers");
-
   return left % right;
 }

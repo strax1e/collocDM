@@ -485,10 +485,10 @@ INT_PTR CALLBACK PolynomProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		int cury = -30;
 		LPCREATESTRUCT lpcs = (LPCREATESTRUCT)lParam;
 		MoveWindow(hWnd, 0, 0, 700, 700, TRUE);
-		FieldA = CreateWindow(TEXT( "EDIT" ), TEXT("1, 2, 3"), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x204, hInst, NULL);
+		FieldA = CreateWindow(TEXT( "EDIT" ), TEXT("1x^3 + 3x^2 + 3x^1 + 1"), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x204, hInst, NULL);
 		CreateWindow(TEXT("STATIC"), TEXT("A:"), WS_CHILDWINDOW | WS_VISIBLE | SS_LEFT, 10, cury, 15, 20, hWnd, (HMENU)0x204, hInst, NULL);
 		FieldPA = CreateWindow(TEXT( "STATIC" ), TEXT( "Polynomial" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury + 20, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
-		FieldB = CreateWindow(TEXT( "EDIT" ), TEXT("1, 0, 0"), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x205, hInst, NULL);
+		FieldB = CreateWindow(TEXT( "EDIT" ), TEXT("1x^0-1x^0"), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x205, hInst, NULL);
 		CreateWindow(TEXT("STATIC"), TEXT("B:"), WS_CHILDWINDOW | WS_VISIBLE | SS_LEFT, 10, cury, 15, 20, hWnd, (HMENU)0x204, hInst, NULL);
 		FieldPB = CreateWindow(TEXT( "STATIC" ), TEXT( "Polynomial" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury + 20, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A + B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x207, hInst, NULL);

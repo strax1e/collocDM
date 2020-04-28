@@ -45,14 +45,14 @@
     <ClInclude Include="BigNatural\BigNatural.h">
       <Filter>Source Files\BigNatural</Filter>
     </ClInclude>
-    <ClInclude Include="Polynom\polynom.h">
-      <Filter>Source Files\Polynom</Filter>
-    </ClInclude>
     <ClInclude Include="Rational\Rational.h">
       <Filter>Source Files\Rational</Filter>
     </ClInclude>
     <ClInclude Include="standart_functions.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Polynom\Polynom.h">
+      <Filter>Source Files\Polynom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,9 +80,6 @@
     <ClCompile Include="BigNatural\BigNatural.cpp">
       <Filter>Source Files\BigNatural</Filter>
     </ClCompile>
-    <ClCompile Include="Polynom\polynom.cpp">
-      <Filter>Source Files\Polynom</Filter>
-    </ClCompile>
     <ClCompile Include="Rational\Rational.cpp">
       <Filter>Source Files\Rational</Filter>
     </ClCompile>
@@ -96,6 +93,9 @@
       <Filter>Source Files\Rational</Filter>
     </ClCompile>
     <ClCompile Include="standart_functions_p.cpp">
+      <Filter>Source Files\Polynom</Filter>
+    </ClCompile>
+    <ClCompile Include="Polynom\Polynom.cpp">
       <Filter>Source Files\Polynom</Filter>
     </ClCompile>
   </ItemGroup>
