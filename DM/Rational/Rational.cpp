@@ -74,11 +74,11 @@ Rational& operator /=(Rational& first, Rational const &second)
   int sign = 1;
 
   if (second.num == 0)
-    throw runtime_error("Division by null");
+    throw runtime_error("Division by zero");
   if (second.num.isNegative())
     sign = -1;
-  first.num = first.num / (BigInteger)second.den * sign;
-  first.den = first.den / ABS_Z_N(second.num);
+  first.num = first.num * (BigInteger)second.den * sign;
+  first.den = first.den * ABS_Z_N(second.num);
   first.Reduct();
   return first;
 }

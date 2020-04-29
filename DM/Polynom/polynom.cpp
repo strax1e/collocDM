@@ -132,6 +132,13 @@ Polynom::Polynom( const std::string &expr )
   size_t deg = 0;
   std::string curnum;
 
+  if (expr.size() == 0)
+  {
+    degree = 1;
+    coefs = {zero};
+    return;
+  }
+
   while (cur < expr.size())
   {
     ch = expr[cur];
@@ -181,7 +188,12 @@ Polynom::Polynom( const std::string &expr )
           cur++;
           ch = expr[cur];
         }
-        while (ch >= '0' && ch <= '9' || ch == '/' || ch == ' ' || ch == '-')
+        else if (ch == '-')
+        {
+          curnum.push_back(ch);
+          ch = expr[++cur];
+        }
+        while (ch >= '0' && ch <= '9' || ch == '/' || ch == ' ')
         {
           if (ch == ' ')
           {
@@ -191,6 +203,8 @@ Polynom::Polynom( const std::string &expr )
           curnum.push_back(ch);
           ch = expr[++cur];
         }
+        if (curnum.size() == 1 && curnum[0] == '-' || curnum.size() == 0)
+          throw std::runtime_error("Invalid syntax");
         coef = Rational(curnum);
         curnum.clear();
       }
@@ -498,6 +512,7 @@ Polynom &operator/=( Polynom &left, const Polynom &right )
   if (left.degree < right.degree)
   {
     left.coefs.resize(1, zero);
+    left.coefs = {zero};
     left.degree = 0;
     return left;
   }
