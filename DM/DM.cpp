@@ -256,6 +256,7 @@ INT_PTR CALLBACK NaturalProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 			if (LOWORD(wParam) == IDOK || LOWORD( wParam ) == IDCANCEL)
 			{
 				SendMessage(hWnd, WM_CLOSE, 0, 0);
+				PostQuitMessage(0);
 				DestroyWindow(hWnd);
 				break;
 			}
@@ -343,6 +344,7 @@ INT_PTR CALLBACK IntegerProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		{
 			if (LOWORD(wParam) == IDOK || LOWORD( wParam ) == IDCANCEL)
 			{
+				SendMessage(hWnd, WM_CLOSE, 0, 0);
 				PostQuitMessage(0);
 				DestroyWindow(hWnd);
 				break;
@@ -424,6 +426,7 @@ INT_PTR CALLBACK RationalProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		{
 			if (LOWORD(wParam) == IDOK || LOWORD( wParam ) == IDCANCEL)
 			{
+				SendMessage(hWnd, WM_CLOSE, 0, 0);
 				PostQuitMessage(0);
 				DestroyWindow(hWnd);
 				break;
@@ -512,6 +515,7 @@ INT_PTR CALLBACK PolynomProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		{
 			if (LOWORD(wParam) == IDOK || LOWORD( wParam ) == IDCANCEL)
 			{
+				SendMessage(hWnd, WM_CLOSE, 0, 0);
 				PostQuitMessage(0);
 				DestroyWindow(hWnd);
 				break;

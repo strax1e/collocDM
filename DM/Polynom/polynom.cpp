@@ -47,76 +47,7 @@ Polynom::Polynom( const std::vector<Rational> &coefs ) : degree(coefs.size() - 1
     throw std::runtime_error("Too big polynom");
   Optimize();
 }
-#if 0
-/* Polynom constructor from string
- * ARGUMENTS:
- *   - expression string:
- *       const std::string &expr;
- */
-Polynom::Polynom( const std::string &expr )
-{
-  bool leftv = true, isok = true, firstdone = false; 
-  char ch = 0;
-  std::string num1, num2 = {"/1"};
 
-  if (expr.size() == 0)
-  {
-    degree = 1;
-    coefs = {zero};
-  }
-  for (int i = 0; i < expr.size(); i++)
-  {
-    ch = expr[i];
-    if (ch == ' ')
-      continue;
-    else if (ch == ',')
-    {
-      coefs.push_back(Rational(std::string(num1 + num2)));
-      firstdone = false;
-      num1.clear();
-      num2.clear();
-      num2 = {"/1"};
-    }
-    else if (ch == '-' || ch == '/' || (ch <= '9' && ch >= '0'))
-    {
-      if (!firstdone)
-      {
-        if (ch == '/')
-          throw std::runtime_error("Missing the numerator");
-        if (num1.size() != 0)
-          throw std::runtime_error("Wrong syntax");
-        num1.push_back(ch);
-        ch = expr[++i];
-        while (ch <= '9' && ch >= '0')
-        {
-          num1.push_back(ch);
-          ch = expr[++i];
-        }
-        i--;
-        firstdone = true;
-      }
-      else if (num1.size() > 0 && ch != '-')
-      {
-        num2.clear();
-        num2.push_back(ch);
-        ch = expr[++i];
-        while (ch <= '9' && ch >= '0')
-        {
-          num2.push_back(ch);
-          ch = expr[++i];
-        }
-        i--;
-        firstdone = false;
-      }
-      else
-        throw std::runtime_error("Wrong symbol");
-    }
-  }
-  if (num1.size() > 0)
-    coefs.push_back(Rational(std::string(num1 + num2)));
-  Optimize();
-}
-#endif
 /* Polynom constructor from string
  * ARGUMENTS:
  *   - expression string:
