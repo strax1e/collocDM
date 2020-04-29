@@ -77,8 +77,8 @@ Rational& operator /=(Rational& first, Rational const &second)
     throw runtime_error("Division by null");
   if (second.num.isNegative())
     sign = -1;
-  first.num = first.num * (BigInteger)second.den * sign;
-  first.den = first.den * ABS_Z_N(second.num);
+  first.num = first.num / (BigInteger)second.den * sign;
+  first.den = first.den / ABS_Z_N(second.num);
   first.Reduct();
   return first;
 }

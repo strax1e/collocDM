@@ -236,7 +236,13 @@ Polynom::Polynom( const std::string &expr )
       throw std::runtime_error("Invalid syntax");
   }
   if (iscoef && !isdeg)
+  {
+    if (coefs.size() < deg + 1)
+      coefs.resize(deg + 1, zero);
     coefs[deg] += coef;
+  }
+  if (isdeg)
+    throw std::runtime_error("Missing degree");
   
   Optimize();
 }
