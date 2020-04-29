@@ -127,7 +127,7 @@ Polynom::Polynom( const std::string &expr )
   int cur = 0;
   char ch = expr[cur];
   bool iscoef = false, isdeg = false;
-  int numsize = 0, numstart;
+  int numsize = 0;
   Rational coef = Rational(1);
   size_t deg = 0;
   std::string curnum;
@@ -157,11 +157,14 @@ Polynom::Polynom( const std::string &expr )
         }
         else
         {
+          if (wasx)
+            deg = 1;
           if (coefs.size() < deg + 1)
             coefs.resize(deg + 1, zero);
           coefs[deg] += coef;
           deg = 0;
           iscoef = false;
+          cur--;
           break;
         }
       }
@@ -171,6 +174,8 @@ Polynom::Polynom( const std::string &expr )
       if (!iscoef)
       {
         iscoef = true;
+        if (coefs.size() > 0 && ch != '-' && ch != '+')
+          throw std::runtime_error("Invalid syntax");
         if (ch == '+')
         {
           cur++;
@@ -230,7 +235,7 @@ Polynom::Polynom( const std::string &expr )
     else
       throw std::runtime_error("Invalid syntax");
   }
-  if (iscoef)
+  if (iscoef && !isdeg)
     coefs[deg] += coef;
   
   Optimize();
