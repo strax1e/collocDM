@@ -212,7 +212,7 @@ void Polynom::Optimize( void )
 /* Polynomial coefficient getting function
  * ARGUMENTS:
  *   - Position:
- *       size_t pos;
+ *       size_t int;
  * RETURNS:
  *   (Rational) Coefficient
  */
@@ -233,7 +233,7 @@ size_t Polynom::GetDegree( void ) const
 
 /* Greatest common divider of polynomials fiding function
  * ARGUMENTS:
- *  - Polynomilas:
+ *  - Polynomials:
  *      const Polynom &left, const Polynom &right;
  * RETURNS:
  *   (Polynom) GCD
@@ -273,13 +273,20 @@ const Polynom GCD( const Polynom &left, const Polynom &right )
 /* Polynomial degree getting function
  * ARGUMENTS: None
  * RETURNS: 
- *   (Rational) Degree
+ *   (Rational) Coefficient
  */
 Rational Polynom::LeadCoef( void ) const
 {
   return coefs[degree];
 }
 
+/* Coeffsicients GCD/LCM finding function
+ * ARGUMENTS:
+ *  - Polynomial:
+ *      const Polynom &p;
+ * RETURNS:
+ *   (Rational) GCD/LCM
+ */
 Rational FAC( const Polynom &p )
 {
   BigNatural gcdnum = ABS_Z_N(p[0].GetNum()), gcdden = p[0].GetDen(), lcmden = 1;
@@ -294,6 +301,13 @@ Rational FAC( const Polynom &p )
   return Rational(gcdnum, lcmden);
 }
 
+/* Polynomial derivative finding function
+ * ARGUMENTS:
+ *  - Polynomial:
+ *      const Polynom &p;
+ * RETURNS:
+ *   (Polynom) Deriative
+ */
 const Polynom DER( const Polynom &p )
 {
   std::vector<Rational> dep;
@@ -309,6 +323,13 @@ const Polynom DER( const Polynom &p )
   }
 }
 
+/* Converting multiple roots to simple function
+ * ARGUMENTS:
+ *  - Polynomial:
+ *      const Polynom &p;
+ * RETURNS:
+ *   (Polynom) Result
+ */
 const Polynom NMR( Polynom p )
 {
   if (p.GetDegree() == 0)

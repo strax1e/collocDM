@@ -72,7 +72,7 @@ int POZ_Z_D(const BigInteger& x)
 /* Simple arithmetic operatoins functions
  * ARGUMENTS:
  *   - BigInteger:
- const BigInteger& left, const BigInteger& right
+ *       const BigInteger& left, const BigInteger& right
  * RETURNS:
  *   - BigInteger(result of operation)
  */

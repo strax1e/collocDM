@@ -98,7 +98,7 @@ BigInteger& BigInteger::BigInteger::operator %=(const BigInteger& other)
 {
     // maybe need to realise comparison with int(0)
     if (other.number == BigNatural(0))
-        throw std::runtime_error("Div by zero");
+        throw std::runtime_error("Division by zero");
 
     number %= other.number;
     if (!isPositive)

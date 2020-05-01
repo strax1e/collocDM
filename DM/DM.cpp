@@ -246,7 +246,7 @@ INT_PTR CALLBACK NaturalProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		CreateWindow(TEXT("BUTTON"), TEXT("A % B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x211, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("НОД(A, B)"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x212, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("НОК(A, B)"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x213, hInst, NULL);
-		FieldAns = CreateWindow(TEXT( "STATIC" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
+		FieldAns = CreateWindow(TEXT( "EDIT" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		break;
 	}
 	case WM_COMMAND:
@@ -400,7 +400,7 @@ INT_PTR CALLBACK IntegerProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 
 INT_PTR CALLBACK RationalProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam )
 {
-	static HWND FieldA = NULL, FieldB = NULL, FieldAns = NULL;
+	static HWND FieldA = NULL, FieldB = NULL, FieldRA = NULL, FieldRB = NULL, FieldAns = NULL;
 
 	switch(message)
 	{
@@ -411,7 +411,9 @@ INT_PTR CALLBACK RationalProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		MoveWindow(hWnd, 0, 0, 700, 500, TRUE);
 		FieldA = CreateWindow(TEXT( "EDIT" ), TEXT(""), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x204, hInst, NULL);
 		CreateWindow(TEXT("STATIC"), TEXT("A:"), WS_CHILDWINDOW | WS_VISIBLE | SS_LEFT, 10, cury, 15, 20, hWnd, (HMENU)0x211, hInst, NULL);
+		FieldRA = CreateWindow(TEXT( "STATIC" ), TEXT( "Reduced" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury + 20, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		FieldB = CreateWindow(TEXT( "EDIT" ), TEXT(""), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x205, hInst, NULL);
+		FieldRB = CreateWindow(TEXT( "STATIC" ), TEXT( "Reduced" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury + 20, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		CreateWindow(TEXT("STATIC"), TEXT("B:"), WS_CHILDWINDOW | WS_VISIBLE | SS_LEFT, 10, cury, 15, 20, hWnd, (HMENU)0x211, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A + B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x207, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("A - B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 280, cury += 40, 75, 20, hWnd, (HMENU)0x208, hInst, NULL);
@@ -445,6 +447,13 @@ INT_PTR CALLBACK RationalProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				try
 				{
 					A = Rational(LPWSTRtoSTR(AC)), B = Rational(LPWSTRtoSTR(BC));
+
+					buf << A;
+					SetWindowText(FieldRA, STRtoLPWSTR(buf.str()));
+					buf.str("");
+					buf << B;
+					SetWindowText(FieldRB, STRtoLPWSTR(buf.str()));
+					buf.str("");
 					switch (LOWORD(wParam))
 					{
 					case 0x207:
