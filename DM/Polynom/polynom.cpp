@@ -65,7 +65,7 @@ Polynom::Polynom( const std::string &expr )
 
   if (expr.size() == 0)
   {
-    degree = 1;
+    degree = 0;
     coefs = {zero};
     return;
   }
@@ -250,7 +250,7 @@ const Polynom GCD( const Polynom &left, const Polynom &right )
     if (l.GetDen() == 1 && r.GetDen() == 1)
         return Polynom({TRANS_Z_Q(GCD(TRANS_Q_Z(l), TRANS_Q_Z(r)))});
   }
-  Polynom newLeft = left, newRight = right, tmp;
+  Polynom newLeft = left / FAC(left), newRight = right / FAC(right), tmp;
   if (right.GetDegree() > left.GetDegree())
   {
     newLeft = right;
@@ -289,16 +289,16 @@ Rational Polynom::LeadCoef( void ) const
  */
 Rational FAC( const Polynom &p )
 {
-  BigNatural gcdnum = ABS_Z_N(p[0].GetNum()), gcdden = p[0].GetDen(), lcmden = 1;
+  BigNatural gcdnum = ABS_Z_N(p[0].GetNum()), gcdden = 1, lcmden = p[0].GetDen();
+  if (p.GetDegree() == 0)
+    return p[0];
   for (size_t i = 0; i <= p.GetDegree(); i++)
   {
     gcdnum = GCD(gcdnum, ABS_Z_N(p[i].GetNum()));
-    gcdden = GCD(gcdden, p[i].GetDen());
-    lcmden *= p[i].GetDen();
+    lcmden = LCM(lcmden, p[i].GetDen());
   }
-  lcmden /= gcdden;
 
-  return Rational(gcdnum, lcmden);
+  return RED_Q_Q(Rational(gcdnum, lcmden));
 }
 
 /* Polynomial derivative finding function
@@ -335,7 +335,7 @@ const Polynom NMR( Polynom p )
   if (p.GetDegree() == 0)
     return p;
   Polynom gcd = GCD(p, DER(p));
-  if (gcd.GetDegree() == 0 && gcd.LeadCoef() == zero)
+  if (gcd.GetDegree() == 0)
     return p;
   return p /= GCD(p, DER(p));
 }

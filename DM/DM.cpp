@@ -515,7 +515,7 @@ INT_PTR CALLBACK PolynomProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lPa
 		CreateWindow(TEXT("BUTTON"), TEXT("Кратные корни B в простые"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 188, cury += 40, 260, 20, hWnd, (HMENU)0x216, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("НОД числителей / НОК знаменателей A"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 138, cury += 40, 360, 20, hWnd, (HMENU)0x217, hInst, NULL);
 		CreateWindow(TEXT("BUTTON"), TEXT("НОД числителей / НОК знаменателей B"), WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_PUSHBUTTON, 138, cury += 40, 360, 20, hWnd, (HMENU)0x218, hInst, NULL);
-		FieldAns = CreateWindow(TEXT( "STATIC" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
+		FieldAns = CreateWindow(TEXT( "EDIT" ), TEXT( "Answer" ), WS_CHILDWINDOW | WS_VISIBLE | ES_AUTOHSCROLL | WS_BORDER, 30, cury += 40, 600, 20, hWnd, (HMENU)0x206, hInst, NULL);
 		break;
 	}
 	case WM_COMMAND:
